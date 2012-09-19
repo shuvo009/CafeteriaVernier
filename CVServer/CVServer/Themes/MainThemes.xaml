@@ -1,0 +1,38 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
+	<!-- Resource dictionary entries should be defined here. -->
+	
+	<System:Double x:Key="TextBoxSize">170</System:Double>
+	
+	<System:Double x:Key="TextBoxHeight">26</System:Double>
+	
+	<SolidColorBrush x:Key="RadGridBackground" Color="#FFB2B2B2"/>
+	
+	<LinearGradientBrush x:Key="TextBoxBorderBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+		<GradientStop Color="#FF284072" Offset="0"/>
+		<GradientStop Color="#FF5C84C1" Offset="1"/>
+	</LinearGradientBrush>
+	
+	<LinearGradientBrush x:Key="RepeatButtonRectangle" EndPoint="0.5,1" StartPoint="0.5,0">
+    	<GradientStop Color="#FF44A3F1" Offset="0"/>
+    	<GradientStop Color="#FF4AA8F3" Offset="1"/>
+    	<GradientStop Color="#FF3265E2" Offset="0.5"/>
+     </LinearGradientBrush>
+	 
+	<SolidColorBrush x:Key="RepeartButtonPath" Color="#FFCECECE"/>
+	
+	<SolidColorBrush x:Key="ThumbRepeat" Color="#009D2E2E"/>
+	
+	<LinearGradientBrush x:Key="ScrollbarThumColor" EndPoint="0.5,1" StartPoint="0.5,0">
+		<GradientStop Color="#FF2B90E8" Offset="0.009"/>
+		<GradientStop Color="#FF1B84E3" Offset="1"/>
+		<GradientStop Color="#FF0057AF" Offset="0.5"/>
+	</LinearGradientBrush>
+	<SolidColorBrush x:Key="TextBlockForgroundBrush" Color="Gainsboro"/>
+	<RadialGradientBrush x:Key="BackGroundBrush" GradientOrigin="-0.01,1.01" RadiusY="0.52">
+		<GradientStop Color="#FF62BAFB"/>
+		<GradientStop Color="#FF0070DA" Offset="0.479"/>
+		<GradientStop Color="#FF00499F" Offset="1"/>
+	</RadialGradientBrush>
+</ResourceDictionary>

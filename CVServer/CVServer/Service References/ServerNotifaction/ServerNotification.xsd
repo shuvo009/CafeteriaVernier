@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ServerNotification" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ServerNotification" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="CounterInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CounterName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CounterNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomerID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="tns:CounterStatus" />
+      <xs:element minOccurs="0" name="sendingTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CounterInformation" nillable="true" type="tns:CounterInformation" />
+  <xs:simpleType name="CounterStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Free" />
+      <xs:enumeration value="Busy" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CounterStatus" nillable="true" type="tns:CounterStatus" />
+  <xs:complexType name="ArrayOfCounterInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CounterInformation" nillable="true" type="tns:CounterInformation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCounterInformation" nillable="true" type="tns:ArrayOfCounterInformation" />
+</xs:schema>

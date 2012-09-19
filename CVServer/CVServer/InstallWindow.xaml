@@ -1,0 +1,22 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:ImageButton="clr-namespace:Procesta.CvServer.UserControls" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Name="IpAddressWindows" mc:Ignorable="d" x:Class="Procesta.CvServer.InstallWindow"
+        Title="Configration" Height="177" Width="289.167" ResizeMode="NoResize" Loaded="IpAddressWindowsLoaded" WindowStartupLocation="CenterScreen">
+	<Window.Background>
+		<RadialGradientBrush GradientOrigin="-0.01,1.01" RadiusY="0.52">
+			<GradientStop Color="#FF62BAFB"/>
+			<GradientStop Color="#FF0070DA" Offset="0.479"/>
+			<GradientStop Color="#FF00499F" Offset="1"/>
+		</RadialGradientBrush>
+	</Window.Background>
+    <Grid>
+    	<Grid Margin="8,28,8,29.165">
+        
+    		<telerik:RadComboBox x:Name="IpAddressComBoBox" Margin="86.107,0,0,0" VerticalAlignment="Top"/>
+            <ImageButton:ButtonWithImages x:Name="IpaddressButtonSave" Margin="138.607,61.834,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="13.333" FontFamily="Segoe UI" ButtonImages="ButtonImages/Save.png" Height="22.001" Width="59.125" Content="Save" Click="IpaddressButtonSaveClick"/>
+    		<TextBlock HorizontalAlignment="Left" Margin="0,1.332,0,0" TextWrapping="Wrap" Text="IP Address :" VerticalAlignment="Top" Foreground="{DynamicResource TextBlockForeground}" FontSize="{DynamicResource TextFontSize}"/>
+    		<TextBlock HorizontalAlignment="Left" Margin="0,34.5,0,37.828" TextWrapping="Wrap" Text="Data Folder :" Foreground="{DynamicResource TextBlockForeground}" FontSize="{DynamicResource TextFontSize}" d:LayoutOverrides="Height"/>
+    		<TextBlock x:Name="ConfigDataFolderPath" Margin="86.107,34.5,27.46,37.828" Text="C:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA" Foreground="{DynamicResource TextBlockForeground}" FontSize="{DynamicResource TextFontSize}" d:LayoutOverrides="Height"/>
+            <ImageButton:ButtonWithImages x:Name="configButtonBrows" Margin="0,31.047,0,37.828" VerticalAlignment="Stretch" ButtonImages="ButtonImages/browse.png" Width="23.46" Click="configButtonBrowsClick"/>
+        
+    	</Grid>
+    </Grid>
+</Window>

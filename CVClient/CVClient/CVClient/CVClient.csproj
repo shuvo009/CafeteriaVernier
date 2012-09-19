@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8785B5E7-5B4E-4786-919C-727789444CF1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Procesta.CVClient</RootNamespace>
+    <AssemblyName>CVClient</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.20525.0</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Client.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CustomControl">
+      <HintPath>..\..\..\..\..\..\MyC#Controls\CustomControl\CustomControl\bin\Debug\CustomControl.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v11.1, Version=11.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v11.1, Version=11.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls, Version=2011.3.1220.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Data, Version=2011.3.1220.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.GridView, Version=2011.3.1220.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Input, Version=2011.3.1220.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Navigation, Version=2011.3.1220.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Data, Version=2011.3.1220.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="UIAutomationProvider">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UIAutomationTypes">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Class\CvCPropertes\ClientUserTeamInfo.cs" />
+    <Compile Include="Class\CvCPropertes\UserInfoViewer.cs" />
+    <Compile Include="Class\CvCPropertes\MiraculasProperty.cs" />
+    <Compile Include="Class\CVsVariables.cs" />
+    <Compile Include="Class\Exception\ErrorException.cs" />
+    <Compile Include="Class\Exception\SuccessException.cs" />
+    <Compile Include="Class\Methords\MiraculousMethods.cs" />
+    <Compile Include="Class\Methords\ServerConnection.cs" />
+    <Compile Include="Class\ReplayCommand.cs" />
+    <Compile Include="Class\ValidationRuls\IPAddressValidator.cs" />
+    <Compile Include="Class\ValidationRuls\TeamNameValidator.cs" />
+    <Compile Include="Class\ValueConverter\ByteImageConverter.cs" />
+    <Compile Include="Class\ValueConverter\counterForgroudConverter.cs" />
+    <Compile Include="Class\ValueConverter\ObjectToBool.cs" />
+    <Compile Include="Class\ValueConverter\PasswordsTolengthcs.cs" />
+    <Compile Include="Class\ValueConverter\PasswordsToStrength.cs" />
+    <Compile Include="Class\ValueConverter\RadioToString.cs" />
+    <Compile Include="Class\ValueConverter\StrengthToBrush.cs" />
+    <Compile Include="Class\ValueConverter\ValuePacker.cs" />
+    <Compile Include="Service References\ServerNotifaction\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ButtonWithImages.xaml.cs">
+      <DependentUpon>ButtonWithImages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Counter.xaml.cs">
+      <DependentUpon>Counter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InstallWindow.xaml.cs">
+      <DependentUpon>InstallWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientNotifaction\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServerSideService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StratWindow.xaml.cs">
+      <DependentUpon>StratWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TimeOut.xaml.cs">
+      <DependentUpon>TimeOut.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MenuButton.xaml.cs">
+      <DependentUpon>MenuButton.xaml</DependentUpon>
+    </Compile>
+    <Page Include="UserControls\ButtonWithImages.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Counter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="InstallWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Settings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StratWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MainThemes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ThemeOne.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TimeOut.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\MenuButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Service References\ClientNotifaction\ClientNotification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientNotifaction\Procesta.CVClient.ClientNotifaction.CommandData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientNotifaction\service.wsdl" />
+    <None Include="Service References\ClientNotifaction\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientNotifaction\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServerNotifaction\Procesta.CVClient.ServerNotifaction.CounterInformation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServerNotifaction\ServerNotification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServerNotifaction\service.wsdl" />
+    <None Include="Service References\ServerNotifaction\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServerNotifaction\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServerSideService\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServerSideService\Procesta.CVClient.ServerSideService.AllUserAndTeam.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServerSideService\Procesta.CVClient.ServerSideService.counterSetting.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServerSideService\Procesta.CVClient.ServerSideService.LoginHistory.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServerSideService\Procesta.CVClient.ServerSideService.Userinformation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServerSideService\Procesta.CVClient.ServerSideService.UserRechareHistory.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServerSideService\Procesta.serverSideService.Class.Propertyes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServerSideService\service.wsdl" />
+    <None Include="Service References\ServerSideService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServerSideService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Client.ico" />
+    <Resource Include="Images\Add.png" />
+    <Resource Include="Images\AddTeam.png" />
+    <Resource Include="Images\available.png" />
+    <Resource Include="Images\browse.png" />
+    <Resource Include="Images\ChangePassword.png" />
+    <Resource Include="Images\Check.png" />
+    <Resource Include="Images\ClientIcon.png" />
+    <Resource Include="Images\Delete.png" />
+    <Resource Include="Images\EditCustomer.png" />
+    <Resource Include="Images\EditTeam.png" />
+    <Resource Include="Images\Login.png" />
+    <Resource Include="Images\LogOff.png" />
+    <Resource Include="Images\New.png" />
+    <Resource Include="Images\RechargeHistory.png" />
+    <Resource Include="Images\remove.png" />
+    <Resource Include="Images\restart.png" />
+    <Resource Include="Images\Save.png" />
+    <Resource Include="Images\Search.png" />
+    <Resource Include="Images\settings.png" />
+    <Resource Include="Images\shutdown.png" />
+    <Resource Include="Images\TeamLoginHistory.png" />
+    <Resource Include="Images\Unavailable.png" />
+    <Resource Include="Images\unlock.png" />
+    <Resource Include="Images\Update.png" />
+    <Resource Include="Images\UserLoginHistory.png" />
+    <Resource Include="Images\user_group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ClientNotifaction\" />
+    <WCFMetadataStorage Include="Service References\ServerNotifaction\" />
+    <WCFMetadataStorage Include="Service References\ServerSideService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServerSideService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServerSideService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServerSideService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientNotifaction\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientNotifaction\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientNotifaction\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServerNotifaction\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServerNotifaction\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServerNotifaction\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

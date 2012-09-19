@@ -1,0 +1,46 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+	x:Class="Procesta.CvServer.WebCamWindow"
+	x:Name="Window"
+	Title="Cafeteria Vernier"
+	Width="503" Height="205" Background="{DynamicResource BackGroundBrush}" ResizeMode="NoResize">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<Border BorderThickness="3" CornerRadius="2" HorizontalAlignment="Left" Margin="68.834,17.666,0,39.167" Width="123.333">
+			<Border.BorderBrush>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					<GradientStop Color="Gainsboro" Offset="0"/>
+					<GradientStop Color="#FFC8C8C8" Offset="1"/>
+					<GradientStop Color="#FF565656" Offset="0.5"/>
+				</LinearGradientBrush>
+			</Border.BorderBrush>
+			<Image x:Name="SourceImage"/>
+		</Border>
+		<Border BorderThickness="3" CornerRadius="2" Margin="0,17.666,112.333,39.167" HorizontalAlignment="Right" Width="123.333">
+			<Border.BorderBrush>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					<GradientStop Color="Gainsboro" Offset="0"/>
+					<GradientStop Color="#FFC8C8C8" Offset="1"/>
+					<GradientStop Color="#FF565656" Offset="0.5"/>
+				</LinearGradientBrush>
+			</Border.BorderBrush>
+			<Image x:Name="GetImage"/>
+		</Border>
+		<StackPanel HorizontalAlignment="Left" Width="61.167" Margin="3.667,38,0,63.878">
+			<telerik:RadButton x:Name="Strat" Content="Strat" HorizontalAlignment="Left" Width="61.167" Command="{Binding StartCoomand, ElementName=Window, Mode=OneWay}" CommandParameter="No Need"/>
+		 	<telerik:RadButton x:Name="Stop" Content="Stop" d:LayoutOverrides="Width" Margin="0,5,0,0" Command="{Binding StopCommand, ElementName=Window, Mode=OneWay}" CommandParameter="No Need"/>
+			<telerik:RadButton x:Name="Continue" Content="Continue" HorizontalAlignment="Left" Width="61.167" Margin="0,5,0,0" Command="{Binding ContinueComand, ElementName=Window, Mode=OneWay}" CommandParameter="No Need"/>
+		</StackPanel>
+		<telerik:RadButton x:Name="Capture" Content="Capture" HorizontalAlignment="Left" Width="61.167" Margin="196.167,69.297,0,85.742" d:LayoutOverrides="Height" Command="{Binding CaptureCommand, ElementName=Window, Mode=OneWay}" CommandParameter="No Need"/>
+		<StackPanel HorizontalAlignment="Right" Margin="0,53.333,8,74.878" Width="92.667">
+			<telerik:RadButton x:Name="VideoFormate" Content="Video Formate" HorizontalAlignment="Left" Width="92.667" Command="{Binding VideoFromateCommand, ElementName=Window, Mode=OneWay}" CommandParameter="No Need"/>
+			<telerik:RadButton x:Name="VideoSource" Content="Video Source" HorizontalAlignment="Left" Width="92.667" Margin="0,5,0,0" Command="{Binding VideoSourceCommand, ElementName=Window, Mode=OneWay}" CommandParameter="No Need"/>
+		</StackPanel>
+		<telerik:RadButton x:Name="Done" Content="Done" HorizontalAlignment="Left" Width="61.167" Margin="427.833,0,0,8" VerticalAlignment="Bottom" Command="{Binding DoneCommand, ElementName=Window, Mode=OneWay}" CommandParameter="{Binding Source, ElementName=GetImage}"/>
+	</Grid>
+</Window>

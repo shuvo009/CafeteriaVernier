@@ -1,0 +1,646 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ServerSideServices" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IServerSideServices_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Procesta.serverSideService.Class.Propertyes" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServerSideServices_UserLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserLogin" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_TeamLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:TeamLogin" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_TeamLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TeamLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserMunitieCounter_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserMunitieCounter" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserMunitieCounter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserMunitieCounterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_TeamMunitieCounter_InputMessage">
+    <wsdl:part name="parameters" element="tns:TeamMunitieCounter" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_TeamMunitieCounter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TeamMunitieCounterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_AccountDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:AccountDetails" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_AccountDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AccountDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_AccountUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:AccountUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_AccountUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AccountUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserLoginHistoryAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserLoginHistoryAll" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserLoginHistoryAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserLoginHistoryAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserLoginHistoryDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserLoginHistoryDate" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserLoginHistoryDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserLoginHistoryDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserLoginHistoryTwoDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserLoginHistoryTwoDate" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserLoginHistoryTwoDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserLoginHistoryTwoDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserRechargeHistoryAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserRechargeHistoryAll" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserRechargeHistoryAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserRechargeHistoryAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserRechargeHistoryDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserRechargeHistoryDate" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserRechargeHistoryDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserRechargeHistoryDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserRechargeHistoryTwoDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserRechargeHistoryTwoDate" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserRechargeHistoryTwoDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserRechargeHistoryTwoDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_TeamRechargeHistoryAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:TeamRechargeHistoryAll" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_TeamRechargeHistoryAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TeamRechargeHistoryAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_TeamRechargeHistoryDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:TeamRechargeHistoryDate" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_TeamRechargeHistoryDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TeamRechargeHistoryDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_TeamRechargeHistoryTwoDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:TeamRechargeHistoryTwoDate" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_TeamRechargeHistoryTwoDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TeamRechargeHistoryTwoDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_GetAllUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsers" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_GetAllUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_TeamNameChecker_InputMessage">
+    <wsdl:part name="parameters" element="tns:TeamNameChecker" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_TeamNameChecker_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TeamNameCheckerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_AddNewTeam_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewTeam" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_AddNewTeam_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewTeamResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_DeleteMember_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteMember" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_DeleteMember_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_CounterSettings_InputMessage">
+    <wsdl:part name="parameters" element="tns:CounterSettings" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_CounterSettings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CounterSettingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_GetUserImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserImage" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_GetUserImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_GetTeamName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTeamName" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_GetTeamName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTeamNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UpdateTeam_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTeam" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UpdateTeam_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTeamResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserLogout_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserLogout" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UserLogout_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserLogoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_TeamLogout_InputMessage">
+    <wsdl:part name="parameters" element="tns:TeamLogout" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_TeamLogout_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TeamLogoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_GetTeamMember_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTeamMember" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_GetTeamMember_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTeamMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_GetUserBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserBalance" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_GetUserBalance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_GetTeamBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTeamBalance" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_GetTeamBalance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTeamBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_PasswordChange_InputMessage">
+    <wsdl:part name="parameters" element="tns:PasswordChange" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_PasswordChange_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PasswordChangeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_GetTeamLogo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTeamLogo" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_GetTeamLogo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTeamLogoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UpdateTeamLogo_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTeamLogo" />
+  </wsdl:message>
+  <wsdl:message name="IServerSideServices_UpdateTeamLogo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTeamLogoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServerSideServices">
+    <wsdl:operation name="UserLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/UserLogin" message="tns:IServerSideServices_UserLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/UserLoginResponse" message="tns:IServerSideServices_UserLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TeamLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/TeamLogin" message="tns:IServerSideServices_TeamLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/TeamLoginResponse" message="tns:IServerSideServices_TeamLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserMunitieCounter">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/UserMunitieCounter" message="tns:IServerSideServices_UserMunitieCounter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/UserMunitieCounterResponse" message="tns:IServerSideServices_UserMunitieCounter_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TeamMunitieCounter">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/TeamMunitieCounter" message="tns:IServerSideServices_TeamMunitieCounter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/TeamMunitieCounterResponse" message="tns:IServerSideServices_TeamMunitieCounter_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AccountDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/AccountDetails" message="tns:IServerSideServices_AccountDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/AccountDetailsResponse" message="tns:IServerSideServices_AccountDetails_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AccountUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/AccountUpdate" message="tns:IServerSideServices_AccountUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/AccountUpdateResponse" message="tns:IServerSideServices_AccountUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginHistoryAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/UserLoginHistoryAll" message="tns:IServerSideServices_UserLoginHistoryAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/UserLoginHistoryAllResponse" message="tns:IServerSideServices_UserLoginHistoryAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginHistoryDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/UserLoginHistoryDate" message="tns:IServerSideServices_UserLoginHistoryDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/UserLoginHistoryDateResponse" message="tns:IServerSideServices_UserLoginHistoryDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginHistoryTwoDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/UserLoginHistoryTwoDate" message="tns:IServerSideServices_UserLoginHistoryTwoDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/UserLoginHistoryTwoDateResponse" message="tns:IServerSideServices_UserLoginHistoryTwoDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserRechargeHistoryAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/UserRechargeHistoryAll" message="tns:IServerSideServices_UserRechargeHistoryAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/UserRechargeHistoryAllResponse" message="tns:IServerSideServices_UserRechargeHistoryAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserRechargeHistoryDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/UserRechargeHistoryDate" message="tns:IServerSideServices_UserRechargeHistoryDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/UserRechargeHistoryDateResponse" message="tns:IServerSideServices_UserRechargeHistoryDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserRechargeHistoryTwoDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/UserRechargeHistoryTwoDate" message="tns:IServerSideServices_UserRechargeHistoryTwoDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/UserRechargeHistoryTwoDateResponse" message="tns:IServerSideServices_UserRechargeHistoryTwoDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TeamRechargeHistoryAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/TeamRechargeHistoryAll" message="tns:IServerSideServices_TeamRechargeHistoryAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/TeamRechargeHistoryAllResponse" message="tns:IServerSideServices_TeamRechargeHistoryAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TeamRechargeHistoryDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/TeamRechargeHistoryDate" message="tns:IServerSideServices_TeamRechargeHistoryDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/TeamRechargeHistoryDateResponse" message="tns:IServerSideServices_TeamRechargeHistoryDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TeamRechargeHistoryTwoDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/TeamRechargeHistoryTwoDate" message="tns:IServerSideServices_TeamRechargeHistoryTwoDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/TeamRechargeHistoryTwoDateResponse" message="tns:IServerSideServices_TeamRechargeHistoryTwoDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/GetAllUsers" message="tns:IServerSideServices_GetAllUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/GetAllUsersResponse" message="tns:IServerSideServices_GetAllUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TeamNameChecker">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/TeamNameChecker" message="tns:IServerSideServices_TeamNameChecker_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/TeamNameCheckerResponse" message="tns:IServerSideServices_TeamNameChecker_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNewTeam">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/AddNewTeam" message="tns:IServerSideServices_AddNewTeam_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/AddNewTeamResponse" message="tns:IServerSideServices_AddNewTeam_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMember">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/DeleteMember" message="tns:IServerSideServices_DeleteMember_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/DeleteMemberResponse" message="tns:IServerSideServices_DeleteMember_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CounterSettings">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/CounterSettings" message="tns:IServerSideServices_CounterSettings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/CounterSettingsResponse" message="tns:IServerSideServices_CounterSettings_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserImage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/GetUserImage" message="tns:IServerSideServices_GetUserImage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/GetUserImageResponse" message="tns:IServerSideServices_GetUserImage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTeamName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/GetTeamName" message="tns:IServerSideServices_GetTeamName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/GetTeamNameResponse" message="tns:IServerSideServices_GetTeamName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTeam">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/UpdateTeam" message="tns:IServerSideServices_UpdateTeam_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/UpdateTeamResponse" message="tns:IServerSideServices_UpdateTeam_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLogout">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/UserLogout" message="tns:IServerSideServices_UserLogout_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/UserLogoutResponse" message="tns:IServerSideServices_UserLogout_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TeamLogout">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/TeamLogout" message="tns:IServerSideServices_TeamLogout_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/TeamLogoutResponse" message="tns:IServerSideServices_TeamLogout_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTeamMember">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/GetTeamMember" message="tns:IServerSideServices_GetTeamMember_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/GetTeamMemberResponse" message="tns:IServerSideServices_GetTeamMember_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/GetUserBalance" message="tns:IServerSideServices_GetUserBalance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/GetUserBalanceResponse" message="tns:IServerSideServices_GetUserBalance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTeamBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/GetTeamBalance" message="tns:IServerSideServices_GetTeamBalance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/GetTeamBalanceResponse" message="tns:IServerSideServices_GetTeamBalance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PasswordChange">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/PasswordChange" message="tns:IServerSideServices_PasswordChange_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/PasswordChangeResponse" message="tns:IServerSideServices_PasswordChange_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTeamLogo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/GetTeamLogo" message="tns:IServerSideServices_GetTeamLogo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/GetTeamLogoResponse" message="tns:IServerSideServices_GetTeamLogo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTeamLogo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServerSideServices/UpdateTeamLogo" message="tns:IServerSideServices_UpdateTeamLogo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServerSideServices/UpdateTeamLogoResponse" message="tns:IServerSideServices_UpdateTeamLogo_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IServerSideServices" type="tns:IServerSideServices">
+    <wsp:PolicyReference URI="#NetTcpBinding_IServerSideServices_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="UserLogin">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/UserLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TeamLogin">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/TeamLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserMunitieCounter">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/UserMunitieCounter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TeamMunitieCounter">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/TeamMunitieCounter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccountDetails">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/AccountDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccountUpdate">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/AccountUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginHistoryAll">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/UserLoginHistoryAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginHistoryDate">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/UserLoginHistoryDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginHistoryTwoDate">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/UserLoginHistoryTwoDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserRechargeHistoryAll">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/UserRechargeHistoryAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserRechargeHistoryDate">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/UserRechargeHistoryDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserRechargeHistoryTwoDate">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/UserRechargeHistoryTwoDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TeamRechargeHistoryAll">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/TeamRechargeHistoryAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TeamRechargeHistoryDate">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/TeamRechargeHistoryDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TeamRechargeHistoryTwoDate">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/TeamRechargeHistoryTwoDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/GetAllUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TeamNameChecker">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/TeamNameChecker" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewTeam">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/AddNewTeam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMember">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/DeleteMember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CounterSettings">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/CounterSettings" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserImage">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/GetUserImage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTeamName">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/GetTeamName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTeam">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/UpdateTeam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogout">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/UserLogout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TeamLogout">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/TeamLogout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTeamMember">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/GetTeamMember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBalance">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/GetUserBalance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTeamBalance">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/GetTeamBalance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PasswordChange">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/PasswordChange" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTeamLogo">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/GetTeamLogo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTeamLogo">
+      <soap12:operation soapAction="http://tempuri.org/IServerSideServices/UpdateTeamLogo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServerSideServices">
+    <wsdl:port name="NetTcpBinding_IServerSideServices" binding="tns:NetTcpBinding_IServerSideServices">
+      <soap12:address location="net.tcp://localhost:8081/ServerSideServices" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8081/ServerSideServices</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>Dreamer-PC\shuvo</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

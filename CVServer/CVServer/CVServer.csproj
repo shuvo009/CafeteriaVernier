@@ -1,0 +1,554 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2ADA2AF6-B5C0-4068-97E6-84158F18A956}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Procesta.CvServer</RootNamespace>
+    <AssemblyName>CVServer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.20525.0</ExpressionBlendVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Server.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CustomControl">
+      <HintPath>..\..\..\..\..\MyC#Controls\CustomControl\CustomControl\bin\Debug\CustomControl.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v11.1.Core, Version=11.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v11.1, Version=11.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.PivotGrid.v11.1.Core, Version=11.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v11.1.Core, Version=11.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v11.1.Core, Version=11.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v11.1, Version=11.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v11.1, Version=11.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Printing.v11.1, Version=11.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v11.1, Version=11.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPivotGrid.v11.1, Version=11.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v11.1, Version=11.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v11.1, Version=11.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Controls" />
+    <Reference Include="Microsoft.Expression.Interactions" />
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Smo, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.Smo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.SmoExtended, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.SmoExtended.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls, Version=2011.3.1220.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Charting, Version=2011.3.1220.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.GridView, Version=2011.3.1220.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Input, Version=2011.3.1220.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Navigation, Version=2011.3.1220.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Data, Version=2011.3.1220.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="UIAutomationProvider">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UIAutomationTypes">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebCam_Capture, Version=1.0.2395.24959, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\WebCam_Capture.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\ClientChecker\ConnectFromServer.cs" />
+    <Compile Include="Class\CounterInfo\CounterSummary.cs" />
+    <Compile Include="Class\CvVariables.cs" />
+    <Compile Include="Class\Methods\AccountRechargeSearchs.cs" />
+    <Compile Include="Class\Methods\NotificationFromClients.cs" />
+    <Compile Include="Class\Methods\CommonInfoSearch.cs" />
+    <Compile Include="Class\Methods\CustomerInfoSearch.cs" />
+    <Compile Include="Class\Methods\FackClass.cs" />
+    <Compile Include="Class\Methods\LogFileWriter.cs" />
+    <Compile Include="Class\Methods\MiraculousMethods.cs" />
+    <Compile Include="Class\Methods\ParmissionIequality.cs" />
+    <Compile Include="Class\Methods\ScreenShort.cs" />
+    <Compile Include="Class\Models\ModelCommonUse.cs" />
+    <Compile Include="Class\Models\ModelCustomer.cs" />
+    <Compile Include="Class\Models\ModelEmployee.cs" />
+    <Compile Include="Class\Models\ModelTeamInfo.cs" />
+    <Compile Include="Class\Models\ModelSnapShotTime.cs" />
+    <Compile Include="Class\Models\ModelEmployPermissions.cs" />
+    <Compile Include="Class\Models\ModelBillConfig.cs" />
+    <Compile Include="Class\Models\ModelUserLogin.cs" />
+    <Compile Include="Class\ValidationRuls\CustomerUserName.cs" />
+    <Compile Include="Class\ValidationRuls\EmailAddressValidator.cs" />
+    <Compile Include="Class\ValidationRuls\EmployeeName.cs" />
+    <Compile Include="Class\ValidationRuls\TeamName.cs" />
+    <Compile Include="Class\ValueConverter\BoolReverse.cs" />
+    <Compile Include="Class\ValueConverter\CounterStatusToImagePath.cs" />
+    <Compile Include="Class\ValueConverter\DateDiffer.cs" />
+    <Compile Include="Class\ValueConverter\Editpermission.cs" />
+    <Compile Include="Class\ValidationRuls\PhoneNumber.cs" />
+    <Compile Include="Class\ValueConverter\ByteImageConverter.cs" />
+    <Compile Include="Class\ValueConverter\CounterStatusEnToImage.cs" />
+    <Compile Include="Class\ValueConverter\MunitiesToColor.cs" />
+    <Compile Include="Class\ValueConverter\ObjectToBool.cs" />
+    <Compile Include="Class\ValueConverter\PasswordsTolengthcs.cs" />
+    <Compile Include="Class\ValueConverter\PasswordsToStrength.cs" />
+    <Compile Include="Class\ValueConverter\RadioToString.cs" />
+    <Compile Include="Class\ValueConverter\RechargerDatacontextChanger.cs" />
+    <Compile Include="Class\ValueConverter\StrengthToBrush.cs" />
+    <Compile Include="Class\ValueConverter\ValuePacker.cs" />
+    <Compile Include="Class\Views\SnapShotTimeCollections.cs" />
+    <Compile Include="Class\Views\ViewEmployPermissions.cs" />
+    <Compile Include="EntityFramework\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="InstallWindow.xaml.cs">
+      <DependentUpon>InstallWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\CashHistoryReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\CashHistoryReport.Designer.cs">
+      <DependentUpon>CashHistoryReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportEmployee.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportEmployee.Designer.cs">
+      <DependentUpon>ReportEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientNotification\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServerNotifaction\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="StratWindow.xaml.cs">
+      <DependentUpon>StratWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ButtonWithImages.xaml.cs">
+      <DependentUpon>ButtonWithImages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MenuButton.xaml.cs">
+      <DependentUpon>MenuButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WebCam\WebCamWindow.xaml.cs">
+      <DependentUpon>WebCamWindow.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Reports\CashHistoryReport.resx">
+      <DependentUpon>CashHistoryReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportEmployee.resx">
+      <DependentUpon>ReportEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="EntityFramework\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Properties\DataSources\ModelEmployee.datasource" />
+    <None Include="Properties\DataSources\ModelEmployPermissions.datasource" />
+    <None Include="Properties\DataSources\Procesta.CvServer.EntityFramework.Cafeteria_Vernier_dbEntities.datasource" />
+    <None Include="Properties\DataSources\Procesta.CvServer.EntityFramework.Cash.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Service References\ClientNotification\ClientNotification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientNotification\Procesta.CvServer.ClientNotification.CommandData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientNotification\service.wsdl" />
+    <None Include="Service References\ClientNotification\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientNotification\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServerNotifaction\Procesta.CvServer.ServerNotifaction.CounterInformation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServerNotifaction\ServerNotification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServerNotifaction\service.wsdl" />
+    <None Include="Service References\ServerNotifaction\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServerNotifaction\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="InstallWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Properties\DesignTimeResources.xaml" Condition="'$(DesignTime)'=='true' OR ('$(SolutionPath)'!='' AND Exists('$(SolutionPath)') AND '$(BuildingInsideVisualStudio)'!='true' AND '$(BuildingInsideExpressionBlend)'!='true')">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
+    </Page>
+    <Page Include="StratWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ScrollBarStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MainThemes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ThemeEight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ThemeFive.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ThemeFour.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ThemeOne.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ThemeSeven.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ThemeSix.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ThemeThree.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ThemeTwo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\ButtonWithImages.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\MenuButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WebCam\WebCamWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ButtonImages\Add.png" />
+    <Resource Include="ButtonImages\browse.png" />
+    <Resource Include="ButtonImages\CashView.png" />
+    <Resource Include="ButtonImages\ChangePassword.png" />
+    <Resource Include="ButtonImages\Close.png" />
+    <Resource Include="ButtonImages\database.png" />
+    <Resource Include="ButtonImages\databaseBackup.png" />
+    <Resource Include="ButtonImages\databaseRestore.png" />
+    <Resource Include="ButtonImages\Delete.png" />
+    <Resource Include="ButtonImages\Home.png" />
+    <Resource Include="ButtonImages\Login.png" />
+    <Resource Include="ButtonImages\MoneySetting.png" />
+    <Resource Include="ButtonImages\Print.png" />
+    <Resource Include="ButtonImages\RechargeHistory.png" />
+    <Resource Include="ButtonImages\Report.png" />
+    <Resource Include="ButtonImages\Save.png" />
+    <Resource Include="ButtonImages\ScreenCaptureSetting.png" />
+    <Resource Include="ButtonImages\Search.png" />
+    <Resource Include="ButtonImages\send.png" />
+    <Resource Include="ButtonImages\SenEmail.png" />
+    <Resource Include="ButtonImages\settings.png" />
+    <Resource Include="ButtonImages\shutdown.png" />
+    <Resource Include="ButtonImages\TeamMaintenance.png" />
+    <Resource Include="ButtonImages\TodaySummary.png" />
+    <Resource Include="ButtonImages\Update.png" />
+    <Resource Include="ButtonImages\UserReset.png" />
+    <Resource Include="ButtonImages\UserLoginHistory.png" />
+    <Resource Include="ButtonImages\userMaintenance.png" />
+    <Resource Include="ButtonImages\webcam.png" />
+    <Resource Include="Images\CopunterBusy.png" />
+    <Resource Include="Images\CounterError.png" />
+    <Resource Include="Images\CounterFree.png" />
+    <Resource Include="Images\CounterLock.png" />
+    <Resource Include="Images\LogOff.png" />
+    <Resource Include="Images\remove.png" />
+    <Resource Include="Images\restart.png" />
+    <Resource Include="Images\ServerIcon.png" />
+    <Resource Include="Images\shutdown.png" />
+    <Resource Include="Images\SplashScreen.png" />
+    <Resource Include="Server.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\MyC#Class`s\InternetAccessories\InternetAccessories\InternetAccessories.csproj">
+      <Project>{D41BFCA6-7595-454E-A76A-4DF6A83AE05B}</Project>
+      <Name>InternetAccessories</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ButtonImages\EmailSetting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ButtonImages\General.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Sql.Server.Express.10.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server 2008 Express</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\keyboardShortcuts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ButtonImages\Customer.png" />
+    <Resource Include="ButtonImages\Employee.png" />
+    <Resource Include="ButtonImages\Team.png" />
+    <Resource Include="ButtonImages\Recharge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ButtonImages\CashHHistory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ButtonImages\Stop.png" />
+    <Resource Include="ButtonImages\Strat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ClientNotification\" />
+    <WCFMetadataStorage Include="Service References\ServerNotifaction\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientNotification\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientNotification\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientNotification\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServerNotifaction\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServerNotifaction\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServerNotifaction\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

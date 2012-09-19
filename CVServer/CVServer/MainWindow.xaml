@@ -1,0 +1,1311 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:tileview="clr-namespace:Telerik.Windows.Controls.TileView;assembly=Telerik.Windows.Controls.Navigation"
+	    xmlns:telerikQuickStart="clr-namespace:Telerik.Windows.Controls.QuickStart;assembly=Telerik.Windows.Controls"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
+		xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Procesta.CvServer"
+		xmlns:Properties="clr-namespace:Procesta.CvServer.Properties"
+        xmlns:Procesta_CustomControl="clr-namespace:Procesta.CustomControl;assembly=CustomControl" 
+        xmlns:CvValueConverter="clr-namespace:Procesta.CvServer.Class.ValueConverter" 
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+		xmlns:Procesta_CvServer_Class_ClientChecker="clr-namespace:Procesta.CvServer.Class.ClientChecker"
+        xmlns:Procesta_CvServer_Class_Propertys="clr-namespace:Procesta.CvServer.Class.Propertys"   
+        xmlns:Procesta_CvServer_UserControls="clr-namespace:Procesta.CvServer.UserControls" 
+		xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"  
+		xmlns:telerikTheme="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls" 
+       xmlns:Procesta_CvServer_Class_Methods="clr-namespace:Procesta.CvServer.Class.Methods" 
+		x:Name="window" mc:Ignorable="d" x:Class="Procesta.CvServer.MainWindow" 
+       Title="Cafeteria Vernier" MinHeight="641" MinWidth="1004" Height="662.5" Width="1004" WindowStartupLocation="CenterScreen" Loaded="Window_Load" Background="{DynamicResource BackGroundBrush}" Icon="Images/ServerIcon.png">
+    <Window.Resources>
+    	<Procesta_CvServer_Class_Methods:NotificationFromClients x:Key="NotificationFromClientsDataSource" d:IsDataSource="True"/>
+    	<local:CounterStatusToImagePath x:Key="CounterStatusToImagePath"/>
+    	<local:SnapShotTimeCollections x:Key="SnapShotTimeCollectionsDataSource" d:IsDataSource="True"/>
+    	<local:ObjectToBool x:Key="ObjectToBool"/>
+    	<local:RadioToString x:Key="RadioToString"/>
+    	 <!--Data Source-->
+    	 <Procesta_CvServer_Class_ClientChecker:ConnectFromServer x:Key="ConnectFromServerDataSource" d:IsDataSource="True"/>
+		 <System:DateTime x:Key="DateTimeDataSource" d:IsDataSource="True"/>
+    	<local:BoolReverse x:Key="BoolReverse"/>
+    	<local:RechargerDatacontextChanger x:Key="RechDataContxtChanger"/>
+    	<local:Editpermission x:Key="Editpermission"/>
+    	<local:ByteImageConverter x:Key="ByteImageConverter"/>
+    	<CvValueConverter:PasswordsToStrength x:Key="PasswordsToStrength"/>
+    	<CvValueConverter:StrengthToBrush x:Key="StrengthToBrush"/>
+    	<CvValueConverter:MunitiesToColor x:Key="MunitiesToColor"/>
+    	<CvValueConverter:CounterStatusEnToImage x:Key="counterStatusEToImage"/>
+    	<CvValueConverter:PasswordsTolengthcs x:Key="passwordToLengthcs"/>
+		<local:DateDiffer x:Key="DateDifference"/>
+    	<telerikTheme:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    	<tileview:TileToFluideStateConverter x:Key="tileConverter" />		
+		<local:ValuePacker x:Key="ValuePaker"/>
+
+		<!--Data Template-->
+		<Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
+		  <Setter Property="OverridesDefaultStyle" Value="true"/>
+		  <Setter Property="HasDropShadow" Value="True"/>
+		  <Setter Property="Foreground" Value="White"/>
+		  <Setter Property="Template">
+		    <Setter.Value>
+		      <ControlTemplate TargetType="{x:Type ToolTip}">
+		       <Border BorderBrush="#111111" SnapsToDevicePixels="True">
+		        <Border x:Name="Border"
+		          Background="#525252"
+		          BorderBrush="#999999"
+		          BorderThickness="1"
+		          Width="{TemplateBinding Width}"
+		          Height="{TemplateBinding Height}">
+		          <ContentPresenter
+		            Margin="4" 
+		            HorizontalAlignment="Left"
+		            VerticalAlignment="Top" />
+		        </Border>
+				</Border>
+		        <ControlTemplate.Triggers>
+		          <Trigger Property="HasDropShadow" Value="true">
+		            <Setter TargetName="Border" Property="CornerRadius" Value="4"/>
+		            <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="true"/>
+		          </Trigger>
+		        </ControlTemplate.Triggers>
+		      </ControlTemplate>
+		    </Setter.Value>
+		  </Setter>
+		</Style>
+		<!--Data Members-->
+    	<DataTemplate x:Key="CountryHeaderTemplate">
+    		<TextBlock Text="{Binding CounterName}" Foreground="Black" FontSize="{DynamicResource TextFontSize}"/>
+    	</DataTemplate>
+		
+    	<DataTemplate x:Key="RadComboBoxItemTemplate">
+    		<StackPanel Orientation="Horizontal">
+    			<Border BorderThickness="2" Height="44" HorizontalAlignment="Left" Width="44" d:LayoutOverrides="HorizontalAlignment">
+    				<Border.BorderBrush>
+    					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    						<GradientStop Color="DarkGray" Offset="0"/>
+    						<GradientStop Color="#FF999999" Offset="1"/>
+    						<GradientStop Color="Gray" Offset="0.504"/>
+    					</LinearGradientBrush>
+    				</Border.BorderBrush>
+    				<Image Source="{Binding Image, Converter={StaticResource ByteImageConverter}}"/>
+    			</Border>
+    			<TextBlock Margin="6,13.299,0,8" TextWrapping="Wrap" Text="{Binding UserName}" FontSize="16"/>
+    		</StackPanel>
+    	</DataTemplate>
+		<!--Data Member for List view-->
+		<DataTemplate x:Key="ListBoxDataTamplate">
+			<DockPanel Height="40" Margin="0,0,0,5" LastChildFill="True">
+				<Border Margin="0,5,0,0" Height="36" Width="34" BorderThickness="2" CornerRadius="2" DockPanel.Dock="Left">
+					<Border.BorderBrush>
+						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+							<GradientStop Color="#FFE5E5E5" Offset="0"/>
+							<GradientStop Color="#FFCACACA" Offset="1"/>
+							<GradientStop Color="#FFE5E5E5" Offset="0.502"/>
+						</LinearGradientBrush>
+					</Border.BorderBrush>
+					<Image Source="{Binding Image}"/>
+				</Border>
+				<TextBlock DockPanel.Dock="Left" Height="19" TextWrapping="Wrap" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14.667"/> 
+			</DockPanel>
+		</DataTemplate>
+    	
+		
+		<Style x:Key="TileViewItemHeaderStyle1" TargetType="{x:Type tileview:TileViewItemHeader}">
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+        </Style>
+        <Style TargetType="{x:Type telerik:RadTileViewItem}">
+            <Setter Property="Padding" Value="3" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HeaderStyle" Value="{StaticResource TileViewItemHeaderStyle1}" />
+        </Style>
+        <Style TargetType="{x:Type telerik:RadTileView}">
+            <Setter Property="PreservePositionWhenMaximized" Value="True" />
+            <Setter Property="telerik:TileViewPanel.IsVirtualized" Value="True" />
+            <Setter Property="IsAutoScrollingEnabled" Value="True" />
+            <Setter Property="TileStateChangeTrigger" Value="SingleClick" />
+            <Setter Property="MinimizedColumnWidth" Value="308" />
+            <Setter Property="MinimizedRowHeight" Value="193" />
+            <Setter Property="RowHeight" Value="187" />
+            <Setter Property="ColumnWidth" Value="277" />
+            <Setter Property="ColumnsCount" Value="4" />
+        </Style>
+		
+		  <DataTemplate x:Key="contentTemplate">
+            <telerikTheme:RadFluidContentControl ContentChangeMode="Manual"
+			                                State="Normal"
+			                                TransitionDuration="0:0:.5">
+            	<telerikTheme:RadFluidContentControl.Content>
+            		  <Border BorderThickness="5" Margin="8,8,24.442,14.328" CornerRadius="5">
+			    		<Border.BorderBrush>
+			    			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+			    				<GradientStop Color="#FFCECECE" Offset="0"/>
+			    				<GradientStop Color="#FFE4E4E4" Offset="1"/>
+			    				<GradientStop Color="#FF626262" Offset="0.504"/>
+			    			</LinearGradientBrush>
+			    		</Border.BorderBrush>
+	    		<Image Source="{Binding Status, Converter={StaticResource CounterStatusToImagePath}}"/>
+	    	</Border>        	
+				</telerikTheme:RadFluidContentControl.Content>
+                <telerikTheme:RadFluidContentControl.LargeContent>
+                    <Grid>
+				    	<Grid.ColumnDefinitions>
+				    		<ColumnDefinition Width="0.371*"/>
+				    		<ColumnDefinition Width="0.629*"/>
+				    	</Grid.ColumnDefinitions>
+				    	<Grid.RowDefinitions>
+				    		<RowDefinition Height="0.517*"/>
+				    		<RowDefinition Height="0.483*"/>
+				    	</Grid.RowDefinitions>
+				    	<Border BorderThickness="5" Margin="8,8,24.442,14.328" CornerRadius="5" Width="100" Height="100">
+				    		<Border.BorderBrush>
+				    			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+				    				<GradientStop Color="#FFCECECE" Offset="0"/>
+				    				<GradientStop Color="#FFE4E4E4" Offset="1"/>
+				    				<GradientStop Color="#FF626262" Offset="0.504"/>
+				    			</LinearGradientBrush>
+				    		</Border.BorderBrush>
+				    		<Image Source="{Binding Status, Converter={StaticResource CounterStatusToImagePath}}"/>
+				    	</Border>
+				    	<Procesta_CvServer_UserControls:MenuButton Margin="-1.5,42.471,0,39.857" Foreground="#FFE0E0E0" ButtonImage="Images/restart.png" ScreenTip="Restart" SupperTip="Restart Client Computer" Grid.Column="1" HorizontalAlignment="Left" Width="100" Command="{Binding DataContext.ClientRestartCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding CounterNumber}"/>
+				    	<Procesta_CvServer_UserControls:MenuButton Margin="121.5,42.471,130.069,39.857" Foreground="#FFE0E0E0" ButtonImage="Images/shutdown.png" ScreenTip="Shutdown" SupperTip="Shutdown Client Computer" Grid.Column="1" Command="{Binding DataContext.ClientShoutdownCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding CounterNumber}" Width="100" HorizontalAlignment="Center"/>
+				    	<Procesta_CvServer_UserControls:MenuButton Margin="0,42.471,8,39.857" Foreground="#FFE0E0E0" HorizontalAlignment="Right" Width="100" ButtonImage="Images/LogOff.png" ScreenTip="Logoff" SupperTip="Logoff customer account if he is currently logged in" Grid.Column="1" Command="{Binding DataContext.ClientLogoffCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding CounterNumber}"/>
+				    	<TextBlock Margin="0,7.999,8,0" TextWrapping="Wrap" Text="Counter Name :" VerticalAlignment="Top" FontSize="16" Foreground="#FFE0E0E0" Grid.Row="1" HorizontalAlignment="Right" Width="112"/>
+				    	<TextBlock Margin="0,33.279,8,0" TextWrapping="Wrap" Text="Counter Number :" FontSize="16" Foreground="#FFE0E0E0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="128"/>
+				    	<TextBlock Margin="0,58.556,8,0" TextWrapping="Wrap" Text="Customer Name :" VerticalAlignment="Top" FontSize="16" Foreground="#FFE0E0E0" Grid.Row="1" HorizontalAlignment="Right" Width="123"/>
+				    	<TextBlock Margin="0,7.994,0,0" TextWrapping="Wrap" Text="{Binding CounterName}" VerticalAlignment="Top" FontSize="16" Foreground="#FFE0E0E0" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
+				    	<TextBlock Margin="0,33.275,0,0" TextWrapping="Wrap" Text="{Binding CounterNumber}" FontSize="16" Foreground="#FFE0E0E0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Left" Width="127.404"/>
+				    	<TextBlock Margin="0,58.556,0,0" TextWrapping="Wrap" Text="{Binding CustomerID}" VerticalAlignment="Top" FontSize="16" Foreground="#FFE0E0E0" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
+				    </Grid>  
+           </telerikTheme:RadFluidContentControl.LargeContent>
+       </telerikTheme:RadFluidContentControl>
+        </DataTemplate>
+		
+		<DataTemplate x:Key="headerTemplate">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="{Binding CounterName}" Foreground="Black"/>
+			</StackPanel>
+        </DataTemplate>
+
+
+		
+
+    	<Storyboard x:Key="EmployeeLoginAnimation">
+    		<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="EmployeeLoginUsername">
+    			<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="29.307"/>
+    		</DoubleAnimationUsingKeyFrames>
+    		<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="textBlock1">
+    			<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="29.307"/>
+    		</DoubleAnimationUsingKeyFrames>
+    		<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="EmployeeLoginUsername">
+    			<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.21"/>
+    		</DoubleAnimationUsingKeyFrames>
+    		<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="textBlock1">
+    			<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.21"/>
+    		</DoubleAnimationUsingKeyFrames>
+    		<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="EmployeeLoginUsername">
+    			<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+    		</DoubleAnimationUsingKeyFrames>
+    		<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textBlock1">
+    			<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+    		</DoubleAnimationUsingKeyFrames>
+    		<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="passwordBoxEdit">
+    			<EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="28.967"/>
+    		</DoubleAnimationUsingKeyFrames>
+    		<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="textBlock2">
+    			<EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="28.967"/>
+    		</DoubleAnimationUsingKeyFrames>
+    		<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="passwordBoxEdit">
+    			<EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1"/>
+    		</DoubleAnimationUsingKeyFrames>
+    		<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textBlock2">
+    			<EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1"/>
+    		</DoubleAnimationUsingKeyFrames>
+    		<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="EmployeeLogin">
+    			<EasingDoubleKeyFrame KeyTime="0:0:1" Value="26.5"/>
+    		</DoubleAnimationUsingKeyFrames>
+    		<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="EmployeeLogin">
+    			<EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+    		</DoubleAnimationUsingKeyFrames>
+    	</Storyboard>
+	</Window.Resources>
+	<Window.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="PanelEmployeeLogin">
+		  <BeginStoryboard Storyboard="{StaticResource EmployeeLoginAnimation}"/>
+		</EventTrigger>
+	</Window.Triggers>
+	<Window.InputBindings>
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="C" Modifiers="Control" CommandParameter="NewCustomer"/>
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="R" Modifiers="Control" CommandParameter="AccountRecharge"/>
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="E" Modifiers="Control" CommandParameter="RechargeHistory"/>
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="L" Modifiers="Control" CommandParameter="CustomerLoginHistory"/>
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="A" Modifiers="Control" CommandParameter="Cash"/>
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="S" Modifiers="Control" CommandParameter="Summary"/>
+		<KeyBinding Command="{Binding SettingMenuCommand, ElementName=window, Mode=OneWay}" Key="U" Modifiers="Control" CommandParameter="RateSetting"/>	<!--Setting-->	
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="I" Modifiers="Control" CommandParameter="Setting"/>
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="N" Modifiers="Control" CommandParameter="TeamMaintenance"/>
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="O" Modifiers="Control" CommandParameter="CustomerMaintenance"/>
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="M" Modifiers="Control" CommandParameter="NewTeam"/>
+		<KeyBinding Command="{Binding SettingMenuCommand, ElementName=window, Mode=OneWay}" Key="P" Modifiers="Control" CommandParameter="ChangePassword"/> <!--Setting-->
+		<KeyBinding Command="{Binding SettingMenuCommand, ElementName=window, Mode=OneWay}" Key="F" Modifiers="Control" CommandParameter="ScreenCapture"/> <!--Setting-->
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="J" Modifiers="Control" CommandParameter="SendEmail"/>
+		<KeyBinding Command="{Binding SettingMenuCommand, ElementName=window, Mode=OneWay}" Key="K" Modifiers="Control" CommandParameter="EMailSetting"/> <!--Setting-->
+		<KeyBinding Command="{Binding SettingMenuCommand, ElementName=window, Mode=OneWay}" Key="G" Modifiers="Control" CommandParameter="GeneralSetting"/><!--Setting-->
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="H" Modifiers="Control" CommandParameter="Home"/>
+		<KeyBinding Command="{Binding SettingMenuCommand, ElementName=window, Mode=OneWay}" Key="T" Modifiers="Control" CommandParameter="CounterSetting"/><!--setting-->
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="Q" Modifiers="Control" CommandParameter="NewEmployee"/>		
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="D" Modifiers="Control" CommandParameter="Database"/>
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="Z" Modifiers="Control" CommandParameter="CustomerStatusReset"/>
+		<KeyBinding Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" Key="Y" Modifiers="Control" CommandParameter="CashHistory"/>
+	</Window.InputBindings>
+	<Grid x:Name="PanelRoot" DataContext="{Binding Source={StaticResource DateTimeDataSource}}">
+    	<Grid.ColumnDefinitions>
+    		<ColumnDefinition Width="0.115*"/>
+    		<ColumnDefinition Width="0.764*"/>
+    		<ColumnDefinition Width="0.121*"/>
+    	</Grid.ColumnDefinitions>
+    	<Grid.RowDefinitions>
+    		<RowDefinition Height="0.043*"/>
+    		<RowDefinition Height="0.741*"/>
+    		<RowDefinition Height="0.216*"/>
+    	</Grid.RowDefinitions>
+		<!--Panel New Employ-->
+    	<Grid x:Name="PanelNewEmploy" Margin="91.775,1.454,0,8" Grid.Row="1" Grid.Column="1" d:IsHidden="True" Visibility="Hidden" d:IsLocked="True">
+    		<Grid.RowDefinitions>
+    			<RowDefinition Height="0.903*"/>
+    			<RowDefinition Height="0.097*"/>
+    		</Grid.RowDefinitions>
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition Width="0.735*"/>
+    			<ColumnDefinition Width="0.265*"/>
+    		</Grid.ColumnDefinitions>
+            <telerik:RadGridView x:Name="EmployeeGridView" Margin="0,0,0,0.335" ShowGroupPanel="False" Grid.Column="1" FontSize="14.667" AutoGenerateColumns="False">
+            	<telerik:RadGridView.Columns>
+            		<telerik:GridViewDataColumn Header="Employee ID`s" HeaderTextAlignment="Center" DataMemberBinding="{Binding Name}" MinWidth="130"/>        	
+				</telerik:RadGridView.Columns>         
+			</telerik:RadGridView>
+            <StackPanel Margin="71.99,0,54.856,8.001" Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Bottom" Height="31.69" HorizontalAlignment="Center">
+            	<Procesta_CvServer_UserControls:ButtonWithImages x:Name="EmployeeNew" Content="New" Margin="0" FontSize="14.667" Width="70.834" Command="{Binding NewEmployeeCommand, ElementName=window, Mode=OneWay}" CommandParameter="Parameter No Need" TabIndex="7" ButtonImages="ButtonImages/Add.png"/>
+            	<Procesta_CvServer_UserControls:ButtonWithImages x:Name="EmployeeUpdate" Content="Update" Margin="5,0,0,0" Width="89.333" FontSize="14.667" Command="{Binding UpdateEmployeeCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=EmployeeGridView}" TabIndex="8" ButtonImages="ButtonImages/Save.png"/>
+            	<Procesta_CvServer_UserControls:ButtonWithImages x:Name="EmployeeDelete" Content="Detete" Margin="5,0,0,0" Width="86.333" FontSize="14.667" Command="{Binding DeleteEmployeeCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=EmployeeGridView}" TabIndex="8" ButtonImages="ButtonImages/Delete.png" IsEnabled="{Binding LoginEmployee, ConverterParameter=EmployeeEdit, Converter={StaticResource Editpermission}, ElementName=window}"/>
+            	<Procesta_CvServer_UserControls:ButtonWithImages x:Name="EmployeeReport" Content="Report" Margin="5,0,0,0" Width="80.333" FontSize="14.667" Command="{Binding ReportEmployeeCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=EmployeeGridView}" TabIndex="10" ButtonImages="ButtonImages/Report.png"/>
+            </StackPanel>
+            <dx:DXTabControl Margin="0,0,0.083,0.088">
+            	<dx:DXTabItem FontSize="14.667" MinWidth="100" HorizontalContentAlignment="Center" Header="Employee">
+            		<Grid>
+                			<Grid.RowDefinitions>
+                				<RowDefinition Height="0.051*"/>
+                				<RowDefinition Height="0.081*"/>
+                				<RowDefinition Height="0.105*"/>
+                				<RowDefinition Height="0.105*"/>
+                				<RowDefinition Height="0.063*"/>
+                				<RowDefinition Height="0.105*"/>
+                				<RowDefinition Height="0.419*"/>
+                				<RowDefinition Height="0.069*"/>
+                			</Grid.RowDefinitions>
+                			<Grid.ColumnDefinitions>
+                				<ColumnDefinition Width="0.331*"/>
+                				<ColumnDefinition Width="0.353*"/>
+                				<ColumnDefinition Width="0.316*"/>
+                			</Grid.ColumnDefinitions>
+                            <dxe:TextEdit Margin="0,1,0,0" x:Name="EmployeeUserID"  Grid.Row="1" TabIndex="0" MaxLength="19" NullText="Employee ID" Grid.Column="1">
+								<dxe:TextEdit.Text>
+									<Binding ElementName="EmployeeGridView" Path="SelectedItem.Name" Mode="TwoWay" UpdateSourceTrigger="LostFocus" ValidatesOnDataErrors="True">
+										<Binding.ValidationRules>
+											<local:EmployeeName/>
+										</Binding.ValidationRules>
+									</Binding>
+								</dxe:TextEdit.Text>                    
+							</dxe:TextEdit>
+                            <dxe:TextEdit Margin="0,8,0,1" x:Name="EmployeePhone"  Grid.Row="5" TabIndex="3" MaxLength="19" NullText="Phone Number" Grid.Column="1" d:LayoutOverrides="Height">
+								<dxe:TextEdit.Text>
+										<Binding ElementName="EmployeeGridView" Path="SelectedItem.PhoneNmber" Mode="TwoWay" UpdateSourceTrigger="LostFocus" ValidatesOnDataErrors="True">
+											<Binding.ValidationRules>
+												<local:PhoneNumber/>
+											</Binding.ValidationRules>
+										</Binding>
+								</dxe:TextEdit.Text>
+							 </dxe:TextEdit>
+                            <dxe:TextEdit Margin="0,8,0,0" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" FontSize="{DynamicResource TextFontSize}" Background="{DynamicResource TextBoxBackground}" Grid.Row="6" TabIndex="4" MaxLength="99" NullText="Home Address" Grid.Column="1" Text="{Binding SelectedItem.Address, ElementName=EmployeeGridView, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}" />
+                            <dxe:PasswordBoxEdit x:Name="EmployeePassword" Margin="2,8,-1,1" Grid.Row="2" TabIndex="1" MaxLength="19" NullText="Password" Grid.Column="1" FontSize="14.667" d:LayoutOverrides="Height" Password="{Binding SelectedItem.FirstPassword, ElementName=EmployeeGridView, Mode=TwoWay}"/>
+                            <dxe:PasswordBoxEdit x:Name="EmployeeConfirmPassword" Margin="0,8,0,0" Grid.Row="3" TabIndex="2" MaxLength="19" NullText="Re-enter Password" Grid.Column="1" FontSize="14.6670" Password="{Binding SelectedItem.Password, ElementName=EmployeeGridView, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"/>
+                            <TextBlock x:Name="EmployPasswordStanth" Margin="6,0,0,-8" TextWrapping="Wrap" Foreground="{Binding Text, Converter={StaticResource StrengthToBrush}, ElementName=EmployPasswordStanth}" Text="{Binding Value, Converter={StaticResource PasswordsToStrength}, ElementName=EmployPasswordLenth}" FontSize="13.333" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left"/>
+                            <TextBlock Margin="0,4,10,0" TextWrapping="Wrap" Text="Employee ID :" VerticalAlignment="Center" FontSize="{DynamicResource TextFontSize}" Grid.Row="1" HorizontalAlignment="Right"/>
+                            <TextBlock Margin="0,11,10,4" TextWrapping="Wrap" Text="Password :" FontSize="{DynamicResource TextFontSize}" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBlock Margin="0,11,5,3" TextWrapping="Wrap" Text="Re-enter Password :" FontSize="{DynamicResource TextFontSize}" Grid.Row="3" HorizontalAlignment="Right" d:LayoutOverrides="Height" VerticalAlignment="Center"/>
+                            <TextBlock Margin="0,11,10,4" TextWrapping="Wrap" Text="Phone :" FontSize="{DynamicResource TextFontSize}" Grid.Row="5" HorizontalAlignment="Right" d:LayoutOverrides="Height"/>
+                            <TextBlock Margin="0,8,10,0" TextWrapping="Wrap" Text="Address :" FontSize="{DynamicResource TextFontSize}" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                            <telerikTheme:RadProgressBar x:Name="EmployPasswordLenth" Margin="1,8,-1,0" Grid.Row="4" Height="9" VerticalAlignment="Top" Maximum="3" Grid.Column="1" IsTabStop="False">
+                               <telerikTheme:RadProgressBar.Foreground>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+										<GradientStop Color="#FF5973FF" Offset="1"/>
+										<GradientStop Color="#FF5973FF" Offset="0"/>
+										<GradientStop Color="#FF94A9E7" Offset="0.43"/>
+										<GradientStop Color="#FF8EAEFF" Offset="0.43"/>
+									</LinearGradientBrush>
+				           </telerikTheme:RadProgressBar.Foreground>
+            				<telerikTheme:RadProgressBar.Value>
+            				<MultiBinding Converter="{StaticResource passwordToLengthcs}">
+                				<Binding ElementName="EmployeePassword" Path="Password" />
+                				<Binding ElementName="EmployeeConfirmPassword" Path="Password" />
+            				</MultiBinding>
+       			</telerikTheme:RadProgressBar.Value>                     
+			</telerikTheme:RadProgressBar>
+                            <Border BorderBrush="Black" BorderThickness="2" Grid.Column="2" Margin="35,0,8,4" Grid.RowSpan="3" CornerRadius="3" Width="100" Height="80" d:LayoutOverrides="GridBox">
+                            	<Image Source="{Binding SelectedItem.UserImage, Converter={StaticResource ByteImageConverter}, ElementName=EmployeeGridView}"/>
+                            </Border>
+                            <StackPanel Grid.Column="2" Margin="35,0,0,0" Grid.Row="3" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" Width="87">
+                            	<Procesta_CvServer_UserControls:ButtonWithImages x:Name="EmployeeBrowse" Content="Browse" FontSize="12" Width="72" Command="{Binding BrowseEmployeeCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=EmployeeGridView}" TabIndex="5" ButtonImages="ButtonImages/browse.png" Height="22" HorizontalAlignment="Left"/>
+                            	<Procesta_CvServer_UserControls:ButtonWithImages x:Name="EmployeeWebCam" Content="WebCam" Margin="0,5,0,0" FontSize="12" Width="83" Command="{Binding WebCamEmployeeCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=EmployeeGridView}" TabIndex="6" ButtonImages="ButtonImages/webcam.png" Height="23" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                  </Grid>    	
+				</dx:DXTabItem>
+            	<dx:DXTabItem FontSize="14.667" MinWidth="100" HorizontalContentAlignment="Center" Header="Permission">
+            		<Grid>
+						<telerik:RadGridView x:Name="EmployeePermission" ShowGroupPanel="False" Margin="72,0,63,0" AutoGenerateColumns="False" ItemsSource="{Binding SelectedItem.Permissions, ElementName=EmployeeGridView}" HorizontalAlignment="Center" Width="302">
+							<telerik:RadGridView.Columns>
+								<telerik:GridViewCheckBoxColumn FooterTextAlignment="Center" TextAlignment="Center" MinWidth="50" DataMemberBinding="{Binding Permission, Mode=TwoWay}">
+									<telerik:GridViewCheckBoxColumn.Header>
+										<dxe:CheckEdit HorizontalAlignment="Center" Checked="EmployeePermissionChecked" Unchecked="EmployeePermissionUnchecked"/>
+									</telerik:GridViewCheckBoxColumn.Header>
+								</telerik:GridViewCheckBoxColumn>
+								<telerik:GridViewDataColumn Header="Permission`s" DataMemberBinding="{Binding SupperTip}" HeaderTextAlignment="Center" IsReadOnly="True" MinWidth="200"/>
+							</telerik:RadGridView.Columns>
+						</telerik:RadGridView>
+					</Grid>
+				</dx:DXTabItem>
+            </dx:DXTabControl>
+        </Grid>
+		
+		<Grid x:Name="PanelCounterView" Margin="8,8.5,8,0.406" Grid.Column="1" Grid.Row="1" DataContext="{Binding Source={StaticResource ConnectFromServerDataSource}}" Grid.ColumnSpan="2" Visibility="Hidden" d:IsHidden="True">
+			<telerik:RadTileView
+				ContentTemplate="{StaticResource contentTemplate}"
+				IsItemDraggingEnabled="False"
+				ItemsSource="{Binding CounterInformations, Source={StaticResource NotificationFromClientsDataSource}}"
+				ItemTemplate="{StaticResource headerTemplate}"
+				MaximizeMode="ZeroOrOne"
+				TileStateChanged="tileView1_TileStateChanged"
+				PreservePositionWhenMaximized="True"
+				 Margin="0,0,8,8"/>
+		</Grid>
+		<!--Panel New Customer-->
+		<Grid x:Name="PanelNewCustomer" Margin="8,5.651,0,0.405" Grid.Row="1" Height="452" Grid.Column="1" d:IsHidden="True" Visibility="Hidden" d:IsLocked="True">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.271*"/>
+				<ColumnDefinition Width="0.233*"/>
+				<ColumnDefinition Width="0.246*"/>
+				<ColumnDefinition Width="0.25*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="0.2*"/>
+				<RowDefinition Height="0.8*"/>
+			</Grid.RowDefinitions>
+			<dxe:TextEdit x:Name="CustomerUserName" Margin="4.754,3.071,7.333,0" FontSize="{DynamicResource TextFontSize}" Height="{DynamicResource TextBoxHeight}" Background="{DynamicResource TextBoxBackground}" Grid.Row="1" MaxLength="19" NullText="Must Be Uniq" TabIndex="0" VerticalAlignment="Top" Grid.Column="1">
+				<dxe:TextEdit.Text>
+					<Binding Path="SelectedItem.UserName" ElementName="CustomerList" Mode="TwoWay" ValidatesOnDataErrors="True" UpdateSourceTrigger="LostFocus">
+						<Binding.ValidationRules>
+							<local:CustomerUserName/>
+						</Binding.ValidationRules>
+					</Binding>
+				</dxe:TextEdit.Text>
+			</dxe:TextEdit>
+			<Border BorderThickness="3" CornerRadius="2" VerticalAlignment="Bottom" Height="90" Margin="0,0,96.2,0.377" HorizontalAlignment="Right" Width="100">
+				<Border.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFD4D4D4"/>
+						<GradientStop Color="#FFD4D4D4" Offset="1"/>
+						<GradientStop Color="#FF747474" Offset="0.506"/>
+					</LinearGradientBrush>
+				</Border.BorderBrush>
+				<Image x:Name="NewCustomerImage" Margin="1" Source="{Binding SelectedItem.Image, ElementName=CustomerList}"/>
+			</Border>
+			<TextBlock Margin="0,5.088,-0.001,0" TextWrapping="Wrap" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Customer ID :" Grid.Row="1" VerticalAlignment="Top"/>
+			<dxe:TextEdit x:Name="CustomerName" Margin="4.087,106.93,8,0" Grid.Row="1" VerticalAlignment="Top" FontSize="{DynamicResource TextFontSize}" Height="{DynamicResource TextBoxHeight}" Background="{DynamicResource TextBoxBackground}" MaxLength="19" NullText="Customer Name" TabIndex="3" Grid.Column="1" Text="{Binding SelectedItem.Name, ElementName=CustomerList, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"/>
+			<TextBlock Margin="0,109.455,-0.001,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Name :" Grid.Row="1"/>
+			<dxe:TextEdit x:Name="CustomerEmail" Margin="4.087,166.436,8,169.163" Grid.Row="1" FontSize="{DynamicResource TextFontSize}" Height="{DynamicResource TextBoxHeight}" Background="{DynamicResource TextBoxBackground}" MaxLength="19" NullText="Customer E-mail" TabIndex="5" Grid.Column="1" d:LayoutOverrides="VerticalMargin">
+				<dxe:TextEdit.Text>
+					<Binding Path="SelectedItem.Email" ElementName="CustomerList" Mode="TwoWay" ValidatesOnDataErrors="True" UpdateSourceTrigger="LostFocus">
+						<Binding.ValidationRules>
+							<local:EmailAddressValidator/>
+						</Binding.ValidationRules>
+					</Binding>
+				</dxe:TextEdit.Text>
+			</dxe:TextEdit>
+			<TextBlock Margin="0,0,1.115,142.929" TextWrapping="Wrap" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Phone :" Grid.Row="1" VerticalAlignment="Bottom"/>
+			<dxe:TextEdit x:Name="CustomerPhone" Margin="4.087,0,8,139.163" Grid.Row="1" FontSize="{DynamicResource TextFontSize}" Height="{DynamicResource TextBoxHeight}" Background="{DynamicResource TextBoxBackground}" MaxLength="19" NullText="Customer Phone" TabIndex="6" VerticalAlignment="Bottom" Grid.Column="1">
+				<dxe:TextEdit.Text>
+					<Binding Path="SelectedItem.Phone" ElementName="CustomerList" Mode="TwoWay" ValidatesOnDataErrors="True" UpdateSourceTrigger="LostFocus">
+						<Binding.ValidationRules>
+							<local:PhoneNumber/>
+						</Binding.ValidationRules>
+					</Binding>
+				</dxe:TextEdit.Text>
+			</dxe:TextEdit>
+			<TextBlock Margin="0,168.681,-0.088,0" TextWrapping="Wrap" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="E-Mail :" Grid.Row="1" VerticalAlignment="Top"/>
+			<dxe:TextEdit Margin="4.087,0,8,109.163" Grid.Row="1" FontSize="{DynamicResource TextFontSize}" Height="{DynamicResource TextBoxHeight}" Background="{DynamicResource TextBoxBackground}" VerticalAlignment="Bottom" MaxLength="39" NullText="Customer National ID" TabIndex="7" Grid.Column="1" Text="{Binding SelectedItem.NationalID, ElementName=CustomerList, Mode=TwoWay}"/>
+			<TextBlock Margin="0,0,0,113.075" TextWrapping="Wrap" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="National ID :" Grid.Row="1" VerticalAlignment="Bottom" Width="80.867"/>
+			<dxe:TextEdit Margin="4.087,0,8,32.729" Grid.Row="1" FontSize="{DynamicResource TextFontSize}" Background="{DynamicResource TextBoxBackground}" Height="72.434" VerticalAlignment="Bottom" MaxLength="99" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" NullText="Customer Home Address" TabIndex="8" Grid.Column="1" Text="{Binding SelectedItem.Address, ElementName=CustomerList, Mode=TwoWay}"/>
+			<TextBlock Margin="0,0,1.115,83.765" TextWrapping="Wrap" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Address :" Grid.Row="1" Height="21.398" VerticalAlignment="Bottom"/>
+			<TextBlock Margin="0,140.127,-0.001,0" TextWrapping="Wrap" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Date :" Grid.Row="1" VerticalAlignment="Top"/>
+			<telerik:RadDatePicker Margin="4.087,136.93,8,0" Grid.Row="1" FontSize="{DynamicResource TextFontSize}" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" VerticalAlignment="Top" TextAlignment="Center" TabIndex="4" Grid.Column="1" SelectedDate="{Binding SelectedItem.JoinDate, ElementName=CustomerList, Mode=TwoWay}" />
+			<dxe:PasswordBoxEdit x:Name="CustomerFirstPassword" Margin="4.087,34.43,8,0" Grid.Row="1" VerticalAlignment="Top" FontSize="{DynamicResource TextFontSize}" Height="{DynamicResource TextBoxHeight}" Background="{DynamicResource TextBoxBackground}" MaxLength="19" NullText="Customer Password" TabIndex="1" Grid.Column="1" Password="{Binding SelectedItem.CheckPassword, ElementName=CustomerList, Mode=TwoWay}"/>
+			<dxe:PasswordBoxEdit x:Name="CustomerPassword" Margin="4.087,64.43,8,0" Grid.Row="1" VerticalAlignment="Top" FontSize="{DynamicResource TextFontSize}" Height="{DynamicResource TextBoxHeight}" Background="{DynamicResource TextBoxBackground}" MaxLength="19" NullText="Re-Enter Password" TabIndex="2" Grid.Column="1" Password="{Binding SelectedItem.Password, ElementName=CustomerList, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"/>
+			<TextBlock Margin="0,66.095,-0.001,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Re-enter Password :" Grid.Row="1"/>
+			<TextBlock Margin="0,34.43,-0.001,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Password :" Grid.Row="1"/>
+			<telerikTheme:RadProgressBar x:Name="radProgressBar" Height="8.5" Margin="4.087,94.43,8,0" Grid.Row="1" VerticalAlignment="Top" Maximum="3" Grid.Column="1">
+				<telerikTheme:RadProgressBar.Foreground>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF5973FF" Offset="1"/>
+						<GradientStop Color="#FF5973FF" Offset="0"/>
+						<GradientStop Color="#FF94A9E7" Offset="0.43"/>
+						<GradientStop Color="#FF8EAEFF" Offset="0.43"/>
+					</LinearGradientBrush>
+				</telerikTheme:RadProgressBar.Foreground>
+	           <telerikTheme:RadProgressBar.Value>
+	            	<MultiBinding Converter="{StaticResource passwordToLengthcs}">
+	                	<Binding ElementName="CustomerFirstPassword" Path="Password" />
+	                	<Binding ElementName="CustomerPassword" Path="Password" />
+	            	</MultiBinding>
+	      </telerikTheme:RadProgressBar.Value>   
+			</telerikTheme:RadProgressBar>
+			<TextBlock x:Name="textBlock" Height="16.233" Margin="0,82.534,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="{Binding Text, Converter={StaticResource StrengthToBrush}, ElementName=textBlock}" Text="{Binding Value, Converter={StaticResource PasswordsToStrength}, ElementName=radProgressBar}" Grid.Row="1" Grid.Column="2" d:LayoutOverrides="HorizontalAlignment" FontSize="13.333"/>
+			<StackPanel Margin="0,16.9,1.116,14.75" HorizontalAlignment="Right" Width="91.084">
+				<Procesta_CvServer_UserControls:ButtonWithImages x:Name="CustomerBrowse" HorizontalAlignment="Left" VerticalAlignment="Stretch" ButtonImages="ButtonImages/browse.png" Content="Browse" Height="24.412" Width="77.084" Command="{Binding BrowseCustomerCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=CustomerList}"/>
+				<Procesta_CvServer_UserControls:ButtonWithImages x:Name="CustomerWebCam" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ButtonImages="ButtonImages/webcam.png" Height="25.912" Content="Web Cam" Margin="0,5,0,0" Command="{Binding WebCamCustomerCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=CustomerList}"/>
+			</StackPanel>
+			<StackPanel Height="23.543" Margin="-33.179,0,-33.349,1.186" Grid.Row="1" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
+				<Procesta_CvServer_UserControls:ButtonWithImages x:Name="CustomerNew" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ButtonImages="ButtonImages/Add.png" Content="New" FontSize="13.333" Command="{Binding NewCustomerCommand, ElementName=window, Mode=OneWay}" CommandParameter="No Parameter"/>
+				<Procesta_CvServer_UserControls:ButtonWithImages x:Name="CustomerUpdate" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ButtonImages="ButtonImages/Save.png" Content="Update" FontSize="13.333" Margin="5,0,0,0" Command="{Binding UpdateCustomerCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=CustomerList}"/>
+				<Procesta_CvServer_UserControls:ButtonWithImages x:Name="CustomerDelete" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ButtonImages="ButtonImages/Delete.png" Content="Delete" FontSize="13.333" Margin="5,0,0,0" Command="{Binding DeleteCustomerCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=CustomerList}" IsEnabled="{Binding LoginEmployee, ConverterParameter=EditCustomer, Converter={StaticResource Editpermission}, ElementName=window}"/>
+			</StackPanel>
+			<ListBox x:Name="CustomerList" Grid.Column="3" Margin="3.32,34.43,8,32.729" Grid.Row="1" Background="{DynamicResource TextBoxBackground}">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						 <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
+					    	<Border Width="60" Height="50" BorderThickness="2" CornerRadius="2">
+					    		<Border.BorderBrush>
+					    			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					    				<GradientStop Color="#FF3B3434" Offset="0"/>
+					    				<GradientStop Color="#FF3B3434" Offset="1"/>
+					    				<GradientStop Color="#FF848484" Offset="0.5"/>
+					    			</LinearGradientBrush>
+					    		</Border.BorderBrush>
+					    		<Image Stretch="Fill" Source="{Binding Image, Converter={StaticResource ByteImageConverter}}"/>
+					    	</Border>
+					    	<TextBlock Margin="5,12,0,13.257" TextWrapping="Wrap" FontSize="14" Text="{Binding UserName}"/>
+					    </StackPanel>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+			<TextBox x:Name="CustomerTxtSearch" Grid.Column="3" Margin="3.32,4.447,8,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Background="{DynamicResource TextBoxBackground}" FontSize="14.667"/>
+			<TextBlock Margin="0,3.071,0.68,0" TextWrapping="Wrap" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Search :" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2"/>
+			<GroupBox Grid.Column="2" Header="Balance" Margin="12.28,108.455,8,122.618" Grid.Row="1" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="14.667">
+				<Grid>
+					<TextBlock  TextWrapping="Wrap" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Minutes :" Margin="0,36.622,0,46" HorizontalAlignment="Left"/>
+					<telerik:RadNumericUpDown Margin="63.384,36.018,8,45.998" d:LayoutOverrides="Height" IsInteger="True" Minimum="0" Background="{DynamicResource TextBoxBackground}" TabIndex="9" IsTabStop="True"  Value="{Binding SelectedItem.Minutes, ElementName=CustomerList, Mode=TwoWay}" IsEnabled="{Binding LoginEmployee, ConverterParameter=EditRecharge, Converter={StaticResource Editpermission}, ElementName=window}"/>			
+				</Grid>
+			</GroupBox>
+		</Grid>
+	<!--Panel Setting-->
+		<Grid x:Name="PanelSetting" Margin="1.632,5.652,0,8" Visibility="Hidden" Grid.Column="1" Grid.Row="1" d:IsHidden="True" d:IsLocked="True">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.172*"/>
+				<ColumnDefinition Width="0.828*"/>
+			</Grid.ColumnDefinitions>
+			<ItemsControl x:Name="SettingMenu" Margin="0,0,0.595,0">
+				<ItemsControl.ItemsPanel>
+        		<ItemsPanelTemplate>
+        			<VirtualizingStackPanel Orientation="Vertical"/> 			
+        		</ItemsPanelTemplate>    		
+        	</ItemsControl.ItemsPanel>
+        	<ItemsControl.ItemTemplate>
+        		<DataTemplate>
+        			<Procesta_CvServer_UserControls:MenuButton Width="90" Height="90" Foreground="WhiteSmoke" ButtonImage="{Binding ImagePath}" SupperTip="{Binding SupperTip}" ScreenTip="{Binding ScreenTip}" KeyboardShorcut="{Binding KeboardShortcut}"  Command="{Binding DataContext.SettingMenuCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding Setting}"/>
+        		</DataTemplate>  		 
+        	</ItemsControl.ItemTemplate>    
+        	<ItemsControl.Template>
+        		<ControlTemplate>
+        			<ScrollViewer Padding="{TemplateBinding Padding}" Focusable="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        				<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"	/>
+        			</ScrollViewer>	
+        		</ControlTemplate>
+        	</ItemsControl.Template>
+			</ItemsControl>
+			<!--Setting Panel Money Setting-->
+			<Grid x:Name="SettingPanelRateSetup" Margin="33.5,125.576,75.707,63.891" Visibility="Hidden" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="265.636" Width="496.109" d:IsLocked="True" d:IsHidden="True">
+				<TextBlock TextWrapping="Wrap" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Text="Minutes :" Margin="0,66,416.226,0" VerticalAlignment="Top" Foreground="{DynamicResource TextBlockForgroundBrush}"/>
+				<TextBlock TextWrapping="Wrap" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Text="Rate :" Margin="0,95.855,416.727,0" VerticalAlignment="Top" Foreground="{DynamicResource TextBlockForgroundBrush}"/>
+				<StackPanel HorizontalAlignment="Left" Height="25.628" Margin="8,0,0,88" Orientation="Horizontal" VerticalAlignment="Bottom">
+					<Procesta_CvServer_UserControls:ButtonWithImages x:Name="RateSettingNew" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" FontSize="14.667" FontFamily="Segoe UI" ButtonImages="ButtonImages/Add.png" Height="25.628" Width="64.563" Content="New" Command="{Binding RateSettingNewCommand, ElementName=window, Mode=OneWay}" CommandParameter="No Parameter"/>
+					<Procesta_CvServer_UserControls:ButtonWithImages x:Name="RateSettingUpdate" HorizontalAlignment="Stretch" Margin="5,0,0,0" VerticalAlignment="Bottom" FontSize="14.667" FontFamily="Segoe UI" ButtonImages="ButtonImages/Save.png" Height="25.627" d:LayoutOverrides="Width" Content="Update" Width="83" Command="{Binding RateSettingUpdateCommand, ElementName=window, Mode=OneWay}" CommandParameter="No Parameter"/>
+					<Procesta_CvServer_UserControls:ButtonWithImages x:Name="RateSettingDelete" HorizontalAlignment="Left" Margin="5,0,0,0.0" VerticalAlignment="Bottom" FontSize="14.667" FontFamily="Segoe UI" ButtonImages="ButtonImages/Delete.png" Height="25.627" Width="78.6" Content="Delete" Command="{Binding RateSettingDeleteCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=RateSettingsGrid}"/>
+				</StackPanel>
+				<telerik:RadGridView x:Name="RateSettingsGrid" ShowGroupPanel="False" FontSize="14.667" Margin="256.163,0,6.366,0" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding BillConfigInfo, ElementName=window, Mode=TwoWay}">
+					<telerik:RadGridView.Columns>
+						<telerik:GridViewDataColumn Header="Minutes" MinWidth="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Minutes}"/>
+						<telerik:GridViewDataColumn Header="Rate" MinWidth="100" HeaderTextAlignment="Center" DataMemberBinding="{Binding Amount}"/>
+					</telerik:RadGridView.Columns>
+				</telerik:RadGridView>
+				<telerik:RadNumericUpDown Margin="84.716,66,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" FontSize="14.667" IsInteger="True" Minimum="0" Value="{Binding SelectedItem.Minutes, ElementName=RateSettingsGrid}"/>
+				<telerik:RadNumericUpDown Margin="84.716,95.855,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" FontSize="14.667" Minimum="0" Value="{Binding SelectedItem.Amount, ElementName=RateSettingsGrid}"/>
+			</Grid>
+			<!--Setting Panel Change Password-->
+			<Grid x:Name="settingPanelChangePassword" Margin="113.626,160.665,84.874,157.437" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="131" Width="418.816" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+				<dxe:PasswordBoxEdit x:Name="settingChangeOldPassword" Margin="134.485,0,99.015,0" VerticalAlignment="Top" FontSize="{DynamicResource TextFontSize}" Height="{DynamicResource TextBoxHeight}" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" MaxLength="19" NullText="Old Password" TabIndex="0"/>
+				<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Old Password :" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" Margin="31.638,3.246,0,0"/>
+				<telerikTheme:RadProgressBar x:Name="settingChangeProgress" Margin="134.485,59.354,99.015,0" Height="6.998" VerticalAlignment="Top" Maximum="3">
+                               <telerikTheme:RadProgressBar.Foreground>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+										<GradientStop Color="#FF5973FF" Offset="1"/>
+										<GradientStop Color="#FF5973FF" Offset="0"/>
+										<GradientStop Color="#FF94A9E7" Offset="0.43"/>
+										<GradientStop Color="#FF8EAEFF" Offset="0.43"/>
+									</LinearGradientBrush>
+				           </telerikTheme:RadProgressBar.Foreground>
+            				<telerikTheme:RadProgressBar.Value>
+            				<MultiBinding Converter="{StaticResource passwordToLengthcs}">
+                				<Binding ElementName="settingChangeNewPassword" Path="Password" />
+                				<Binding ElementName="settingChnageConPassword" Path="Password" />
+            				</MultiBinding>
+       </telerikTheme:RadProgressBar.Value>                     
+</telerikTheme:RadProgressBar>
+				<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="New Password :" Margin="25.645,33.172,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+				<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Re-Enter Password :" Margin="1.322,70.257,0,0" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top"/>
+				<Grid Margin="134.485,30.593,99.015,6.193">
+					<Grid.IsEnabled>
+						<MultiBinding Converter="{StaticResource ObjectToBool}">
+								<Binding ElementName="settingChangeOldPassword" Path="Password" />
+								<Binding ElementName="window" Path="LoginEmployee.Password" />
+						</MultiBinding>
+					</Grid.IsEnabled>
+					<Procesta_CvServer_UserControls:ButtonWithImages x:Name="settingChageUpdate" HorizontalAlignment="Stretch" Margin="52.931,0,47.736,0.001" VerticalAlignment="Bottom" ButtonImages="ButtonImages/Save.png" Height="23.96" d:LayoutOverrides="VerticalAlignment" Content="Update" FontSize="13.333" FontFamily="Segoe UI" TabIndex="4" Command="{Binding PasswordChangeCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding Password, ElementName=settingChnageConPassword}">
+						<Procesta_CvServer_UserControls:ButtonWithImages.IsEnabled>
+							<MultiBinding Converter="{StaticResource ObjectToBool}">
+								<Binding ElementName="settingChangeNewPassword" Path="Password" />
+								<Binding ElementName="settingChnageConPassword" Path="Password" />
+						</MultiBinding>
+						</Procesta_CvServer_UserControls:ButtonWithImages.IsEnabled>
+					</Procesta_CvServer_UserControls:ButtonWithImages>
+					<dxe:PasswordBoxEdit x:Name="settingChnageConPassword" Margin="0,37.999,0,30.213" FontSize="{DynamicResource TextFontSize}" Height="{DynamicResource TextBoxHeight}" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" MaxLength="19" NullText="Confirm Password" TabIndex="2"/>
+					<dxe:PasswordBoxEdit x:Name="settingChangeNewPassword" VerticalAlignment="Top" FontSize="{DynamicResource TextFontSize}" Height="{DynamicResource TextBoxHeight}" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" MaxLength="19" NullText="New Password" TabIndex="1"/>
+				</Grid>
+				<TextBlock x:Name="settingChangeTextStangth" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="326.968,53.351,0,0" VerticalAlignment="Top" FontSize="14.667" Foreground="{Binding Text, Converter={StaticResource StrengthToBrush}, ElementName=settingChangeTextStangth}" Text="{Binding Value, Converter={StaticResource PasswordsToStrength}, ElementName=settingChangeProgress}" Width="85.515"/>
+			</Grid>
+			<!--Setting Panel SnapShot-->
+			<Grid x:Name="SettingPanelScreenCapture" Margin="113.626,134.761,134.024,200.343" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+				<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Save at :" Margin="8,33.407,0,0" Height="21.407" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+				<Procesta_CvServer_UserControls:ButtonWithImages x:Name="settingScrCapBrowse" Margin="65.6,54.814,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" ButtonImages="ButtonImages/browse.png" Height="26.186" FontSize="13.333" Content="Browse" Command="{Binding ScrSnapFolderBrowseCommand, ElementName=window, Mode=OneWay}" CommandParameter="No Parameter"/>
+				<TextBlock x:Name="settingScrCapFolderPath" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="{Binding schreenCapturePath, Source={x:Static Properties:Settings.Default}}"  Margin="65.6,33.407,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+				<telerik:RadComboBox x:Name="settingScrSnapCombo" Margin="165.367,8,29.5,0" VerticalAlignment="Top" FontSize="{DynamicResource TextFontSize}" Height="{DynamicResource TextBoxHeight}" ItemsSource="{Binding Mode=OneWay}" DisplayMemberPath="Name" SelectedValuePath="shotTime" DataContext="{Binding Source={StaticResource SnapShotTimeCollectionsDataSource}}"/>
+				<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" VerticalAlignment="Top" Text="Screen Snapshot every :" Margin="8,10.331,0,0"/>
+				<Procesta_CvServer_UserControls:ButtonWithImages x:Name="settingScrCapStrat" Margin="157.198,79.812,155.079,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ButtonImages="ButtonImages/Strat.png" Height="26.186" FontSize="13.333" Content="Start" d:LayoutOverrides="Width" IsEnabled="{Binding IsCupture, Converter={StaticResource BoolReverse}, Source={x:Static Properties:Settings.Default}}" Command="{Binding ScrSnapStratCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedValue, ElementName=settingScrSnapCombo}"/>
+				<Procesta_CvServer_UserControls:ButtonWithImages x:Name="settingScrCapStop" Margin="0,79.812,84.139,0" VerticalAlignment="Top" HorizontalAlignment="Right" ButtonImages="ButtonImages/Stop.png" Height="26.186" FontSize="13.333" Content="Stop" Width="64.056" IsEnabled="{Binding IsCupture, Source={x:Static Properties:Settings.Default}}" Command="{Binding ScrSnapStopCommand, ElementName=window, Mode=OneWay}" CommandParameter="No Parameter"/>
+			</Grid>
+			<Grid x:Name="SettingPanelEmailSetting" Margin="154.503,183.06,214.024,177.341" Visibility="Hidden" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="267.251" d:IsHidden="True" d:IsLocked="True">
+				<dxe:TextEdit Margin="80.249,3.407,8.002,0" VerticalAlignment="Top" FontSize="{DynamicResource TextFontSize}" Height="{DynamicResource TextBoxHeight}" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}">
+				  <dxe:TextEdit.Text>
+					<Binding Path="settingEmail" Source= "{x:Static Properties:Settings.Default}" Mode="TwoWay" ValidatesOnDataErrors="True" UpdateSourceTrigger="LostFocus">
+						<Binding.ValidationRules>
+							<local:EmailAddressValidator/>
+						</Binding.ValidationRules>
+					</Binding>
+				</dxe:TextEdit.Text>
+			</dxe:TextEdit>
+				<dxe:PasswordBoxEdit Margin="80.251,33.407,8,0" VerticalAlignment="Top" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" Height="{DynamicResource TextBoxHeight}" FontSize="{DynamicResource TextFontSize}" Password="{Binding settingEmailPassword, Mode=TwoWay, Source={x:Static Properties:Settings.Default}, UpdateSourceTrigger=LostFocus}"/>
+				<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="E-Mail :" Margin="28.026,6,0,0" Height="21.407" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+				<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Password :" Margin="8,36.023,0,0" Height="21.407" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+			</Grid>
+			<!--General Panel Setting-->
+			<Grid x:Name="SettingPanelGeneral" Margin="206.739,213.81,234.667,204.344" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+				<dxe:CheckEdit x:Name="settingGeneralCheckSystemStart" HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}" Content="Start with system start" Checked="settingGeneralCheckSystemStartChecked" Unchecked="settingGeneralCheckSystemStartUnChecked" d:LayoutOverrides="VerticalAlignment"/>
+			</Grid>
+		</Grid>
+		<!--Panel Recharge History View-->
+		<Grid x:Name="PanelRechargeHistoryView" Margin="67.027,1.454,61.383,0" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			 <telerik:RadGridView x:Name="ResHisGridView" Margin="0,131.017,96.542,0.001" AutoGenerateColumns="False" ShowGroupPanel="False" IsReadOnly="True" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Width="529.88" SelectionMode="Extended">
+				<telerik:RadGridView.Columns>
+					<telerik:GridViewDataColumn Header="Date" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataFormatString="{}{0:d}" DataMemberBinding="{Binding DateWithTime}"/>
+					<telerik:GridViewDataColumn x:Name="GridDataColumnName" Header="Name" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding UserID}"/>
+					<telerik:GridViewDataColumn Header="Employ" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding EmployeeID}"/>
+					<telerik:GridViewDataColumn Header="Munities" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding Minutes}"/>
+					<telerik:GridViewDataColumn Header="Amount" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding bill}"/>
+				</telerik:RadGridView.Columns>
+			</telerik:RadGridView>
+			<telerikTheme:GroupBox x:Name="ResHisgroupName" Margin="8,31.507,0,0" VerticalAlignment="Top" Height="95.508" Header="Name" HorizontalAlignment="Left" Width="185.364" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}">
+				<Grid>
+				    <telerik:RadComboBox x:Name="ResHisCustomerComboBox" telerikTheme:TextSearch.TextPath="UserName" Margin="0,23.506,0,0" VerticalAlignment="Top" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" FontSize="{DynamicResource TextFontSize}" d:LayoutOverrides="HorizontalAlignment" IsEditable="True" Height="26" ItemTemplate="{StaticResource RadComboBoxItemTemplate}" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ResHisCustomer}" IsEnabled="{Binding IsChecked, ElementName=ResHisbyName}"/>
+				    <RadioButton x:Name="ResHisbyName" Content="By Name" VerticalAlignment="Top" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}" IsChecked="True" HorizontalAlignment="Left"/>
+				    <RadioButton x:Name="ResHisForAll" Content=" For All" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Top" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}"/>
+				    <telerik:RadComboBox x:Name="ResHisTeamComboBox" Margin="0,23.506,0,0" telerikTheme:TextSearch.TextPath="UserName" VerticalAlignment="Top" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" FontSize="{DynamicResource TextFontSize}" IsEditable="True" Height="{DynamicResource TextBoxHeight}" ItemTemplate="{StaticResource RadComboBoxItemTemplate}" d:LayoutOverrides="HorizontalAlignment" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=ResHisTeam}" IsEnabled="{Binding IsChecked, ElementName=ResHisbyName}"/>
+				</Grid>
+			</telerikTheme:GroupBox>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="ResHiSearch" Margin="0,76.015,29.234,0" VerticalAlignment="Top" FontSize="13.333" FontFamily="Segoe UI" ButtonImages="ButtonImages/Search.png" Height="29.073" Width="81.668" Content="Search" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Command="{Binding SearchRechargeHistoryCommand, ElementName=window, Mode=OneWay}">
+				<Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>
+    				<MultiBinding Converter="{StaticResource ValuePaker}">
+    					<Binding ElementName="ResHisCustomer" Path="IsChecked"/>
+						<Binding ElementName="ResHisbyName" Path="IsChecked"/>
+						<Binding ElementName="ResHisCustomerComboBox" Path="SelectedItem.UserName"/>
+						<Binding ElementName="ResHisTeamComboBox" Path="SelectedItem.UserName"/>
+						<Binding ElementName="ResHisDateOne" Path="SelectedDate"/>
+						<Binding ElementName="ResHisDateTwo" Path="SelectedDate"/>
+					</MultiBinding>			
+				</Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>	
+			</Procesta_CvServer_UserControls:ButtonWithImages>
+			<telerikTheme:GroupBox x:Name="ResHisgroupDate" Margin="206,31.507,123.598,0" Header="Date" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}" Height="95.508" VerticalAlignment="Top">
+				<Grid>
+					<RadioButton x:Name="ResHisByDate" Content="By Date" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}" HorizontalAlignment="Left" Width="67.117" VerticalAlignment="Top" IsChecked="{Binding Option, ConverterParameter=ByDate, Converter={StaticResource RadioToString}, ElementName=window}"/>
+					<RadioButton x:Name="ResHisBetweenTwoDate" Content="Between Two Date" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}" Margin="0,23.506,0,23.971" HorizontalAlignment="Left" IsChecked="{Binding Option, ConverterParameter=BetweenTwoDate, Converter={StaticResource RadioToString}, ElementName=window}"/>
+				    <telerik:RadDatePicker x:Name="ResHisDateOne" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" FontSize="{DynamicResource TextFontSize}" SelectedValue="{Binding Now, Mode=OneWay}" Width="135.002" TextAlignment="Center" Margin="0,0,8,0"/>
+			        <telerik:RadDatePicker x:Name="ResHisDateTwo" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" FontSize="{DynamicResource TextFontSize}" SelectedValue="{Binding Now, Mode=OneWay}" HorizontalAlignment="Right" Width="132.335" TextAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=ResHisBetweenTwoDate}" Margin="0,29.506,10.667,17.987" d:LayoutOverrides="Height"/>
+			        <RadioButton x:Name="ResHisRedioByAnyDate" Content="Any Date" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}" HorizontalAlignment="Right" Width="78" Margin="0,0,207.058,4.465" VerticalAlignment="Bottom" IsChecked="{Binding Option, ConverterParameter=All, Converter={StaticResource RadioToString}, ElementName=window}"/>
+				</Grid>
+			</telerikTheme:GroupBox>
+			<RadioButton x:Name="ResHisCustomer" Content="Customer" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}" Margin="165.333,8,0,0" IsChecked="True"/>
+			<RadioButton x:Name="ResHisTeam" Content="Team" VerticalAlignment="Top" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}" Margin="255.903,8,318.302,0"/>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="ResHisDelete" Margin="0,393.127,16.156,0" VerticalAlignment="Top" FontSize="13.333" FontFamily="Segoe UI" ButtonImages="ButtonImages/Delete.png" Height="29.073" Content="Delete" d:LayoutOverrides="HorizontalAlignment" Command="{Binding DeleteRechareHistoryCommand, ElementName=window, Mode=OneWay}">
+				<Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>
+    				<MultiBinding Converter="{StaticResource ValuePaker}">
+    					<Binding ElementName="ResHisGridView" Path="SelectedItems"/>
+    					<Binding ElementName="ResHisCustomer" Path="IsChecked"/>
+					</MultiBinding>			
+				</Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>	
+			</Procesta_CvServer_UserControls:ButtonWithImages>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="ResHisDeleteAll" Margin="0,426.2,1.334,0" VerticalAlignment="Top" FontSize="13.333" FontFamily="Segoe UI" ButtonImages="ButtonImages/Delete.png" Height="29.072" Width="95.208" Content="Delete All" d:LayoutOverrides="HorizontalAlignment" Command="{Binding DeleteAllRechageHistoryClick, ElementName=window, Mode=OneWay}">
+				<Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>
+    				<MultiBinding Converter="{StaticResource ValuePaker}">
+    					<Binding ElementName="ResHisGridView" Path="ItemsSource"/>
+    					<Binding ElementName="ResHisCustomer" Path="IsChecked"/>
+					</MultiBinding>			
+				</Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>	
+			</Procesta_CvServer_UserControls:ButtonWithImages>
+		</Grid>
+		<!--Panel Login History View-->
+		<Grid x:Name="PanelLoginHistory" Margin="-0.679,19.501,-24,2.553" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="782.511" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<telerik:RadGridView x:Name="LogHisGridView" Margin="0,102.011,117.131,0.004" AutoGenerateColumns="False" ShowGroupPanel="False" IsReadOnly="True" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Width="659.38" SelectionMode="Extended">
+				<telerik:RadGridView.Columns>
+					<telerik:GridViewDataColumn Header="Date" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataFormatString="{}{0:d}" DataMemberBinding="{Binding StratTime}"/>
+					<telerik:GridViewDataColumn Header="Name" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding UserID}"/>
+					<telerik:GridViewDataColumn Header="Uses" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding MuniteUses}"/>
+					<telerik:GridViewDataColumn Header="Counter No" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding CounterNumber}"/>
+					<telerik:GridViewDataColumn Header="Team Name" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding TeamName}"/>
+				</telerik:RadGridView.Columns>
+			</telerik:RadGridView>
+			<telerikTheme:GroupBox x:Name="LogHisgroupName" Margin="3,-1.493,0,0" VerticalAlignment="Top" Height="99.508" Header="Name" HorizontalAlignment="Left" Width="185.364" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}">
+				<Grid>
+					<telerik:RadComboBox x:Name="LogHisComboBox" Margin="0,31.506,0,0" VerticalAlignment="Top" telerikTheme:TextSearch.TextPath="UserName" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" FontSize="{DynamicResource TextFontSize}" d:LayoutOverrides="HorizontalAlignment" Height="{DynamicResource TextBoxHeight}" ItemTemplate="{StaticResource RadComboBoxItemTemplate}" IsEnabled="{Binding IsChecked, ElementName=LogHisByName}" IsEditable="True"/>
+					<RadioButton x:Name="LogHisByName" Content="By Name" HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}" IsChecked="True"/>
+					<RadioButton x:Name="LogHisAll" Content="All" HorizontalAlignment="Right" Margin="0,8,45.207,0" VerticalAlignment="Top" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}"/>
+				</Grid>
+			</telerikTheme:GroupBox>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="LogHisSearch" Margin="0,69.688,166.002,0" VerticalAlignment="Top" FontSize="13.333" FontFamily="Segoe UI" ButtonImages="ButtonImages/Search.png" Height="28.323" Width="80.037" Content="Search" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Command="{Binding CustLoginHisSearchCommand, ElementName=window, Mode=OneWay}">
+				<Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>
+    				<MultiBinding Converter="{StaticResource ValuePaker}">
+    					<Binding ElementName="LogHisComboBox" Path="SelectedItem.UserName"/>
+						<Binding ElementName="LogHisByName" Path="IsChecked"/>
+						<Binding ElementName="LogHisDateOne" Path="SelectedDate"/>
+						<Binding ElementName="LogHisDateTwo" Path="SelectedDate"/>
+						<Binding ElementName="LogHisDateThree" Path="SelectedDate"/>
+					</MultiBinding>			
+				</Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>	
+			</Procesta_CvServer_UserControls:ButtonWithImages>
+			<telerikTheme:GroupBox x:Name="LogHisgroupDate" Margin="192.364,-1.493,0,0" Header="Date" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}" VerticalAlignment="Top" HorizontalAlignment="Left">
+				<Grid>
+					<RadioButton x:Name="LogHisByDate" Content="By Date" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}" HorizontalAlignment="Left" Width="67.117" VerticalAlignment="Top" Margin="0,4.481,0,0" IsChecked="{Binding Option, ConverterParameter=ByDate, Converter={StaticResource RadioToString}, ElementName=window}"/>
+					<RadioButton x:Name="LogHisBetweenTwoDate" Content="Two Date" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}" Margin="0,27.988,243.784,25.503" d:LayoutOverrides="Height" IsChecked="{Binding Option, ConverterParameter=BetweenTwoDate, Converter={StaticResource RadioToString}, ElementName=window}"/>
+					<telerik:RadDatePicker x:Name="LogHisDateOne" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" FontSize="{DynamicResource TextFontSize}" SelectedValue="{Binding Now, Mode=OneWay}" TextAlignment="Center" Margin="98.68,-0.001,118.5,0" VerticalAlignment="Top" IsEnabled="{Binding IsChecked, ElementName=LogHisByDate}"/>
+					<telerik:RadDatePicker x:Name="LogHisDateTwo" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" FontSize="{DynamicResource TextFontSize}" SelectedValue="{Binding Now, Mode=OneWay}" TextAlignment="Center" Margin="98.68,29.505,118.5,17.985" d:LayoutOverrides="Height" IsEnabled="{Binding IsChecked, ElementName=LogHisBetweenTwoDate}"/>
+					<RadioButton x:Name="LogHisByAnyDate" Content="Any Date" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="{DynamicResource TextFontSize}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,252.848,1.996" IsChecked="{Binding Option, ConverterParameter=All, Converter={StaticResource RadioToString}, ElementName=window}"/>
+					<telerik:RadDatePicker x:Name="LogHisDateThree" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" FontSize="{DynamicResource TextFontSize}" SelectedValue="{Binding Now, Mode=OneWay}" TextAlignment="Center" Margin="0,29.505,1.165,17.982" HorizontalAlignment="Right" Width="113.335" d:LayoutOverrides="Height" IsEnabled="{Binding IsChecked, ElementName=LogHisBetweenTwoDate}"/>
+				</Grid>
+			</telerikTheme:GroupBox>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="LogHisDelete" Margin="0,0,30.813,32.74" VerticalAlignment="Bottom" FontSize="13.333" FontFamily="Segoe UI" ButtonImages="ButtonImages/Delete.png" Height="28.406" Content="Delete" d:LayoutOverrides="HorizontalAlignment" Command="{Binding CustLoginHisDeleteCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItems, ElementName=LogHisGridView}"/>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="LogHisDeleteAll" Margin="0,0,12.201,0.001" VerticalAlignment="Bottom" FontSize="13.333" FontFamily="Segoe UI" ButtonImages="ButtonImages/Delete.png" Height="28.739" Content="Delete All" d:LayoutOverrides="HorizontalAlignment" Command="{Binding CustLoginHisDeleteAllCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding ItemsSource, ElementName=LogHisGridView}"/>
+		</Grid>
+		<!--Panel Cash View-->
+		<Grid x:Name="PanelCahView" Grid.Column="1" Margin="217.913,160.897,214.765,185.244" Grid.Row="1" VerticalAlignment="Center" Height="102.418" d:LayoutOverrides="Width" HorizontalAlignment="Center" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<telerik:RadDatePicker x:Name="CashViewDate" Margin="0,12.253,92.096,0" VerticalAlignment="Top" HorizontalAlignment="Right" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" Height="{DynamicResource TextBoxHeight}" FontSize="{DynamicResource TextFontSize}" Width="158.217" SelectedValue="{Binding Now, Mode=OneWay}" TextAlignment="Center"/>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Date :" Margin="29.87,15.346,0,0" d:LayoutOverrides="HorizontalAlignment" Height="21.407" VerticalAlignment="Top"/>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="CashSearch" HorizontalAlignment="Right" Margin="0,11.753,8,0" VerticalAlignment="Top" ButtonImages="ButtonImages/Search.png" Content="Search" FontSize="13.333" FontFamily="Segoe UI" Height="25.5" Command="{Binding SearchCashCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedDate, ElementName=CashViewDate}"/>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Amount :" Margin="8,47.677,0,0" Height="21.407" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+			<TextBlock x:Name="CashViewtextBolockAmount" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForeground}" Margin="71.453,0,0,8" Height="21.407" VerticalAlignment="Bottom" d:LayoutOverrides="HorizontalAlignment"/>
+			<telerik:RadNumericUpDown x:Name="CashAmount" Margin="71.917,47.084,92.096,0" VerticalAlignment="Top" Minimum="0" FontSize="14.667" IsEnabled="{Binding LoginEmployee, ConverterParameter=EditCash, Converter={StaticResource Editpermission}, ElementName=window}"/>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="CashUpdate" HorizontalAlignment="Stretch" Margin="110.632,0,132.998,0" VerticalAlignment="Bottom" ButtonImages="ButtonImages/Save.png" Content="Update" FontSize="13.333" FontFamily="Segoe UI" Height="25.4" Command="{Binding UpdateCashCommand, ElementName=window, Mode=OneWay}" IsEnabled="{Binding LoginEmployee, ConverterParameter=EditCash, Converter={StaticResource Editpermission}, ElementName=window}">
+				<Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>
+	    				<MultiBinding Converter="{StaticResource ValuePaker}">
+	    					<Binding ElementName="CashViewDate"	 Path="SelectedDate"/>
+							<Binding ElementName="CashAmount" Path="Value"/>
+						</MultiBinding>			
+					</Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>	
+				</Procesta_CvServer_UserControls:ButtonWithImages>
+		</Grid>
+		<!--Panel Summary-->
+		<Grid x:Name="PanelSummary" Margin="262.355,165.646,224.36,143.686" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="275.2" Height="146.557" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Date :" Height="21.407" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" Margin="5.4,10.668,0,0"/>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="SummarySearch" Margin="0,0,4.627,114.944" VerticalAlignment="Bottom" FontSize="13.333" FontFamily="Segoe UI" Content="Search" ButtonImages="ButtonImages/Search.png" Height="23.613" Width="74.957" d:LayoutOverrides="HorizontalAlignment" Command="{Binding SearchSummaryCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedDate, ElementName=summDate}"/>
+			<telerik:RadDatePicker x:Name="summDate" Margin="46.983,8,0,0" VerticalAlignment="Top" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" Height="{DynamicResource TextBoxHeight}" FontSize="{DynamicResource TextFontSize}" HorizontalAlignment="Left" Width="137.55" SelectedValue="{Binding Now, Mode=OneWay}" TextAlignment="Center"/>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Cash :" Margin="65.468,0,0,76.148" Height="21.407" VerticalAlignment="Bottom" d:LayoutOverrides="HorizontalAlignment"/>
+			<TextBlock x:Name="SummaryCash" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Margin="107.732,0,0,76.647" Height="21.406" VerticalAlignment="Bottom"/>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Total Munities :" Margin="5.4,0,0,24.001" d:LayoutOverrides="HorizontalAlignment" Height="22.74" VerticalAlignment="Bottom"/>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Total Login :" Margin="24.27,0,0,49.241" Height="21.407" VerticalAlignment="Bottom" d:LayoutOverrides="HorizontalAlignment"/>
+			<TextBlock x:Name="SummaryMinutes" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Margin="108.616,0,0,23.498" Height="22.74" VerticalAlignment="Bottom"/>
+			<TextBlock x:Name="SummaryTotalLogin" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Margin="107.733,0,0,50.738" Height="21.409" VerticalAlignment="Bottom"/>
+		</Grid>
+		<!--Panel Cash Edit-->
+		<Grid x:Name="PanelCashHistory" Grid.Column="1" Margin="178.034,68.877,131.17,42.327" Grid.Row="1" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="CashHistorySearch" HorizontalAlignment="Left" Margin="8,208.754,0,0" VerticalAlignment="Top" FontSize="14.667" FontFamily="Segoe UI" Content="Search" ButtonImages="ButtonImages/Search.png" Height="33" d:LayoutOverrides="HorizontalAlignment" Command="{Binding SearchCashHisotyCommand, ElementName=window, Mode=OneWay}">
+				<Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>
+	    				<MultiBinding Converter="{StaticResource ValuePaker}">
+	    					<Binding ElementName="CashHistoryOneDate" Path="SelectedDate"/>
+							<Binding ElementName="CashHistoryDateTwo" Path="SelectedDate"/>
+							<Binding ElementName="CashHistoryDateThree" Path="SelectedDate"/>
+						</MultiBinding>			
+					</Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>	
+				</Procesta_CvServer_UserControls:ButtonWithImages>
+			<telerik:RadDatePicker x:Name="CashHistoryOneDate" Margin="28.083,36.834,0,0" VerticalAlignment="Top" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" Height="{DynamicResource TextBoxHeight}" FontSize="{DynamicResource TextFontSize}" SelectedValue="{Binding Today, Mode=OneWay}" TextAlignment="Center" HorizontalAlignment="Left" Width="151.18" IsEnabled="{Binding IsChecked, ElementName=CashHistoryByDate}"/>
+			<telerik:RadGridView x:Name="CashHistoryGrid" Margin="183.263,8,8,6.666" ShowGroupPanel="False" IsReadOnly="True" FontSize="14.667" d:LayoutOverrides="HorizontalAlignment" AutoGenerateColumns="False">
+				<telerik:RadGridView.Columns>
+					<telerik:GridViewDataColumn Header="Date" MinWidth="100" DataMemberBinding="{Binding EntryDate, StringFormat=\{0:dd/MM/yyyy\}}" HeaderTextAlignment="Center"/>
+					<telerik:GridViewDataColumn Header="Amount" MinWidth="100" DataMemberBinding="{Binding Amount}" HeaderTextAlignment="Center"/>
+				</telerik:RadGridView.Columns>
+			</telerik:RadGridView>
+			<RadioButton Content="By Date" x:Name="CashHistoryByDate" HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="{Binding Option, ConverterParameter=ByDate, Converter={StaticResource RadioToString}, ElementName=window}"/>
+			<RadioButton Content="Between two Date" x:Name="CashHistoryByTwoDate" HorizontalAlignment="Left" Margin="8,67.5,0,0" VerticalAlignment="Top" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="{Binding Option, ConverterParameter=BetweenTwoDate, Converter={StaticResource RadioToString}, ElementName=window}"/>
+			<RadioButton Content="By All" x:Name="CashHistoryByAll" HorizontalAlignment="Left" Margin="8,166.99,0,160.337" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" d:LayoutOverrides="Height" IsChecked="{Binding Option, ConverterParameter=All, Converter={StaticResource RadioToString}, ElementName=window}"/>
+			<telerik:RadDatePicker x:Name="CashHistoryDateTwo" Margin="28.083,95.001,0,0" VerticalAlignment="Top" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" Height="{DynamicResource TextBoxHeight}" FontSize="{DynamicResource TextFontSize}" SelectedValue="{Binding Today, Mode=OneWay}" TextAlignment="Center" HorizontalAlignment="Left" Width="151.18" IsEnabled="{Binding IsChecked, ElementName=CashHistoryByTwoDate}"/>
+			<telerik:RadDatePicker x:Name="CashHistoryDateThree" Margin="28.083,129.664,0,0" VerticalAlignment="Top" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" Height="{DynamicResource TextBoxHeight}" FontSize="{DynamicResource TextFontSize}" SelectedValue="{Binding Today, Mode=OneWay}" TextAlignment="Center" HorizontalAlignment="Left" Width="151.18" IsEnabled="{Binding IsChecked, ElementName=CashHistoryByTwoDate}"/>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="CashHistoryPrint" HorizontalAlignment="Left" Margin="107.079,208.754,0,0" VerticalAlignment="Top" FontSize="14.667" FontFamily="Segoe UI" Content="Print" ButtonImages="ButtonImages/Print.png" Height="33" Width="72.184" d:LayoutOverrides="HorizontalAlignment" Command="{Binding PrintCashHistoryCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding ItemsSource, ElementName=CashHistoryGrid}"/>
+		</Grid>
+		<!--Panel New Team-->
+		<Grid x:Name="PanelNewTeam" Margin="40.12,43.38,45.34,-1.663" Grid.Row="1" Grid.ColumnSpan="3" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.288*"/>
+				<ColumnDefinition Width="0.141*"/>
+				<ColumnDefinition Width="0.233*"/>
+				<ColumnDefinition Width="0.338*"/>
+			</Grid.ColumnDefinitions>
+			<Border Margin="9.323,8,0,0" Height="85" VerticalAlignment="Top" d:LayoutOverrides="Height, VerticalMargin" BorderThickness="3" CornerRadius="3" HorizontalAlignment="Left" Width="90.47">
+				<Border.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFE5E5E5" Offset="0"/>
+						<GradientStop Color="#FFCACACA" Offset="1"/>
+						<GradientStop Color="#FF6A6A6A" Offset="0.502"/>
+					</LinearGradientBrush>
+				</Border.BorderBrush>
+			<Image Source="{Binding SelectedItem.Image, ElementName=TeamGridView}"/>
+			</Border>
+			<dxe:TextEdit x:Name="TeamName" Margin="0.403,106.456,8,0" VerticalAlignment="Top" Background="{DynamicResource TextBoxBackground}" Height="{DynamicResource TextBoxHeight}" FontSize="{DynamicResource TextFontSize}" Grid.Column="2" NullText="Must Be Uniq" >
+				<dxe:TextEdit.Text>
+					<Binding Path="SelectedItem.Name" ElementName="TeamGridView" Mode="TwoWay" ValidatesOnDataErrors="True" UpdateSourceTrigger="LostFocus">
+						<Binding.ValidationRules>
+							<local:TeamName/>
+						</Binding.ValidationRules>
+					</Binding>
+				</dxe:TextEdit.Text>
+			</dxe:TextEdit>
+			<telerik:RadComboBox x:Name="TeamAdminName" Margin="0.403,136.456,8,0" FontSize="{DynamicResource TextFontSize}" Height="{DynamicResource TextBoxHeight}" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" IsEditable="True" telerikTheme:TextSearch.TextPath="UserName" DisplayMemberPath="UserName" VerticalAlignment="Top" Grid.Column="2" Text="{Binding SelectedItem.AdminName, ElementName=TeamGridView, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"/>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Admin Name :" Margin="0,139.648,3.354,0" VerticalAlignment="Top" Grid.Column="1"/>
+			<Image x:Name="newTeamImageAvail" Margin="0,131.456,5.674,0" HorizontalAlignment="Right" Width="20" Height="20" VerticalAlignment="Top" Grid.Column="3"/>
+			<TextBlock TextWrapping="Wrap" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Team Name :" Margin="0,108.364,3.593,0" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="1"/>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Right" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Member`s Name :" Margin="0,166.456,3.354,0" VerticalAlignment="Top" Grid.Column="1"/>
+			<dxe:ListBoxEdit x:Name="TeamMemberList" Margin="0.403,166.456,8,34.501"  FontSize="13.333" Grid.Column="2" Background="{DynamicResource TextBoxBackground}" ItemsSource="{Binding SelectedItem.TeamMemberList, ElementName=TeamGridView}">
+				<dxe:ListBoxEdit.ItemTemplate>
+					<DataTemplate>
+						<DockPanel Height="40" Margin="0,0,0,5" LastChildFill="True">
+							<Border Height="36" Width="34" BorderThickness="2" CornerRadius="2" DockPanel.Dock="Left">
+								<Border.BorderBrush>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+										<GradientStop Color="#FFE5E5E5" Offset="0"/>
+										<GradientStop Color="#FFCACACA" Offset="1"/>
+										<GradientStop Color="#FFE5E5E5" Offset="0.502"/>
+									</LinearGradientBrush>
+								</Border.BorderBrush>
+								<Image Source="{Binding Image}"/>
+							</Border>
+							<telerikTheme:RadButton Width="30"  Margin="5,5,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Left" Command="{Binding DataContext.TeamMemberRemoveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding}">
+									<Image Width="30" Height="20" Source="Images/remove.png"/>
+		</telerikTheme:RadButton>
+							<TextBlock Height="19" TextWrapping="Wrap" Text="{Binding UserName}" Margin="5,10.5,0,10.5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14.667"/>
+						</DockPanel>
+					</DataTemplate>
+				</dxe:ListBoxEdit.ItemTemplate>
+			</dxe:ListBoxEdit>
+			<StackPanel Height="47.898" Margin="103.793,17.689,70.245,0" VerticalAlignment="Top">
+				<Procesta_CvServer_UserControls:ButtonWithImages x:Name="TeamBrowes" VerticalAlignment="Top" HorizontalAlignment="Left" ButtonImages="ButtonImages/browse.png"  Content="Browse" Height="21.579" Width="72.165" Command="{Binding BrowseTeamCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=TeamGridView}"/>
+				<Procesta_CvServer_UserControls:ButtonWithImages x:Name="TeamWebcam" VerticalAlignment="Top" HorizontalAlignment="Left" ButtonImages="ButtonImages/webcam.png" Content="WebCam" Height="22.245" Margin="0,5,0,0" Command="{Binding WebCamTeamCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=TeamGridView}"/>
+			</StackPanel>
+			<StackPanel Height="26" Margin="-20.766,0,3.999,4.501" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Column="2" d:LayoutOverrides="Width" HorizontalAlignment="Center">
+				<Procesta_CvServer_UserControls:ButtonWithImages x:Name="TeamNew" VerticalAlignment="Top" HorizontalAlignment="Right" Content="New" FontFamily="Segoe UI" FontSize="13.333"  ButtonImages="ButtonImages/Add.png" Command="{Binding NewTeamCommand, ElementName=window, Mode=OneWay}" CommandParameter="No Parameter"/>
+				<Procesta_CvServer_UserControls:ButtonWithImages x:Name="TeamUpdate" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Update" FontFamily="Segoe UI" FontSize="13.333" ButtonImages="ButtonImages/Save.png" Margin="5,0,0,0" Command="{Binding UpdateTeamCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=TeamGridView}"/>
+				<Procesta_CvServer_UserControls:ButtonWithImages x:Name="TeamDelete" VerticalAlignment="Top" HorizontalAlignment="Stretch" Content="Delete" FontFamily="Segoe UI" FontSize="13.333" ButtonImages="ButtonImages/Delete.png" Margin="5,0,0,0" Command="{Binding DeleteTeamCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=TeamGridView}"/>
+			</StackPanel>
+			<GroupBox Grid.Column="3" Header="Existing Users" Margin="0,103.456,0,8" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="14.667">
+				<Grid>
+					<TextBox x:Name="TeamUserSearch" Height="26" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14.667" Background="{DynamicResource TextBoxBackground}" Margin="99.73,8,8,0" d:LayoutOverrides="GridBox"/>
+					<ListBox x:Name="TeamExistUserList" Background="{DynamicResource TextBoxBackground}" Margin="99.73,38,8,8" d:LayoutOverrides="GridBox" RenderTransformOrigin="0.5,0.5">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<DockPanel Height="40" Margin="0,0,0,5" LastChildFill="True">
+									<Border Margin="0,5,0,0" Height="36" Width="34" BorderThickness="2" CornerRadius="2" DockPanel.Dock="Left">
+										<Border.BorderBrush>
+											<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+												<GradientStop Color="#FFE5E5E5" Offset="0"/>
+												<GradientStop Color="#FFCACACA" Offset="1"/>
+												<GradientStop Color="#FFE5E5E5" Offset="0.502"/>
+											</LinearGradientBrush>
+										</Border.BorderBrush>
+										<Image Source="{Binding Image}"/>
+									</Border>
+									<telerikTheme:RadButton DockPanel.Dock="Left" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Margin="5,5,5,0" Command="{Binding DataContext.TeamMemberAddCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding}">
+											<Image Source="ButtonImages/Add.png" Height="20" Width="30"/>
+				</telerikTheme:RadButton>
+									<TextBlock DockPanel.Dock="Left" Height="19" TextWrapping="Wrap" Text="{Binding UserName}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14.667"/> 
+								</DockPanel>
+						  	</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+					<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Search :" Margin="45.433,8.666,0,0" VerticalAlignment="Top"/>
+					<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Member List :" Margin="7.999,31.506,0,0" VerticalAlignment="Top"/>
+				</Grid>
+			</GroupBox>
+			<telerik:RadGridView x:Name="TeamGridView" Margin="0,103.456,3.557,8" ShowGroupPanel="False" HorizontalAlignment="Right" Width="247.052" FontSize="14.667" AutoGenerateColumns="False">
+				<telerik:RadGridView.Columns>
+					<telerik:GridViewImageColumn ImageHeight="50" ImageWidth="40" Header="Picture" MinWidth="70" HeaderTextAlignment="Center" DataMemberBinding="{Binding Image}"/>
+					<telerik:GridViewDataColumn Header="Name" HeaderTextAlignment="Center" MinWidth="100" DataMemberBinding="{Binding Name}"/>
+				</telerik:RadGridView.Columns>
+			</telerik:RadGridView>
+			<GroupBox Grid.Column="1" Header="Balance" Margin="8.93,0,8,101.71" VerticalAlignment="Bottom" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="14.667" Height="92.507">
+				<Grid>
+					<TextBlock Text="Minutes :" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment" HorizontalAlignment="Left"/>
+					<telerik:RadNumericUpDown Margin="1.33,28.168,0,15.812" d:LayoutOverrides="Height" IsInteger="True" Minimum="0" Value="{Binding SelectedItem.Minutes, ElementName=TeamGridView, Mode=TwoWay}" IsEnabled="{Binding LoginEmployee, ConverterParameter=EditRecharge, Converter={StaticResource Editpermission}, ElementName=window}"/>
+				</Grid>
+			</GroupBox>	
+		</Grid>
+		<!--Panel User Maintenance-->
+		<Grid x:Name="PanelUserMaintenance" Margin="8,20.676,0,2.553" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="UserMaintenanceSearch" HorizontalAlignment="Right" Margin="0,81.544,12.025,0" VerticalAlignment="Top" FontSize="13.333" FontFamily="Segoe UI" ButtonImages="ButtonImages/Search.png" Content="Search" Height="29.703" Width="82.978" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Command="{Binding UserMaintenanceSearchCommand, ElementName=window, Mode=OneWay}">
+				<Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>
+    				<MultiBinding Converter="{StaticResource ValuePaker}">
+    					<Binding ElementName="UserMaintenanceCutomer" Path="SelectedItem.UserName"/>
+						<Binding ElementName="UserMaintenanceDateOne" Path="SelectedDate"/>
+						<Binding ElementName="UserMaintenanceDateTwo" Path="SelectedDate"/>
+						<Binding ElementName="UserMaintenanceDateThree" Path="SelectedDate"/>
+						<Binding ElementName="UserMaintenanceMunities" Path="Value"/>
+					</MultiBinding>			
+			</Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>	
+			</Procesta_CvServer_UserControls:ButtonWithImages>
+			<telerik:RadGridView x:Name="UserMaintenanceCutomerGridView" Margin="8,113.997,12.025,37.151" AutoGenerateColumns="False" CanUserInsertRows="False" ShowGroupPanel="False" SelectionMode="Extended" FontSize="{DynamicResource TextFontSize}" HorizontalAlignment="Center">
+			<telerik:RadGridView.Columns>
+					<telerik:GridViewImageColumn Header="Photo" TextAlignment="Center" MinWidth="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" ImageHeight="50" ImageWidth="60" DataMemberBinding="{Binding Logo}"/>
+				    <telerik:GridViewDataColumn Header="User ID" TextAlignment="Center" MinWidth="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding UserID}"/>
+					<telerik:GridViewDataColumn Header="Name" TextAlignment="Center" MinWidth="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding Name}"/>
+					<telerik:GridViewDataColumn Header="Phone" TextAlignment="Center" MinWidth="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding Phone}"/>
+					<telerik:GridViewDataColumn Header="Email" TextAlignment="Center" MinWidth="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding Email}"/>
+					<telerik:GridViewDataColumn Header="Munities" TextAlignment="Center" MinWidth="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding CustomerAccount.Minutes}"/>
+					<telerik:GridViewDataColumn Header="Last Login" TextAlignment="Center" MinWidth="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataFormatString="{}{0:d}" DataMemberBinding="{Binding JoinDate}"/>
+			</telerik:RadGridView.Columns>
+			</telerik:RadGridView>
+			<RadioButton x:Name="UserMaintenanceByName" Content="By Name" Margin="8,8,0,0" VerticalAlignment="Top" FontSize="{DynamicResource TextFontSize}" HorizontalAlignment="Left" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="{Binding Option, ConverterParameter=ByName, Converter={StaticResource RadioToString}, ElementName=window}"/>
+			<RadioButton x:Name="UserMaintenanceByDate" Content="By Date" Margin="8,31.506,0,0" VerticalAlignment="Top" FontSize="{DynamicResource TextFontSize}" HorizontalAlignment="Left" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="{Binding Option, ConverterParameter=ByDate, Converter={StaticResource RadioToString}, ElementName=window}"/>
+            <RadioButton x:Name="UserMaintenanceByMunities" Content="By Minutes " Margin="8,55.012,0,0" VerticalAlignment="Top" FontSize="{DynamicResource TextFontSize}" HorizontalAlignment="Left" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="{Binding Option, ConverterParameter=ByAmount, Converter={StaticResource RadioToString}, ElementName=window}"/>
+			<telerikTheme:GroupBox x:Name="UsMainGroupName" Margin="0,8,150.241,0" VerticalAlignment="Top" telerikTheme:TextSearch.TextPath="UId" Height="72.294" FontSize="{DynamicResource TextFontSize}" Header="Name" HorizontalAlignment="Right" Width="192.195" Foreground="{DynamicResource TextBlockForgroundBrush}" IsEnabled="{Binding IsChecked, ElementName=UserMaintenanceByName}">
+				<Grid>
+					<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="User ID :" Margin="0,14.604,0,0" d:LayoutOverrides="HorizontalAlignment" Height="21.406" VerticalAlignment="Top"/>
+					<telerik:RadComboBox x:Name="UserMaintenanceCutomer" Margin="58.47,13.27,0,0" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" FontSize="{DynamicResource TextFontSize}" Height="{DynamicResource TextBoxHeight}" IsEditable="True" VerticalAlignment="Top" telerikTheme:TextSearch.TextPath="UserName" ItemTemplate="{StaticResource RadComboBoxItemTemplate}"/>
+				</Grid>
+			</telerikTheme:GroupBox>
+			<telerikTheme:GroupBox x:Name="UsMainGroupDate" Margin="106.519,0,346.436,0" FontSize="{DynamicResource TextFontSize}" Header="Date" Height="98.222" VerticalAlignment="Top" Foreground="{DynamicResource TextBlockForgroundBrush}" IsEnabled="{Binding IsChecked, ElementName=UserMaintenanceByDate}">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<RadioButton x:Name="UserMaintenanceDateEqual" Content="Equal" Margin="3.45,3.714,0,0" FontSize="{DynamicResource TextFontSize}" HorizontalAlignment="Left" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="{Binding SubOption, ConverterParameter=ByDate, Converter={StaticResource RadioToString}, ElementName=window}"/>
+					<RadioButton x:Name="UserMaintenanceDateBelow" Content="Below" FontSize="{DynamicResource TextFontSize}" HorizontalAlignment="Left" Margin="3.45,25.221,0,26.982" d:LayoutOverrides="Height" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="{Binding SubOption, ConverterParameter=Below, Converter={StaticResource RadioToString}, ElementName=window}"/>
+					<RadioButton x:Name="UserMaintenanceTwoDate" Content="Two Date" Margin="3.45,0,0,5.48" FontSize="{DynamicResource TextFontSize}" HorizontalAlignment="Left" Width="78.375" VerticalAlignment="Bottom" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="{Binding SubOption, ConverterParameter=TwoDate, Converter={StaticResource RadioToString}, ElementName=window}"/>
+					<telerik:RadDatePicker x:Name="UserMaintenanceDateOne" Margin="85.825,8,0,0" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" TextAlignment="Center" Height="{DynamicResource TextBoxHeight}" FontSize="{DynamicResource TextFontSize}" SelectedValue="{Binding Today, Mode=OneWay}" HorizontalAlignment="Left" Width="129.529" VerticalAlignment="Top"/>
+					<telerik:RadDatePicker x:Name="UserMaintenanceDateTwo" Margin="85.825,0,101.189,2.989" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" TextAlignment="Center" Height="{DynamicResource TextBoxHeight}" FontSize="{DynamicResource TextFontSize}" SelectedValue="{Binding Today, Mode=OneWay}" VerticalAlignment="Bottom" IsEnabled="{Binding IsChecked, ElementName=UserMaintenanceTwoDate}"/>
+					<telerik:RadDatePicker x:Name="UserMaintenanceDateThree" Margin="0,0,0,2.988" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" TextAlignment="Center" Height="{DynamicResource TextBoxHeight}" FontSize="{DynamicResource TextFontSize}" SelectedValue="{Binding Today, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="97.189" IsEnabled="{Binding IsChecked, ElementName=UserMaintenanceTwoDate}"/>	
+				</Grid>
+			</telerikTheme:GroupBox>
+			<telerikTheme:GroupBox x:Name="UsMainGroupMunities" Margin="0,8,8,0" VerticalAlignment="Top" Height="72.294" FontSize="{DynamicResource TextFontSize}" Header="Minutes " HorizontalAlignment="Right" Width="137.55" Foreground="{DynamicResource TextBlockForgroundBrush}" IsEnabled="{Binding IsChecked, ElementName=UserMaintenanceByMunities}">
+				<Grid>
+					<RadioButton x:Name="UserMaintenanceMinutesEqual" Content="Equal" Margin="58.823,-1.495,0,0" VerticalAlignment="Top" FontSize="{DynamicResource TextFontSize}" HorizontalAlignment="Left" Height="19.507" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="{Binding SubOption, ConverterParameter=Equal, Converter={StaticResource RadioToString}, ElementName=window}"/>
+					<RadioButton x:Name="UserMaintenanceMinutesBelow" Content="Below" FontSize="{DynamicResource TextFontSize}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-2,0,0" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="{Binding SubOption, ConverterParameter=Below, Converter={StaticResource RadioToString}, ElementName=window}"/>
+					<telerik:RadNumericUpDown x:Name="UserMaintenanceMunities" Margin="0,21.506,8,2.278" d:LayoutOverrides="Height" IsInteger="True" Minimum="0"/>
+				</Grid>
+			</telerikTheme:GroupBox>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="UserMaintenanceDelete" HorizontalAlignment="Right" Margin="0,0,12.025,0" VerticalAlignment="Bottom" FontSize="13.333" FontFamily="Segoe UI" ButtonImages="ButtonImages/Delete.png" Content="Delete" Height="33.151" d:LayoutOverrides="HorizontalAlignment" Command="{Binding UserMiantenanceDeleteCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItems, ElementName=UserMaintenanceCutomerGridView}"/>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="UserMaintenanceDeleteAll" HorizontalAlignment="Right" Margin="0,0,106.225,0" VerticalAlignment="Bottom" FontSize="13.333" FontFamily="Segoe UI" ButtonImages="ButtonImages/Delete.png" Content="Delete All" Height="33.151" Width="101.7" d:LayoutOverrides="HorizontalAlignment" Command="{Binding UserMiantenanceDeleteAllCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding ItemsSource, ElementName=UserMaintenanceCutomerGridView}"/>
+		</Grid>
+		<!--Panel Team Maintenance-->
+		<Grid x:Name="PanelTeamMainTenance" Grid.Column="1" Margin="-26.5,0,-25.5,2.553" telerikTheme:TextSearch.TextPath="UId" Width="806.832" Grid.Row="1" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="temMainSearch" HorizontalAlignment="Left" Margin="678.62,70.46,0,0" VerticalAlignment="Top" ButtonImages="ButtonImages/Search.png" Height="33.96" Width="90.635" d:LayoutOverrides="VerticalAlignment" Content="Search" FontSize="14.667" FontFamily="Segoe UI" Command="{Binding TeamMainSearchCommand, ElementName=window, Mode=OneWay}">
+				<Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>
+    				<MultiBinding Converter="{StaticResource ValuePaker}">
+    					<Binding ElementName="temMainTeamName" Path="SelectedItem.UserName"/>
+						<Binding ElementName="teamMianDateOne" Path="SelectedDate"/>
+						<Binding ElementName="teamMianDateTwo" Path="SelectedDate"/>
+						<Binding ElementName="teamMainDateThree" Path="SelectedDate"/>
+						<Binding ElementName="UserMaintenanceMunities" Path="Value"/>
+					</MultiBinding>			
+			</Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>	
+			</Procesta_CvServer_UserControls:ButtonWithImages>
+			<GroupBox Header="By Date" Margin="108.56,0,388.362,0" VerticalAlignment="Top" Height="104.46" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" IsEnabled="{Binding IsChecked, ElementName=teamMainByDate}">
+				<Grid>
+					<RadioButton x:Name="teamMianDateEqual" Content="Equal" Margin="8,4.665,0,0" VerticalAlignment="Top" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" HorizontalAlignment="Left" Width="51.06" IsChecked="{Binding SubOption, ConverterParameter=ByDate, Converter={StaticResource RadioToString}, ElementName=window}"/>
+					<RadioButton x:Name="teamMianDateBelow" Content="Below" Margin="8,26.172,0,32.27" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" d:LayoutOverrides="Height" HorizontalAlignment="Left" Width="56.56" IsChecked="{Binding SubOption, ConverterParameter=Below, Converter={StaticResource RadioToString}, ElementName=window}"/>
+					<RadioButton x:Name="teamMainTwoDate" Content="Two Date" Margin="8,0,0,11.428" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="76.56" IsChecked="{Binding SubOption, ConverterParameter=TwoDate, Converter={StaticResource RadioToString}, ElementName=window}"/>
+					<telerik:RadDatePicker x:Name="teamMianDateOne" Margin="92.06,15.376,94.5,37.061" d:LayoutOverrides="Height"/>
+					<telerik:RadDatePicker x:Name="teamMainDateThree" Margin="0,0,4.5,5.419" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="94.5" IsEnabled="{Binding IsChecked, ElementName=teamMainTwoDate}"/>
+					<telerik:RadDatePicker x:Name="teamMianDateTwo" Margin="92.06,0,103,5.418" VerticalAlignment="Bottom" IsEnabled="{Binding IsChecked, ElementName=teamMainTwoDate}"/>
+				</Grid>
+			</GroupBox>
+			<RadioButton x:Name="teamMainByName" Content="By Name" HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="{Binding Option, ConverterParameter=ByName, Converter={StaticResource RadioToString}, ElementName=window}"/>
+			<GroupBox Header="Team Name" Margin="0,0,223.665,0" VerticalAlignment="Top" Height="66.46" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" HorizontalAlignment="Right" Width="160.697" IsEnabled="{Binding IsChecked, ElementName=teamMainByName}">
+				<telerik:RadComboBox x:Name="temMainTeamName" Margin="0,8,-2.636,0" FontSize="{DynamicResource TextFontSize}" Height="{DynamicResource TextBoxHeight}" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" IsEditable="True" telerikTheme:TextSearch.TextPath="userName" ItemTemplate="{StaticResource RadComboBoxItemTemplate}" VerticalAlignment="Top"/>
+			</GroupBox>
+			<RadioButton x:Name="teamMainByDate" Content="By Date" HorizontalAlignment="Left" Margin="8,31.506,0,0" VerticalAlignment="Top" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="{Binding Option, ConverterParameter=ByDate, Converter={StaticResource RadioToString}, ElementName=window}"/>
+			<RadioButton x:Name="teamMainByMinutes" Content="By Minutes " HorizontalAlignment="Left" Margin="8,55.012,0,0" VerticalAlignment="Top" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="{Binding Option, ConverterParameter=ByAmount, Converter={StaticResource RadioToString}, ElementName=window}"/>
+			<GroupBox Header="Minutes" VerticalAlignment="Top" Height="66.46" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" HorizontalAlignment="Right" Width="182.088" Margin="0,0,37.577,0" IsEnabled="{Binding IsChecked, ElementName=teamMainByMinutes}">
+				<Grid>
+					<RadioButton x:Name="teamMainMinBel" Content="Below" HorizontalAlignment="Left" Margin="8,0,0,-0.001" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="{Binding SubOption, ConverterParameter=Below, Converter={StaticResource RadioToString}, ElementName=window}" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Bottom"/>
+					<RadioButton x:Name="teamMainMinEqual" Content="Equal" HorizontalAlignment="Left" Margin="8,0,0,0" VerticalAlignment="Top" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" d:LayoutOverrides="HorizontalAlignment" IsChecked="{Binding SubOption, ConverterParameter=Equal, Converter={StaticResource RadioToString}, ElementName=window}"/>
+					<telerik:RadNumericUpDown x:Name="teamMainMinutes" Margin="66.823,8,8,9.953" IsInteger="True" Maximum="0" Minimum="0" />
+				</Grid>
+			</GroupBox>
+			<telerik:RadGridView x:Name="teamMainGridView" Margin="120.345,108.42,118.045,0.04" ShowGroupPanel="False" FontSize="14.667" AutoGenerateColumns="False" IsReadOnly="True">
+				<telerik:RadGridView.Columns>
+					<telerik:GridViewToggleRowDetailsColumn/>
+					<telerik:GridViewImageColumn ImageHeight="50" ImageWidth="60" Header="Photo" HeaderTextAlignment="Center" MinWidth="80" DataMemberBinding="{Binding Logo}"/>
+					<telerik:GridViewDataColumn Header="Name"  HeaderTextAlignment="Center" MinWidth="100" DataMemberBinding="{Binding Name}"/>
+					<telerik:GridViewDataColumn Header="Admin Name" HeaderTextAlignment="Center" MinWidth="100" DataMemberBinding="{Binding AdminName}"/>
+					<telerik:GridViewDataColumn Header="Minutes" HeaderTextAlignment="Center" MinWidth="100" DataMemberBinding="{Binding TeamAccount.Minutes}"/>
+					<telerik:GridViewDataColumn Header="Join Date" HeaderTextAlignment="Center" MinWidth="100" DataFormatString="{}{0:d}" DataMemberBinding="{Binding JoinDate}"/>
+				</telerik:RadGridView.Columns>
+				<telerik:RadGridView.RowDetailsTemplate>
+					<DataTemplate>
+						<telerik:RadGridView AutoGenerateColumns="False" ShowGroupPanel="False" IsReadOnly="True" RowIndicatorVisibility="Collapsed" ItemsSource="{Binding TeamMembers}">
+							<telerik:RadGridView.Columns>
+								<telerik:GridViewImageColumn ImageHeight="50" Width="60" Header="Photo" MinWidth="70" HeaderTextAlignment="Center" DataMemberBinding="{Binding CustomerInformation.Logo}"/>
+								<telerik:GridViewDataColumn MinWidth="100" Header="Name" HeaderTextAlignment="Center" DataMemberBinding="{Binding UserID}"/>
+							</telerik:RadGridView.Columns>
+						</telerik:RadGridView>
+					</DataTemplate>
+				</telerik:RadGridView.RowDetailsTemplate>
+			</telerik:RadGridView>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="teamMainDelete" HorizontalAlignment="Left" Margin="692.787,0,0,39.078" VerticalAlignment="Bottom" ButtonImages="ButtonImages/Delete.png" Height="33.96" Width="88.635" Content="Delete" FontSize="14.667" FontFamily="Segoe UI" Command="{Binding TeamMainDeleteCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItems, ElementName=teamMainGridView}"/>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="teamMainDeleteAll" HorizontalAlignment="Left" Margin="692.787,0,0,0" VerticalAlignment="Bottom" ButtonImages="ButtonImages/Delete.png" Height="33.96" Width="107.968" Content="Delete All" FontSize="14.667" FontFamily="Segoe UI" Command="{Binding TeamMainDeleteAllCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding ItemsSource, ElementName=teamMainGridView}"/>
+		</Grid>
+		<!--Panel Send Mail -->
+		<Grid x:Name="PanelSendMail" Margin="234.413,62.042,167.611,97.513" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="289.767" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<RadioButton x:Name="sendMailOneByOne" Content="One by one" Margin="8,8,0,0" VerticalAlignment="Top" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" HorizontalAlignment="Left" IsChecked="{Binding Option, ConverterParameter=OneByOne, Converter={StaticResource RadioToString}, ElementName=window}"/>
+			<telerik:RadComboBox x:Name="sendMailUsers" Margin="8,28.768,193.881,0" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" Height="{DynamicResource TextBoxHeight}" FontSize="{DynamicResource TextFontSize}" VerticalAlignment="Top" IsEditable="True" telerikTheme:TextSearch.TextPath="UserName" ItemTemplate="{StaticResource RadComboBoxItemTemplate}" IsEnabled="{Binding IsChecked, ElementName=sendMailOneByOne}"/>
+			<dxe:TextEdit x:Name="sendMailSubject" Margin="66.88,58.768,8,0" VerticalAlignment="Top" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" Height="{DynamicResource TextBoxHeight}" FontSize="{DynamicResource TextFontSize}"/>
+			<RadioButton x:Name="sendMailEveryOne" Content="Every one" Margin="110.464,8,162.451,0" VerticalAlignment="Top" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="{Binding Option, ConverterParameter=EveryOne, Converter={StaticResource RadioToString}, ElementName=window}"/>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Subject :" Margin="8,58.768,0,0" Height="21.408" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Body :" Margin="22.95,93.9,0,0" Height="21.408" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+			<dxe:TextEdit x:Name="sendMailBody" Margin="66.88,93.9,8,68.867" Background="{DynamicResource TextBoxBackground}" BorderBrush="{DynamicResource TextBoxBorderBrush}" FontSize="{DynamicResource TextFontSize}" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="sendMailSend" Margin="117.391,0,0,31.799" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Send" ButtonImages="ButtonImages/send.png" Height="33.068" d:LayoutOverrides="VerticalAlignment" FontSize="13.333" FontFamily="Segoe UI" Command="{Binding EmailSendCommand, ElementName=window, Mode=OneWay}">
+				<Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>
+    				<MultiBinding Converter="{StaticResource ValuePaker}">
+						<Binding ElementName="sendMailSubject" Path="Text"/>
+						<Binding ElementName="sendMailBody" Path="Text"/>
+						<Binding ElementName="sendMailUsers" Path="SelectedItem.UserName"/>
+					</MultiBinding>			
+			</Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>	
+			</Procesta_CvServer_UserControls:ButtonWithImages>
+			<telerikTheme:RadProgressBar x:Name="sendMailProgress" Height="15.135" Margin="8,0,8,8" VerticalAlignment="Bottom" telerikTheme:StyleManager.Theme="Transparent"/>
+			<Procesta_CvServer_UserControls:ButtonWithImages x:Name="sendMailCancel" Margin="194.357,0,0,31.799" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Cancel" ButtonImages="ButtonImages/Close.png" Height="33.068" Width="83.966" FontSize="13.333" FontFamily="Segoe UI" d:LayoutOverrides="VerticalAlignment" Command="{Binding EmailSendingCancelCommand, ElementName=window, Mode=OneWay}" CommandParameter="No Paramaeter"/>
+			<TextBlock x:Name="sendMailPersentage" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="{DynamicResource TextBlockForgroundBrush}" Margin="159.093,0,0,8" VerticalAlignment="Bottom"/>
+		</Grid>
+		<!--Panel Connect Client-->
+		<!--Panel Counetr Configure-->
+		<!--Panel Database Backup and Restore-->
+        <Grid x:Name="PanelDatabaseBackupRestore" Grid.Column="1" Margin="165.027,120.227,113.165,104.157" Grid.Row="1" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="229" Width="484.602" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+        	<dx:DXTabControl Margin="0,0,-0.36,-0.327" d:LayoutOverrides="HorizontalAlignment, HorizontalMargin">
+        		<dx:DXTabItem Header="Backup" MinWidth="80" TextBlock.TextAlignment="Center" FontSize="14.667">
+        			<dx:DXTabItem.Icon>
+        				<Image Source="ButtonImages/databaseBackup.png"/>   			
+					</dx:DXTabItem.Icon>
+        			    <Grid Background="Transparent">
+        				<Procesta_CvServer_UserControls:ButtonWithImages x:Name="dbbackupBrowse" Content="Browse" HorizontalAlignment="Left" Margin="48,55,0,0" VerticalAlignment="Top" FontSize="13.333" FontFamily="Segoe UI" ButtonImages="ButtonImages/browse.png" Height="28" Width="83" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Command="{Binding BackupLocationCommand, ElementName=window, Mode=OneWay}" CommandParameter="No Parameter"/>
+        				<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForeground}" Text="Path :" Height="21.406" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" Margin="8,30,0,0"/>
+        				<TextBlock x:Name="dbbackupFolderPath" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForeground}" Height="21" VerticalAlignment="Top" Margin="48,30,0,0" Width="405"/>
+        				<Procesta_CvServer_UserControls:ButtonWithImages x:Name="dbbackupBackup" HorizontalAlignment="Left" Margin="152.144,96.739,0,0" VerticalAlignment="Top" FontSize="13.333" FontFamily="Segoe UI" ButtonImages="ButtonImages/databaseBackup.png" Height="31.767" Width="83.683" Content="Backup" Command="{Binding DatabaseBackupCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding Text, ElementName=dbbackupFolderPath}"/>
+        				<telerikTheme:RadProgressBar x:Name="dbBackupProgress" Height="20" Margin="8,0,8,8" VerticalAlignment="Bottom" Maximum="30">
+        					<telerikTheme:RadProgressBar.Foreground>
+        						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+        							<GradientStop Color="#FFFFA3A3" Offset="1"/>
+        							<GradientStop Color="#FFFFDADA" Offset="0"/>
+        							<GradientStop Color="#FFFF5A5A" Offset="0.43"/>
+        							<GradientStop Color="#FFFEAEAE" Offset="0.42"/>
+        						</LinearGradientBrush>
+        					</telerikTheme:RadProgressBar.Foreground>
+        				</telerikTheme:RadProgressBar>
+        			</Grid>		
+				</dx:DXTabItem>
+				<dx:DXTabItem Header="Restore" FontSize="14.667" MinWidth="80">
+					<dx:DXTabItem.Icon>
+        				<Image Source="ButtonImages/databaseRestore.png"/>   			
+					</dx:DXTabItem.Icon>
+					<Grid>
+						<Procesta_CvServer_UserControls:ButtonWithImages x:Name="dbrestoreBrowse" Content="Browse" HorizontalAlignment="Left" Margin="48,55,0,0" VerticalAlignment="Top" FontSize="13.333" FontFamily="Segoe UI" ButtonImages="ButtonImages/browse.png" Height="28" Width="82" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Command="{Binding RestoreLocationCommand, ElementName=window, Mode=OneWay}" CommandParameter="No Parameter"/>
+						<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForeground}" Text="Path :" Height="21.406" VerticalAlignment="Top" Margin="8,30,0,0" d:LayoutOverrides="HorizontalAlignment"/>
+						<TextBlock x:Name="dbrestoreFilePath" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForeground}" Height="21" VerticalAlignment="Top" Margin="48,30,0,0" Width="405"/>
+						<Procesta_CvServer_UserControls:ButtonWithImages x:Name="dbrestoreRestore" HorizontalAlignment="Left" Margin="152.144,96.739,0,0" VerticalAlignment="Top" FontSize="13.333" FontFamily="Segoe UI" ButtonImages="ButtonImages/databaseRestore.png" Height="31.767" Width="83.683" Content="Restore" Command="{Binding DatabaseRestore, ElementName=window, Mode=OneWay}" CommandParameter="{Binding Text, ElementName=dbrestoreFilePath}"/>
+						<telerikTheme:RadProgressBar x:Name="dbRestoreProgress" Height="20" Margin="8,0,8,8" Value="-67" VerticalAlignment="Bottom" Maximum="30">
+							<telerikTheme:RadProgressBar.Foreground>
+								<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+									<GradientStop Color="#FFFFA3A3" Offset="1"/>
+									<GradientStop Color="#FFFFDADA" Offset="0"/>
+									<GradientStop Color="#FFFF5A5A" Offset="0.43"/>
+									<GradientStop Color="#FFFEAEAE" Offset="0.42"/>
+								</LinearGradientBrush>
+							</telerikTheme:RadProgressBar.Foreground>
+						</telerikTheme:RadProgressBar>
+						<TextBlock Margin="217,58,155,0" TextWrapping="Wrap" Text="Backup Date :" VerticalAlignment="Top" d:LayoutOverrides="Width"/>
+						<TextBlock x:Name="dbRestoreDate" HorizontalAlignment="Right" Margin="0,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+					</Grid>
+				</dx:DXTabItem>
+        	</dx:DXTabControl>
+        </Grid>
+		<!--Panel Reset Users-->
+        <Grid x:Name="PanelStatusReset" Margin="161.046,106.152,149.457,51.232" Grid.Row="1" Grid.Column="1" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+        	<Grid Margin="85,38.838,66,24"  Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=CustResRadio}">
+        		<telerik:RadGridView x:Name="userResGrid" Margin="0,0,0,30.333" d:LayoutOverrides="VerticalAlignment" ShowGroupPanel="False" FontSize="14.667" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Width="293.329">
+        			<telerik:RadGridView.Columns>
+        				<telerik:GridViewDataColumn Header="User"  MinWidth="70" HeaderTextAlignment="Center" DataMemberBinding="{Binding UserID}"/>
+        				<telerik:GridViewDataColumn Header="Munities" MinWidth="70" HeaderTextAlignment="Center" DataMemberBinding="{Binding Minutes}"/>
+        				<telerik:GridViewDataColumn Header="Counter"  MinWidth="70" HeaderTextAlignment="Center" DataMemberBinding="{Binding Counternumber}"/>   	
+        			</telerik:RadGridView.Columns>         	
+        		</telerik:RadGridView>
+        		<Procesta_CvServer_UserControls:ButtonWithImages x:Name="userResButtonUpdate" HorizontalAlignment="Stretch" Margin="118.421,0,94.868,0" VerticalAlignment="Bottom" FontSize="13.333" FontFamily="Segoe UI" Content="Update" ButtonImages="ButtonImages/Update.png" Height="26.334" d:LayoutOverrides="VerticalAlignment" Command="{Binding UserStatusResetCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=userResGrid}"/>
+        	</Grid>
+        	<Grid Margin="93.329,27.838,57.671,0"  Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=TeamResRadio}">
+        		<telerik:RadGridView x:Name="TeamResGrid" Margin="0,0,0,30.334" d:LayoutOverrides="VerticalAlignment" ShowGroupPanel="False" FontSize="14.667" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Width="293.329">
+        			<telerik:RadGridView.Columns>
+        				<telerik:GridViewDataColumn Header="Name"  MinWidth="70" HeaderTextAlignment="Center" DataMemberBinding="{Binding Name}"/>
+        				<telerik:GridViewDataColumn Header="Munities" MinWidth="70" HeaderTextAlignment="Center" DataMemberBinding="{Binding Minutes}"/> 	
+        			</telerik:RadGridView.Columns>         	
+        		</telerik:RadGridView>
+        		<Procesta_CvServer_UserControls:ButtonWithImages x:Name="TeamResButtonUpdate" HorizontalAlignment="Stretch" Margin="118.421,0,94.868,0" VerticalAlignment="Bottom" FontSize="13.333" FontFamily="Segoe UI" Content="Update" ButtonImages="ButtonImages/Update.png" Height="26.334" d:LayoutOverrides="VerticalAlignment" Command="{Binding TeamStatusResetCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=TeamResGrid}"/>
+        	</Grid>
+        	<RadioButton x:Name="CustResRadio" Content="Customer" Margin="147.105,3.838,218.654,0" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE7E7E7" d:LayoutOverrides="Width" IsChecked="True"/>
+        	<RadioButton x:Name="TeamResRadio" Content="Team" Margin="0,3.838,158.204,0" VerticalAlignment="Top" FontSize="14.667" Foreground="#FFE7E7E7" HorizontalAlignment="Right"/>
+        </Grid>
+		<!-- Main Menu-->
+        <ItemsControl x:Name="MainMenu" Grid.IsSharedSizeScope="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" AlternationCount="2" ScrollViewer.CanContentScroll="True" Margin="-0.329,1.447,0,0.216" Grid.Row="2" Grid.ColumnSpan="3" d:IsLocked="True">
+        	<ItemsControl.ItemsPanel>
+        		<ItemsPanelTemplate>
+        			<VirtualizingStackPanel Orientation="Horizontal"/> 			
+        		</ItemsPanelTemplate>    		
+        	</ItemsControl.ItemsPanel>
+        	<ItemsControl.ItemTemplate>
+        		<DataTemplate>
+        			<Procesta_CvServer_UserControls:MenuButton Width="90" Height="90" Foreground="WhiteSmoke" ButtonImage="{Binding ImagePath}" SupperTip="{Binding SupperTip}" ScreenTip="{Binding ScreenTip}" KeyboardShorcut="{Binding KeboardShortcut}"  Command="{Binding DataContext.MainMenuCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding Item}"/>
+        		</DataTemplate>  		 
+        	</ItemsControl.ItemTemplate>    
+        	<ItemsControl.Template>
+        		<ControlTemplate>
+        			<ScrollViewer Padding="{TemplateBinding Padding}" Focusable="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+        				<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"	/>
+        			</ScrollViewer>	
+        		</ControlTemplate>
+        	</ItemsControl.Template>	
+        </ItemsControl>
+		<!--Menu Employee Login-->
+        <telerikTheme:RadBusyIndicator x:Name="LoginBusyIndicator"  Grid.ColumnSpan="3" Grid.RowSpan="3" IsIndeterminate="True"  Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+        <Grid x:Name="PanelEmployeeLogin"  Grid.ColumnSpan="3" Margin="-0.329,1.998,0,0.216" Grid.RowSpan="3" Background="#3B000000">
+			 <Grid.DataContext>
+                 <local:ModelEmployee/>
+        	</Grid.DataContext>
+        	<Grid.ColumnDefinitions>
+        		<ColumnDefinition Width="0.367*"/>
+        		<ColumnDefinition Width="0.175*"/>
+        		<ColumnDefinition Width="0.458*"/>
+        	</Grid.ColumnDefinitions>
+        	<Grid.RowDefinitions>
+        		<RowDefinition Height="0.412*"/>
+        		<RowDefinition Height="0.047*"/>
+        		<RowDefinition Height="0.541*"/>
+        	</Grid.RowDefinitions>
+                <dxe:TextEdit x:Name="EmployeeLoginUsername" Margin="-29.065,-0.216,29.456,0" FontSize="14.667" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Text="{Binding Name, Mode=TwoWay}" RenderTransformOrigin="0.5,0.5" Opacity="0" >
+        		<dxe:TextEdit.RenderTransform>
+        			<TransformGroup>
+        				<ScaleTransform/>
+        				<SkewTransform/>
+        				<RotateTransform/>
+        				<TranslateTransform/>
+        			</TransformGroup>
+        		</dxe:TextEdit.RenderTransform>
+				<dxe:TextEdit.InputBindings>
+					<KeyBinding Key="Return" Command="{Binding EmployeeLoginCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding}"/>
+				</dxe:TextEdit.InputBindings>
+        	</dxe:TextEdit>
+        	<dxe:PasswordBoxEdit x:Name="passwordBoxEdit" Margin="-28.671,1.728,29.158,0" FontSize="14.667" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment" RenderTransformOrigin="0.5,0.5" Password="{Binding Password, Mode=TwoWay}" Opacity="0">
+        		<dxe:PasswordBoxEdit.RenderTransform>
+        			<TransformGroup>
+        				<ScaleTransform/>
+        				<SkewTransform/>
+        				<RotateTransform/>
+        				<TranslateTransform/>
+        			</TransformGroup>
+        		</dxe:PasswordBoxEdit.RenderTransform>
+				<dxe:PasswordBoxEdit.InputBindings>
+					<KeyBinding Key="Return" Command="{Binding EmployeeLoginCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding}"/>
+				</dxe:PasswordBoxEdit.InputBindings>
+        	</dxe:PasswordBoxEdit>
+        	<TextBlock x:Name="textBlock2" HorizontalAlignment="Right" Margin="0,2.614,32.658,0" Grid.Row="2" TextWrapping="Wrap" Text="Password :" VerticalAlignment="Top" Foreground="#FFD4D4D4" FontSize="16" RenderTransformOrigin="0.5,0.5" Opacity="0">
+        		<TextBlock.RenderTransform>
+        			<TransformGroup>
+        				<ScaleTransform/>
+        				<SkewTransform/>
+        				<RotateTransform/>
+        				<TranslateTransform/>
+        			</TransformGroup>
+        		</TextBlock.RenderTransform>
+        	</TextBlock>
+        	<TextBlock x:Name="textBlock1" HorizontalAlignment="Right" Margin="0,0.915,32.956,0" Grid.Row="1" TextWrapping="Wrap" Text="Username :" Foreground="#FFC8C8C8" FontSize="16" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Opacity="0">
+        		<TextBlock.RenderTransform>
+        			<TransformGroup>
+        				<ScaleTransform/>
+        				<SkewTransform/>
+        				<RotateTransform/>
+        				<TranslateTransform/>
+        			</TransformGroup>
+        		</TextBlock.RenderTransform>
+        	</TextBlock>
+        	<telerikTheme:RadButton x:Name="EmployeeLogin" Grid.Column="2" HorizontalAlignment="Left" Margin="-21.824,-22.765,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="14.667" RenderTransformOrigin="0.5,0.5" Command="{Binding EmployeeLoginCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding}" Height="50" Width="50" Opacity="0">
+        	<telerikTheme:RadButton.Clip>
+        		<EllipseGeometry Center="24.5,24.5" RadiusX="21" RadiusY="20"/>     	
+			</telerikTheme:RadButton.Clip>
+				<telerikTheme:RadButton.RenderTransform>
+        			<TransformGroup>
+        				<ScaleTransform/>
+        				<SkewTransform/>
+        				<RotateTransform/>
+        				<TranslateTransform/>
+        			</TransformGroup>
+     </telerikTheme:RadButton.RenderTransform>
+        		<Image Source="ButtonImages/Login.png"/>
+    </telerikTheme:RadButton>
+        </Grid>
+		</telerikTheme:RadBusyIndicator>
+       <!--Panel Loger Information-->
+	    <StackPanel x:Name="PanelLogerInfo" Grid.Column="2" Height="175.159" Grid.Row="1" VerticalAlignment="Top" d:LayoutOverrides="Width" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+        	<Border BorderThickness="3" Height="100" Margin="1.548,0,2,0" RenderTransformOrigin="0.5,0.5" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="4">
+        		<Border.BorderBrush>
+        			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+        				<GradientStop Color="#FFD4D4D4" Offset="0"/>
+        				<GradientStop Color="#FFD4D4D4" Offset="1"/>
+        				<GradientStop Color="#FF666565" Offset="0.5"/>
+        			</LinearGradientBrush>
+        		</Border.BorderBrush>
+        		<Border.RenderTransform>
+        			<TransformGroup>
+        				<ScaleTransform ScaleX="-1"/>
+        				<SkewTransform/>
+        				<RotateTransform/>
+        				<TranslateTransform/>
+        			</TransformGroup>
+        		</Border.RenderTransform>
+        		<Image Source="{Binding LoginEmployee.UserImage, Converter={StaticResource ByteImageConverter}, ElementName=window}"/>
+        	</Border>
+        	<TextBlock Margin="0,3,0,0" TextWrapping="Wrap" Text="{Binding LoginEmployee.Name, ElementName=window}" VerticalAlignment="Center" Foreground="{DynamicResource TextBlockForgroundBrush}" FontSize="14.667" TextAlignment="Center"/>
+        	<telerikTheme:RadButton x:Name="EmployeeLogout" FocusManager.FocusedElement="{Binding ElementName=EmployeeLoginUsername}"   HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="50" FontSize="13.333" Command="{Binding LogoutCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding DataContext, ElementName=PanelEmployeeLogin}">
+        		<telerikTheme:RadButton.Clip>
+        		<EllipseGeometry Center="24.5,24.5" RadiusX="21" RadiusY="20"/>     	
+			</telerikTheme:RadButton.Clip>
+        		<Image Source="ButtonImages/Login.png" RenderTransformOrigin="0.5,0.5">
+        			<Image.RenderTransform>
+        				<TransformGroup>
+        					<ScaleTransform/>
+        					<SkewTransform/>
+        					<RotateTransform Angle="-90.008"/>
+        					<TranslateTransform/>
+        				</TransformGroup>
+        			</Image.RenderTransform>
+        		</Image>     	
+			</telerikTheme:RadButton>
+        </StackPanel>
+	    <Grid x:Name="PanelAccountRecharge" Grid.Column="1" Margin="71.116,57.699,35.472,28.956" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+	    	<Grid.ColumnDefinitions>
+	    		<ColumnDefinition Width="0.555*"/>
+	    		<ColumnDefinition Width="0.445*"/>
+	    	</Grid.ColumnDefinitions>
+	    	<Grid Margin="8,42.35,8,7.998" Grid.Column="1" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=radioButtonUser}">
+	    		<Grid.ColumnDefinitions>
+	    			<ColumnDefinition Width="0.248*"/>
+	    			<ColumnDefinition Width="0.752*"/>
+	    		</Grid.ColumnDefinitions>
+	    		<TextBox x:Name="AccountRecUserSearch" Margin="8,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="{DynamicResource TextBoxBackground}" Grid.Column="1" FontSize="14.667"/>
+	    		<ListBox x:Name="AccountRecUser" Margin="8,33.001,0,0.001" Background="{DynamicResource TextBoxBackground}" Grid.Column="1" FontSize="14.667" ItemTemplate="{StaticResource ListBoxDataTamplate}"/>
+	    		<TextBlock Margin="0,2.453,0,0" TextWrapping="Wrap" Text="Search : " VerticalAlignment="Top" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" HorizontalAlignment="Right"/>
+	    	</Grid>
+	    	<StackPanel Margin="75.336,14.835,66.978,0" VerticalAlignment="Top" Orientation="Horizontal" Grid.Column="1">
+	    		<RadioButton x:Name="radioButtonUser" Content="User`s" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" IsChecked="True"/>
+	    		<RadioButton x:Name="radioButtonTeam" Content="Team`s" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" Margin="10,0,0,0"/>
+	    	</StackPanel>
+	    	<Grid Margin="8,42.348,8,8" Grid.Column="1" Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=radioButtonTeam}">
+	    		<Grid.ColumnDefinitions>
+	    			<ColumnDefinition Width="0.251*"/>
+	    			<ColumnDefinition Width="0.749*"/>
+	    		</Grid.ColumnDefinitions>
+	    		<TextBox x:Name="AccountRecTeamSearch" Margin="8,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="{DynamicResource TextBoxBackground}" Grid.Column="1" FontSize="14.667"/>
+	    		<ListBox x:Name="AccountRecTeam" Margin="8,33.001,0,0.001" Background="{DynamicResource TextBoxBackground}" Grid.Column="1" FontSize="14.667" ItemTemplate="{StaticResource ListBoxDataTamplate}" />
+	    		<TextBlock Margin="0,2.453,0,0" TextWrapping="Wrap" Text="Search : " VerticalAlignment="Top" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" HorizontalAlignment="Right"/>
+	    		<TextBlock Margin="0,33.001,0,0" TextWrapping="Wrap" Text="Team List :" VerticalAlignment="Top" FontSize="14.667" Foreground="{DynamicResource TextBlockForgroundBrush}" HorizontalAlignment="Right"/>
+	    	</Grid>
+			<!--Panle Account Recharge-->
+	    	<Grid x:Name="PanelAccountRechargeBill" Margin="59.12,93.42,20.347,73.983">
+	    		<Grid.DataContext>
+	    			<MultiBinding Converter="{StaticResource RechDataContxtChanger}">
+	    				<Binding Path="IsChecked" ElementName="radioButtonUser"/>
+						<Binding Path="IsChecked" ElementName="radioButtonTeam"/>
+						<Binding Path="SelectedItem" ElementName="AccountRecUser"/>
+						<Binding Path="SelectedItem" ElementName="AccountRecTeam"/>
+					</MultiBinding>	
+				</Grid.DataContext>
+	    		<Grid.ColumnDefinitions>
+	    			<ColumnDefinition/>
+	    		</Grid.ColumnDefinitions>
+	    		<Grid.RowDefinitions>
+	    			<RowDefinition Height="0.332*"/>
+	    			<RowDefinition Height="0.668*"/>
+	    		</Grid.RowDefinitions>
+	    		<TextBlock Margin="14.109,0,0,8" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Balance :" VerticalAlignment="Bottom" d:LayoutOverrides="HorizontalAlignment"/>
+	    		<TextBlock Margin="74.94,0,0,6.107" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="{Binding Minutes}" Height="21.4" VerticalAlignment="Bottom"/>
+	    		<TextBlock Margin="11.484,20.379,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Minutes :" Grid.Row="1" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+	    		<TextBlock Margin="34.794,55.771,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Rate :" Grid.Row="1" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+	    		<Procesta_CvServer_UserControls:ButtonWithImages x:Name="RechareUpdate" Margin="131.527,0,62.07,8" VerticalAlignment="Bottom" ButtonImages="ButtonImages/Save.png" d:LayoutOverrides="VerticalAlignment" Content="Update" FontSize="13.333" FontFamily="Segoe UI" Grid.Row="1" Height="31.087" Command="{Binding AccountRechargeCommand, ElementName=window, Mode=OneWay}">
+	    			<Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>
+	    				<MultiBinding Converter="{StaticResource ValuePaker}">
+	    					<Binding ElementName="RechargeMunities"	 Path="SelectedItem"/>
+							<Binding ElementName="AccountRecUser" Path="SelectedItem"/>
+							<Binding ElementName="AccountRecTeam" Path="SelectedItem"/>
+							<Binding ElementName="radioButtonUser" Path="IsChecked"/>
+						</MultiBinding>			
+					</Procesta_CvServer_UserControls:ButtonWithImages.CommandParameter>	
+				</Procesta_CvServer_UserControls:ButtonWithImages>
+	    		<telerik:RadComboBox x:Name="RechargeMunities" DisplayMemberPath="Minutes" Margin="74.94,18.214,8,0" Grid.Row="1" VerticalAlignment="Top" Background="{DynamicResource TextBoxBackground}" Height="{DynamicResource TextBoxHeight}" FontSize="{DynamicResource TextFontSize}" Text="{Binding SelectedItem.Minutes, ElementName=RechargeAmount}" d:LayoutOverrides="HorizontalAlignment" ItemsSource="{Binding BillConfigInfo, ElementName=window}"/>
+	    		<telerik:RadComboBox x:Name="RechargeAmount" DisplayMemberPath="Amount" Margin="74.94,53.55,8,48.037" Grid.Row="1" Background="{DynamicResource TextBoxBackground}" Height="{DynamicResource TextBoxHeight}" FontSize="{DynamicResource TextFontSize}" Text="{Binding SelectedItem.Amount, ElementName=RechargeMunities}" d:LayoutOverrides="HorizontalAlignment" ItemsSource="{Binding BillConfigInfo, ElementName=window}"/>
+	    		<TextBlock Margin="25.003,14.821,0,33.399" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="Name :" d:LayoutOverrides="HorizontalAlignment, Height"/>
+	    		<TextBlock Margin="74.94,14.821,0,31.507" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="{DynamicResource TextFontSize}" Foreground="{DynamicResource TextBlockForgroundBrush}" Text="{Binding Name}"/>
+	    	</Grid>
+	    </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,24 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:System="clr-namespace:System;assembly=mscorlib">
+	<!-- Resource dictionary entries should be defined here. -->
+	<LinearGradientBrush x:Key="Background" EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+  		<GradientStop Color="#FF9E6E48" Offset="0.009"/>
+  		<GradientStop Color="#FF4F2402" Offset="0.963"/>
+  	</LinearGradientBrush>
+	<FontFamily x:Key="ButtonFontFamily">Segoe UI</FontFamily>
+	<SolidColorBrush x:Key="TextBlockForeground" Color="Black"/>
+	<System:Double x:Key="ButtonFontSize">13.333</System:Double>
+	<System:Double x:Key="TextFontSize">14.667</System:Double>
+	<LinearGradientBrush x:Key="TextBoxBackground" EndPoint="0.5,1" StartPoint="0.5,0">
+		<GradientStop Color="#FFD0D8E8" Offset="0.006"/>
+		<GradientStop Color="#FFE5E9F1" Offset="0.124"/>
+		<GradientStop Color="#FFFEFEFE" Offset="0.972"/>
+	</LinearGradientBrush>
+	<SolidColorBrush x:Key="ImageButtonForeground" Color="Black"/>
+	<SolidColorBrush x:Key="ImageButtonToolTipBorder" Color="#FFA30909"/>
+	<SolidColorBrush x:Key="ImageButtonToolTipBackground" Color="#A18C8C93"/>
+	<System:Double x:Key="ImageButtonFontSize">16</System:Double>
+	<FontFamily x:Key="ImageButtonFontFamily">Adobe Kaiti Std R</FontFamily>
+</ResourceDictionary>

@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2ADA2AF6-B5C0-4068-97E6-84158F18A956}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Procesta.CvServer</RootNamespace>
+    <AssemblyName>CVServer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.20901.0</ExpressionBlendVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Server.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\ClientChecker\ConnectFromServer.cs" />
+    <Compile Include="Class\CounterInfo\CounterSummary.cs" />
+    <Compile Include="Class\CvVariables.cs" />
+    <Compile Include="Class\Exceptions\ErrorExceptions.cs" />
+    <Compile Include="Class\Exceptions\SuccessfullExceptions.cs" />
+    <Compile Include="Class\LinqToSql\CvDataClasses.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CvDataClasses.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Class\Methods\ClientServerConnection.cs" />
+    <Compile Include="Class\Methods\LogFileWriter.cs" />
+    <Compile Include="Class\Methods\MiraculousMethods.cs" />
+    <Compile Include="Class\Methods\ScreenShort.cs" />
+    <Compile Include="Class\Methods\SendingMails.cs" />
+    <Compile Include="Class\Models\ModelEmployee.cs" />
+    <Compile Include="Class\Propertys\counterNameAndIp.cs" />
+    <Compile Include="Class\Propertys\EmployLogin.cs" />
+    <Compile Include="Class\Models\ModelEmployPermissions.cs" />
+    <Compile Include="Class\Propertys\Employs.cs" />
+    <Compile Include="Class\Propertys\MailAddressList.cs" />
+    <Compile Include="Class\Propertys\MoneySetting.cs" />
+    <Compile Include="Class\Propertys\screenShotData.cs" />
+    <Compile Include="Class\Propertys\UserDelete.cs" />
+    <Compile Include="Class\Propertys\UserLoginStatus.cs" />
+    <Compile Include="Class\Propertys\UserTeamView.cs" />
+    <Compile Include="Class\ValidationRuls\EmployeeName.cs" />
+    <Compile Include="Class\ValidationRuls\PhoneNumber.cs" />
+    <Compile Include="Class\ValueConverter\ByteImageConverter.cs" />
+    <Compile Include="Class\ValueConverter\CounterStatusEnToImage.cs" />
+    <Compile Include="Class\ValueConverter\IsLoginToImage.cs" />
+    <Compile Include="Class\ValueConverter\IsLoginToString.cs" />
+    <Compile Include="Class\ValueConverter\MenuParmissionToImage.cs" />
+    <Compile Include="Class\ValueConverter\MenuToolTipFormate.cs" />
+    <Compile Include="Class\ValueConverter\MunitiesToColor.cs" />
+    <Compile Include="Class\ValueConverter\PasswordsTolengthcs.cs" />
+    <Compile Include="Class\ValueConverter\PasswordsToStrength.cs" />
+    <Compile Include="Class\ValueConverter\StrengthToBrush.cs" />
+    <Compile Include="Class\Views\ViewEmployPermissions.cs" />
+    <Compile Include="EntityFramework\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="InstallWindow.xaml.cs">
+      <DependentUpon>InstallWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientServerService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="StratWindow.xaml.cs">
+      <DependentUpon>StratWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Themes\UserControls\ButtonWithImages.xaml.cs">
+      <DependentUpon>ButtonWithImages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MenuButton.xaml.cs">
+      <DependentUpon>MenuButton.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Class\LinqToSql\CvDataClasses.dbml.layout">
+      <DependentUpon>CvDataClasses.dbml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Class\LinqToSql\CvDataClasses.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>CvDataClasses.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="EntityFramework\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Properties\DataSources\Procesta.CvServer.EntityFramework.Cafeteria_Vernier_dbEntities.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Service References\ClientServerService\Procesta.ClientSideService.Class.Property.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientServerService\Procesta.CvServer.ClientServerService.ConfigerStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientServerService\service.wsdl" />
+    <None Include="Service References\ClientServerService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientServerService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\MyC#Class`s\InternetAccessories\InternetAccessories\InternetAccessories.csproj">
+      <Project>{D41BFCA6-7595-454E-A76A-4DF6A83AE05B}</Project>
+      <Name>InternetAccessories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\MyC#Class`s\ProcestaNecessaryFunction\ProcestaNecessaryFunction\ProcestaNecessaryFunction.csproj">
+      <Project>{2EA8502B-BD12-4F2F-BC33-CC17D0ADD993}</Project>
+      <Name>ProcestaNecessaryFunction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Windows services\Server Side Service\serverSideService\CvServerSideService\CvServerSideService.csproj">
+      <Project>{DCAD2C3D-5683-43A7-911C-2758B7B20AB4}</Project>
+      <Name>CvServerSideService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonUse\CommonUse.csproj">
+      <Project>{02ECFCEB-F6EA-4BA9-B19B-02A46680F21F}</Project>
+      <Name>CommonUse</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ClientServerService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientServerService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientServerService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientServerService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Sql.Server.Express.10.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server 2008 Express</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <ReferencePath Include="E:\SUB\Project\Cafeteria Vernier\CVServer\CommonUse\bin\Debug\CommonUse.dll" />
+    <ReferencePath Include="E:\MyC#Controls\CustomControl\CustomControl\bin\Debug\CustomControl.dll" />
+    <ReferencePath Include="E:\SUB\Project\Cafeteria Vernier\Windows services\Server Side Service\serverSideService\CvServerSideService\bin\Debug\CvServerSideService.exe" />
+    <ReferencePath Include="C:\Program Files (x86)\DevExpress 2011.1\Components\Sources\DevExpress.DLL\DevExpress.Data.v11.1.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\DevExpress 2011.1\Components\Sources\DevExpress.DLL\DevExpress.Xpf.Core.v11.1.dll" />
+    <ReferencePath Include="E:\MyC#Class`s\InternetAccessories\InternetAccessories\bin\Debug\InternetAccessories.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Microsoft.CSharp.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft SDKs\Expression\Blend\.NETFramework\v4.0\Libraries\Microsoft.Expression.Controls.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft SDKs\Expression\Blend\.NETFramework\v4.0\Libraries\Microsoft.Expression.Interactions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.ConnectionInfo.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.Management.Sdk.Sfc.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.Smo.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.SmoExtended.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\PresentationFramework.Aero.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\PresentationFramework.dll" />
+    <ReferencePath Include="E:\MyC#Class`s\ProcestaNecessaryFunction\ProcestaNecessaryFunction\bin\Debug\ProcestaNecessaryFunction.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.ComponentModel.DataAnnotations.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Configuration.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Configuration.Install.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.Entity.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Management.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Runtime.Serialization.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Security.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.ServiceModel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft SDKs\Expression\Blend\.NETFramework\v4.0\Libraries\System.Windows.Interactivity.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xaml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Telerik\RadControls for WPF Q3 2011 SP1\Binaries\WPF40\Telerik.Windows.Controls.Charting.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Telerik\RadControls for WPF Q3 2011 SP1\Binaries\WPF40\Telerik.Windows.Controls.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Telerik\RadControls for WPF Q3 2011 SP1\Binaries\WPF40\Telerik.Windows.Controls.GridView.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Telerik\RadControls for WPF Q3 2011 SP1\Binaries\WPF40\Telerik.Windows.Controls.Input.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Telerik\RadControls for WPF Q3 2011 SP1\Binaries\WPF40\Telerik.Windows.Controls.Navigation.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Telerik\RadControls for WPF Q3 2011 SP1\Binaries\WPF40\Telerik.Windows.Data.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\UIAutomationProvider.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\UIAutomationTypes.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\WindowsBase.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="E:\SUB\Project\Cafeteria Vernier\CVServer\CVServer\obj\x86\Debug\InstallWindow.g.cs" />
+    <Compile Include="E:\SUB\Project\Cafeteria Vernier\CVServer\CVServer\obj\x86\Debug\MainWindow.g.cs" />
+    <Compile Include="E:\SUB\Project\Cafeteria Vernier\CVServer\CVServer\obj\x86\Debug\StratWindow.g.cs" />
+    <Compile Include="E:\SUB\Project\Cafeteria Vernier\CVServer\CVServer\obj\x86\Debug\Themes\UserControls\ButtonWithImages.g.cs" />
+    <Compile Include="E:\SUB\Project\Cafeteria Vernier\CVServer\CVServer\obj\x86\Debug\UserControls\MenuButton.g.cs" />
+    <Compile Include="E:\SUB\Project\Cafeteria Vernier\CVServer\CVServer\obj\x86\Debug\App.g.cs" />
+    <Compile Include="E:\SUB\Project\Cafeteria Vernier\CVServer\CVServer\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs" />
+  </ItemGroup>
+</Project>

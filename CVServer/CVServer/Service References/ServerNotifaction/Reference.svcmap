@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="72948b7a-27bd-4c16-a644-70624db0d77c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8732/Design_Time_Addresses/ServerNotification/ServerNotificationService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="b27e4f00-7e8b-4316-ba47-8e91f5a428dc" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/ServerNotification/ServerNotificationService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="031a833d-6240-4dd0-a9d7-4df0d0ced46a" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/ServerNotification/ServerNotificationService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="ff995d22-ae7f-46b7-9231-c6feccbf4f7c" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/ServerNotification/ServerNotificationService/mex" />
+    <MetadataFile FileName="ServerNotification.xsd" MetadataType="Schema" ID="7fb4ab30-eff7-4801-a6ef-46109e05e9f2" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/ServerNotification/ServerNotificationService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

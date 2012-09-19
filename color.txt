@@ -1,0 +1,31 @@
+<TextBlock.Foreground>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					<GradientStop Color="#FF299503" Offset="0"/>
+					<GradientStop Color="#FF94EB75" Offset="1"/>
+					<GradientStop Color="#FF05AF17" Offset="0.5"/>
+				</LinearGradientBrush>
+			</TextBlock.Foreground>
+
+
+--------------------------Green---------------------------------
+
+
+
+-------------------------Yellow------------------------------------------
+
+	<TextBlock.Foreground>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					<GradientStop Color="#FFD5D600" Offset="0"/>
+					<GradientStop Color="#FFEBDC75" Offset="1"/>
+					<GradientStop Color="#FFB5B600" Offset="0.5"/>
+				</LinearGradientBrush>
+			</TextBlock.Foreground>
+
+---------------------------------------------Rad----------------------------
+<TextBlock.Foreground>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					<GradientStop Color="#FFD01010" Offset="0"/>
+					<GradientStop Color="#FFE44343" Offset="1"/>
+					<GradientStop Color="#FFB60000" Offset="0.5"/>
+				</LinearGradientBrush>
+			</TextBlock.Foreground>

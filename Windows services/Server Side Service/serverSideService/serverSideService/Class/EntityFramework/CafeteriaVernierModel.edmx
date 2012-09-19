@@ -1,0 +1,800 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Cafeteria_Vernier_dbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="Cafeteria_Vernier_dbModelStoreContainer">
+          <EntitySet Name="Cash" EntityType="Cafeteria_Vernier_dbModel.Store.Cash" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CustomerAccount" EntityType="Cafeteria_Vernier_dbModel.Store.CustomerAccount" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CustomerInformation" EntityType="Cafeteria_Vernier_dbModel.Store.CustomerInformation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Employee" EntityType="Cafeteria_Vernier_dbModel.Store.Employee" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmployeePermission" EntityType="Cafeteria_Vernier_dbModel.Store.EmployeePermission" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Team" EntityType="Cafeteria_Vernier_dbModel.Store.Team" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TeamAccount" EntityType="Cafeteria_Vernier_dbModel.Store.TeamAccount" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TeamInvitaction" EntityType="Cafeteria_Vernier_dbModel.Store.TeamInvitaction" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TeamMember" EntityType="Cafeteria_Vernier_dbModel.Store.TeamMember" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TeamRechargeHistory" EntityType="Cafeteria_Vernier_dbModel.Store.TeamRechargeHistory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserLoginHistory" EntityType="Cafeteria_Vernier_dbModel.Store.UserLoginHistory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserRechargeHistory" EntityType="Cafeteria_Vernier_dbModel.Store.UserRechargeHistory" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Cv_Customer_Account_Cv_Customer_Information" Association="Cafeteria_Vernier_dbModel.Store.FK_Cv_Customer_Account_Cv_Customer_Information">
+            <End Role="CustomerInformation" EntitySet="CustomerInformation" />
+            <End Role="CustomerAccount" EntitySet="CustomerAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cv_Employ_Permission_Cv_Employ" Association="Cafeteria_Vernier_dbModel.Store.FK_Cv_Employ_Permission_Cv_Employ">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeePermission" EntitySet="EmployeePermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CV_Team_Account_Cv_Team" Association="Cafeteria_Vernier_dbModel.Store.FK_CV_Team_Account_Cv_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="TeamAccount" EntitySet="TeamAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cv_Team_Account_Recharge_History_Cv_Team" Association="Cafeteria_Vernier_dbModel.Store.FK_Cv_Team_Account_Recharge_History_Cv_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="TeamRechargeHistory" EntitySet="TeamRechargeHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cv_Team_Invitaction_Cv_Customer_Information" Association="Cafeteria_Vernier_dbModel.Store.FK_Cv_Team_Invitaction_Cv_Customer_Information">
+            <End Role="CustomerInformation" EntitySet="CustomerInformation" />
+            <End Role="TeamInvitaction" EntitySet="TeamInvitaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cv_Team_Invitaction_Cv_Team" Association="Cafeteria_Vernier_dbModel.Store.FK_Cv_Team_Invitaction_Cv_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="TeamInvitaction" EntitySet="TeamInvitaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cv_Team_Member_Cv_Customer_Information" Association="Cafeteria_Vernier_dbModel.Store.FK_Cv_Team_Member_Cv_Customer_Information">
+            <End Role="CustomerInformation" EntitySet="CustomerInformation" />
+            <End Role="TeamMember" EntitySet="TeamMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cv_Team_Member_Cv_Team" Association="Cafeteria_Vernier_dbModel.Store.FK_Cv_Team_Member_Cv_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="TeamMember" EntitySet="TeamMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cv_User_Account_Recharge_History_Cv_Customer_Information" Association="Cafeteria_Vernier_dbModel.Store.FK_Cv_User_Account_Recharge_History_Cv_Customer_Information">
+            <End Role="CustomerInformation" EntitySet="CustomerInformation" />
+            <End Role="UserRechargeHistory" EntitySet="UserRechargeHistory" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cash">
+          <Key>
+            <PropertyRef Name="EntryDate" />
+          </Key>
+          <Property Name="EntryDate" Type="datetime2" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerAccount">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Minutes" Type="int" Nullable="false" />
+          <Property Name="Counternumber" Type="smallint" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerInformation">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Logo" Type="image" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="NationalID" Type="varchar" MaxLength="50" />
+          <Property Name="JoinDate" Type="datetime2" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="numeric" Precision="20" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="UserImage" Type="image" />
+        </EntityType>
+        <EntityType Name="EmployeePermission">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Name="AutoInc" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Privilege" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SettingPrivilage" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Logo" Type="image" />
+          <Property Name="AdminName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="JoinDate" Type="datetime2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeamAccount">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Minutes" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeamInvitaction">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Name="AutoInc" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="UserID" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeamMember">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Name="AutoInc" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="UserID" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TeamRechargeHistory">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Name="AutoInc" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="EmployeeID" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DateWithTime" Type="datetime2" Nullable="false" />
+          <Property Name="Minutes" Type="int" Nullable="false" />
+          <Property Name="bill" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserLoginHistory">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Name="AutoInc" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="StratTime" Type="datetime2" Nullable="false" />
+          <Property Name="EndTime" Type="datetime2" />
+          <Property Name="CounterNumber" Type="smallint" Nullable="false" />
+          <Property Name="TeamName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserRechargeHistory">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Name="AutoInc" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="EmployeeID" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DateWithTime" Type="datetime2" Nullable="false" />
+          <Property Name="Minutes" Type="int" Nullable="false" />
+          <Property Name="bill" Type="money" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Cv_Customer_Account_Cv_Customer_Information">
+          <End Role="CustomerInformation" Type="Cafeteria_Vernier_dbModel.Store.CustomerInformation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CustomerAccount" Type="Cafeteria_Vernier_dbModel.Store.CustomerAccount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerInformation">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CustomerAccount">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cv_Employ_Permission_Cv_Employ">
+          <End Role="Employee" Type="Cafeteria_Vernier_dbModel.Store.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EmployeePermission" Type="Cafeteria_Vernier_dbModel.Store.EmployeePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EmployeePermission">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CV_Team_Account_Cv_Team">
+          <End Role="Team" Type="Cafeteria_Vernier_dbModel.Store.Team" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TeamAccount" Type="Cafeteria_Vernier_dbModel.Store.TeamAccount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="TeamAccount">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cv_Team_Account_Recharge_History_Cv_Team">
+          <End Role="Team" Type="Cafeteria_Vernier_dbModel.Store.Team" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TeamRechargeHistory" Type="Cafeteria_Vernier_dbModel.Store.TeamRechargeHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="TeamRechargeHistory">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cv_Team_Invitaction_Cv_Customer_Information">
+          <End Role="CustomerInformation" Type="Cafeteria_Vernier_dbModel.Store.CustomerInformation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TeamInvitaction" Type="Cafeteria_Vernier_dbModel.Store.TeamInvitaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerInformation">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TeamInvitaction">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cv_Team_Invitaction_Cv_Team">
+          <End Role="Team" Type="Cafeteria_Vernier_dbModel.Store.Team" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TeamInvitaction" Type="Cafeteria_Vernier_dbModel.Store.TeamInvitaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="TeamInvitaction">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cv_Team_Member_Cv_Customer_Information">
+          <End Role="CustomerInformation" Type="Cafeteria_Vernier_dbModel.Store.CustomerInformation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TeamMember" Type="Cafeteria_Vernier_dbModel.Store.TeamMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerInformation">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TeamMember">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cv_Team_Member_Cv_Team">
+          <End Role="Team" Type="Cafeteria_Vernier_dbModel.Store.Team" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TeamMember" Type="Cafeteria_Vernier_dbModel.Store.TeamMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="TeamMember">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cv_User_Account_Recharge_History_Cv_Customer_Information">
+          <End Role="CustomerInformation" Type="Cafeteria_Vernier_dbModel.Store.CustomerInformation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRechargeHistory" Type="Cafeteria_Vernier_dbModel.Store.UserRechargeHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerInformation">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserRechargeHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Cafeteria_Vernier_dbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="Cafeteria_Vernier_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CustomerAccounts" EntityType="Cafeteria_Vernier_dbModel.CustomerAccount" />
+          <EntitySet Name="CustomerInformations" EntityType="Cafeteria_Vernier_dbModel.CustomerInformation" />
+          <EntitySet Name="Employees" EntityType="Cafeteria_Vernier_dbModel.Employee" />
+          <EntitySet Name="EmployeePermissions" EntityType="Cafeteria_Vernier_dbModel.EmployeePermission" />
+          <EntitySet Name="Teams" EntityType="Cafeteria_Vernier_dbModel.Team" />
+          <EntitySet Name="TeamAccounts" EntityType="Cafeteria_Vernier_dbModel.TeamAccount" />
+          <EntitySet Name="TeamInvitactions" EntityType="Cafeteria_Vernier_dbModel.TeamInvitaction" />
+          <EntitySet Name="TeamMembers" EntityType="Cafeteria_Vernier_dbModel.TeamMember" />
+          <EntitySet Name="TeamRechargeHistories" EntityType="Cafeteria_Vernier_dbModel.TeamRechargeHistory" />
+          <EntitySet Name="UserLoginHistories" EntityType="Cafeteria_Vernier_dbModel.UserLoginHistory" />
+          <EntitySet Name="UserRechargeHistories" EntityType="Cafeteria_Vernier_dbModel.UserRechargeHistory" />
+          <AssociationSet Name="FK_Cv_Customer_Account_Cv_Customer_Information" Association="Cafeteria_Vernier_dbModel.FK_Cv_Customer_Account_Cv_Customer_Information">
+            <End Role="CustomerInformation" EntitySet="CustomerInformations" />
+            <End Role="CustomerAccount" EntitySet="CustomerAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cv_Team_Invitaction_Cv_Customer_Information" Association="Cafeteria_Vernier_dbModel.FK_Cv_Team_Invitaction_Cv_Customer_Information">
+            <End Role="CustomerInformation" EntitySet="CustomerInformations" />
+            <End Role="TeamInvitaction" EntitySet="TeamInvitactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cv_Team_Member_Cv_Customer_Information" Association="Cafeteria_Vernier_dbModel.FK_Cv_Team_Member_Cv_Customer_Information">
+            <End Role="CustomerInformation" EntitySet="CustomerInformations" />
+            <End Role="TeamMember" EntitySet="TeamMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cv_User_Account_Recharge_History_Cv_Customer_Information" Association="Cafeteria_Vernier_dbModel.FK_Cv_User_Account_Recharge_History_Cv_Customer_Information">
+            <End Role="CustomerInformation" EntitySet="CustomerInformations" />
+            <End Role="UserRechargeHistory" EntitySet="UserRechargeHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cv_Employ_Permission_Cv_Employ" Association="Cafeteria_Vernier_dbModel.FK_Cv_Employ_Permission_Cv_Employ">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EmployeePermission" EntitySet="EmployeePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CV_Team_Account_Cv_Team" Association="Cafeteria_Vernier_dbModel.FK_CV_Team_Account_Cv_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="TeamAccount" EntitySet="TeamAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cv_Team_Account_Recharge_History_Cv_Team" Association="Cafeteria_Vernier_dbModel.FK_Cv_Team_Account_Recharge_History_Cv_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="TeamRechargeHistory" EntitySet="TeamRechargeHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cv_Team_Invitaction_Cv_Team" Association="Cafeteria_Vernier_dbModel.FK_Cv_Team_Invitaction_Cv_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="TeamInvitaction" EntitySet="TeamInvitactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cv_Team_Member_Cv_Team" Association="Cafeteria_Vernier_dbModel.FK_Cv_Team_Member_Cv_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="TeamMember" EntitySet="TeamMembers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CustomerAccount">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Type="String" Name="UserID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Minutes" Nullable="false" />
+          <Property Type="Int16" Name="Counternumber" />
+          <Property Type="Boolean" Name="Status" Nullable="false" />
+          <NavigationProperty Name="CustomerInformation" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_Customer_Account_Cv_Customer_Information" FromRole="CustomerAccount" ToRole="CustomerInformation" />
+        </EntityType>
+        <EntityType Name="CustomerInformation">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Type="String" Name="UserID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Binary" Name="Logo" MaxLength="Max" FixedLength="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Phone" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NationalID" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="JoinDate" Nullable="false" />
+          <Property Type="String" Name="Address" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CustomerAccount" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_Customer_Account_Cv_Customer_Information" FromRole="CustomerInformation" ToRole="CustomerAccount" />
+          <NavigationProperty Name="TeamInvitactions" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_Team_Invitaction_Cv_Customer_Information" FromRole="CustomerInformation" ToRole="TeamInvitaction" />
+          <NavigationProperty Name="TeamMembers" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_Team_Member_Cv_Customer_Information" FromRole="CustomerInformation" ToRole="TeamMember" />
+          <NavigationProperty Name="UserRechargeHistories" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_User_Account_Recharge_History_Cv_Customer_Information" FromRole="CustomerInformation" ToRole="UserRechargeHistory" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Type="String" Name="EmployeeID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Phone" Precision="20" Scale="0" />
+          <Property Type="String" Name="Address" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Binary" Name="UserImage" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="EmployeePermissions" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_Employ_Permission_Cv_Employ" FromRole="Employee" ToRole="EmployeePermission" />
+        </EntityType>
+        <EntityType Name="EmployeePermission">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Type="Int64" Name="AutoInc" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="EmployeeID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Privilege" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SettingPrivilage" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employee" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_Employ_Permission_Cv_Employ" FromRole="EmployeePermission" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Binary" Name="Logo" MaxLength="Max" FixedLength="false" />
+          <Property Type="String" Name="AdminName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="JoinDate" Nullable="false" />
+          <NavigationProperty Name="TeamAccount" Relationship="Cafeteria_Vernier_dbModel.FK_CV_Team_Account_Cv_Team" FromRole="Team" ToRole="TeamAccount" />
+          <NavigationProperty Name="TeamRechargeHistories" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_Team_Account_Recharge_History_Cv_Team" FromRole="Team" ToRole="TeamRechargeHistory" />
+          <NavigationProperty Name="TeamInvitactions" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_Team_Invitaction_Cv_Team" FromRole="Team" ToRole="TeamInvitaction" />
+          <NavigationProperty Name="TeamMembers" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_Team_Member_Cv_Team" FromRole="Team" ToRole="TeamMember" />
+        </EntityType>
+        <EntityType Name="TeamAccount">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Minutes" Nullable="false" />
+          <Property Type="Boolean" Name="Status" Nullable="false" />
+          <Property Type="DateTime" Name="EntryDate" Nullable="false" />
+          <NavigationProperty Name="Team" Relationship="Cafeteria_Vernier_dbModel.FK_CV_Team_Account_Cv_Team" FromRole="TeamAccount" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="TeamInvitaction">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Type="Int64" Name="AutoInc" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsAdmin" Nullable="false" />
+          <NavigationProperty Name="CustomerInformation" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_Team_Invitaction_Cv_Customer_Information" FromRole="TeamInvitaction" ToRole="CustomerInformation" />
+          <NavigationProperty Name="Team" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_Team_Invitaction_Cv_Team" FromRole="TeamInvitaction" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="TeamMember">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Type="Int64" Name="AutoInc" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CustomerInformation" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_Team_Member_Cv_Customer_Information" FromRole="TeamMember" ToRole="CustomerInformation" />
+          <NavigationProperty Name="Team" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_Team_Member_Cv_Team" FromRole="TeamMember" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="TeamRechargeHistory">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Type="Int64" Name="AutoInc" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EmployeeID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DateWithTime" Nullable="false" />
+          <Property Type="Int32" Name="Minutes" Nullable="false" />
+          <Property Type="Decimal" Name="bill" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Team" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_Team_Account_Recharge_History_Cv_Team" FromRole="TeamRechargeHistory" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="UserLoginHistory">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Type="Int64" Name="AutoInc" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="StratTime" Nullable="false" />
+          <Property Type="DateTime" Name="EndTime" />
+          <Property Type="Int16" Name="CounterNumber" Nullable="false" />
+          <Property Type="String" Name="TeamName" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserRechargeHistory">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Type="Int64" Name="AutoInc" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EmployeeID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DateWithTime" Nullable="false" />
+          <Property Type="Int32" Name="Minutes" Nullable="false" />
+          <Property Type="Decimal" Name="bill" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="CustomerInformation" Relationship="Cafeteria_Vernier_dbModel.FK_Cv_User_Account_Recharge_History_Cv_Customer_Information" FromRole="UserRechargeHistory" ToRole="CustomerInformation" />
+        </EntityType>
+        <Association Name="FK_Cv_Customer_Account_Cv_Customer_Information">
+          <End Type="Cafeteria_Vernier_dbModel.CustomerInformation" Role="CustomerInformation" Multiplicity="1" />
+          <End Type="Cafeteria_Vernier_dbModel.CustomerAccount" Role="CustomerAccount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerInformation">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CustomerAccount">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cv_Team_Invitaction_Cv_Customer_Information">
+          <End Type="Cafeteria_Vernier_dbModel.CustomerInformation" Role="CustomerInformation" Multiplicity="1" />
+          <End Type="Cafeteria_Vernier_dbModel.TeamInvitaction" Role="TeamInvitaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerInformation">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TeamInvitaction">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cv_Team_Member_Cv_Customer_Information">
+          <End Type="Cafeteria_Vernier_dbModel.CustomerInformation" Role="CustomerInformation" Multiplicity="1" />
+          <End Type="Cafeteria_Vernier_dbModel.TeamMember" Role="TeamMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerInformation">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TeamMember">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cv_User_Account_Recharge_History_Cv_Customer_Information">
+          <End Type="Cafeteria_Vernier_dbModel.CustomerInformation" Role="CustomerInformation" Multiplicity="1" />
+          <End Type="Cafeteria_Vernier_dbModel.UserRechargeHistory" Role="UserRechargeHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerInformation">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserRechargeHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cv_Employ_Permission_Cv_Employ">
+          <End Type="Cafeteria_Vernier_dbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="Cafeteria_Vernier_dbModel.EmployeePermission" Role="EmployeePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EmployeePermission">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CV_Team_Account_Cv_Team">
+          <End Type="Cafeteria_Vernier_dbModel.Team" Role="Team" Multiplicity="1" />
+          <End Type="Cafeteria_Vernier_dbModel.TeamAccount" Role="TeamAccount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="TeamAccount">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cv_Team_Account_Recharge_History_Cv_Team">
+          <End Type="Cafeteria_Vernier_dbModel.Team" Role="Team" Multiplicity="1" />
+          <End Type="Cafeteria_Vernier_dbModel.TeamRechargeHistory" Role="TeamRechargeHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="TeamRechargeHistory">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cv_Team_Invitaction_Cv_Team">
+          <End Type="Cafeteria_Vernier_dbModel.Team" Role="Team" Multiplicity="1" />
+          <End Type="Cafeteria_Vernier_dbModel.TeamInvitaction" Role="TeamInvitaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="TeamInvitaction">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cv_Team_Member_Cv_Team">
+          <End Type="Cafeteria_Vernier_dbModel.Team" Role="Team" Multiplicity="1" />
+          <End Type="Cafeteria_Vernier_dbModel.TeamMember" Role="TeamMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="TeamMember">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Cafeteria_Vernier_dbModelStoreContainer" CdmEntityContainer="Cafeteria_Vernier_dbEntities">
+          <EntitySetMapping Name="CustomerAccounts">
+            <EntityTypeMapping TypeName="Cafeteria_Vernier_dbModel.CustomerAccount">
+              <MappingFragment StoreEntitySet="CustomerAccount">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Counternumber" ColumnName="Counternumber" />
+                <ScalarProperty Name="Minutes" ColumnName="Minutes" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerInformations">
+            <EntityTypeMapping TypeName="Cafeteria_Vernier_dbModel.CustomerInformation">
+              <MappingFragment StoreEntitySet="CustomerInformation">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="NationalID" ColumnName="NationalID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="Cafeteria_Vernier_dbModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="UserImage" ColumnName="UserImage" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeePermissions">
+            <EntityTypeMapping TypeName="Cafeteria_Vernier_dbModel.EmployeePermission">
+              <MappingFragment StoreEntitySet="EmployeePermission">
+                <ScalarProperty Name="SettingPrivilage" ColumnName="SettingPrivilage" />
+                <ScalarProperty Name="Privilege" ColumnName="Privilege" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="AutoInc" ColumnName="AutoInc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="Cafeteria_Vernier_dbModel.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamAccounts">
+            <EntityTypeMapping TypeName="Cafeteria_Vernier_dbModel.TeamAccount">
+              <MappingFragment StoreEntitySet="TeamAccount">
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Minutes" ColumnName="Minutes" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamInvitactions">
+            <EntityTypeMapping TypeName="Cafeteria_Vernier_dbModel.TeamInvitaction">
+              <MappingFragment StoreEntitySet="TeamInvitaction">
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AutoInc" ColumnName="AutoInc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamMembers">
+            <EntityTypeMapping TypeName="Cafeteria_Vernier_dbModel.TeamMember">
+              <MappingFragment StoreEntitySet="TeamMember">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AutoInc" ColumnName="AutoInc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamRechargeHistories">
+            <EntityTypeMapping TypeName="Cafeteria_Vernier_dbModel.TeamRechargeHistory">
+              <MappingFragment StoreEntitySet="TeamRechargeHistory">
+                <ScalarProperty Name="bill" ColumnName="bill" />
+                <ScalarProperty Name="Minutes" ColumnName="Minutes" />
+                <ScalarProperty Name="DateWithTime" ColumnName="DateWithTime" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AutoInc" ColumnName="AutoInc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLoginHistories">
+            <EntityTypeMapping TypeName="Cafeteria_Vernier_dbModel.UserLoginHistory">
+              <MappingFragment StoreEntitySet="UserLoginHistory">
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="CounterNumber" ColumnName="CounterNumber" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StratTime" ColumnName="StratTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AutoInc" ColumnName="AutoInc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRechargeHistories">
+            <EntityTypeMapping TypeName="Cafeteria_Vernier_dbModel.UserRechargeHistory">
+              <MappingFragment StoreEntitySet="UserRechargeHistory">
+                <ScalarProperty Name="bill" ColumnName="bill" />
+                <ScalarProperty Name="Minutes" ColumnName="Minutes" />
+                <ScalarProperty Name="DateWithTime" ColumnName="DateWithTime" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AutoInc" ColumnName="AutoInc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="CafeteriaVernierModel">
+        <EntityTypeShape EntityType="Cafeteria_Vernier_dbModel.CustomerAccount" Width="1.5" PointX="6" PointY="3.375" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="Cafeteria_Vernier_dbModel.CustomerInformation" Width="1.5" PointX="3.75" PointY="0.75" Height="3.3263964843750031" />
+        <EntityTypeShape EntityType="Cafeteria_Vernier_dbModel.Employee" Width="1.5" PointX="8.75" PointY="1.625" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="Cafeteria_Vernier_dbModel.EmployeePermission" Width="1.5" PointX="11" PointY="1.75" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="Cafeteria_Vernier_dbModel.Team" Width="1.5" PointX="0.75" PointY="6.125" Height="2.5571907552083379" />
+        <EntityTypeShape EntityType="Cafeteria_Vernier_dbModel.TeamAccount" Width="1.5" PointX="3" PointY="4.875" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="Cafeteria_Vernier_dbModel.TeamInvitaction" Width="1.5" PointX="3" PointY="8.375" Height="2.172587890624996" />
+        <EntityTypeShape EntityType="Cafeteria_Vernier_dbModel.TeamMember" Width="1.5" PointX="6" PointY="6.375" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="Cafeteria_Vernier_dbModel.TeamRechargeHistory" Width="1.5" PointX="3" PointY="13.25" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="Cafeteria_Vernier_dbModel.UserLoginHistory" Width="1.5" PointX="0.75" PointY="1.375" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="Cafeteria_Vernier_dbModel.UserRechargeHistory" Width="1.5" PointX="6" PointY="9.25" Height="2.3648893229166674" />
+        <AssociationConnector Association="Cafeteria_Vernier_dbModel.FK_Cv_Customer_Account_Cv_Customer_Information" >
+          <ConnectorPoint PointX="5.25" PointY="3.7256982421875016" />
+          <ConnectorPoint PointX="6" PointY="3.7256982421875016" />
+        </AssociationConnector>
+        <AssociationConnector Association="Cafeteria_Vernier_dbModel.FK_Cv_Team_Invitaction_Cv_Customer_Information" >
+          <ConnectorPoint PointX="4.8750005000000005" PointY="4.0763964843750031" />
+          <ConnectorPoint PointX="4.8750005000000005" PointY="9.461293945312498" />
+          <ConnectorPoint PointX="4.7708310833333334" PointY="9.461293945312498" />
+          <ConnectorPoint PointX="4.6041644166666673" PointY="9.461293945312498" />
+          <ConnectorPoint PointX="4.5" PointY="9.461293945312498" />
+        </AssociationConnector>
+        <AssociationConnector Association="Cafeteria_Vernier_dbModel.FK_Cv_Team_Member_Cv_Customer_Information" >
+          <ConnectorPoint PointX="5.09375275" PointY="4.0763964843750031" />
+          <ConnectorPoint PointX="5.09375275" PointY="7.6365364583333388" />
+          <ConnectorPoint PointX="6" PointY="7.6365364583333388" />
+        </AssociationConnector>
+        <AssociationConnector Association="Cafeteria_Vernier_dbModel.FK_Cv_User_Account_Recharge_History_Cv_Customer_Information" >
+          <ConnectorPoint PointX="4.68749775" PointY="4.0763964843750031" />
+          <ConnectorPoint PointX="4.68749775" PointY="11.112488606770832" />
+          <ConnectorPoint PointX="6" PointY="11.112488606770832" />
+        </AssociationConnector>
+        <AssociationConnector Association="Cafeteria_Vernier_dbModel.FK_Cv_Employ_Permission_Cv_Employ" >
+          <ConnectorPoint PointX="10.25" PointY="2.7401432291666694" />
+          <ConnectorPoint PointX="11" PointY="2.7401432291666694" />
+        </AssociationConnector>
+        <AssociationConnector Association="Cafeteria_Vernier_dbModel.FK_CV_Team_Account_Cv_Team" >
+          <ConnectorPoint PointX="2.25" PointY="6.4901432291666694" />
+          <ConnectorPoint PointX="3" PointY="6.4901432291666694" />
+        </AssociationConnector>
+        <AssociationConnector Association="Cafeteria_Vernier_dbModel.FK_Cv_Team_Account_Recharge_History_Cv_Team" >
+          <ConnectorPoint PointX="1.5" PointY="8.6821907552083388" />
+          <ConnectorPoint PointX="1.5" PointY="14.432444661458334" />
+          <ConnectorPoint PointX="3" PointY="14.432444661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="Cafeteria_Vernier_dbModel.FK_Cv_Team_Invitaction_Cv_Team" >
+          <ConnectorPoint PointX="2.25" PointY="8.52859537760417" />
+          <ConnectorPoint PointX="3" PointY="8.52859537760417" />
+        </AssociationConnector>
+        <AssociationConnector Association="Cafeteria_Vernier_dbModel.FK_Cv_Team_Member_Cv_Team" >
+          <ConnectorPoint PointX="2.25" PointY="7.2146614583333388" />
+          <ConnectorPoint PointX="4.6041644166666673" PointY="7.2146614583333379" />
+          <ConnectorPoint PointX="4.7708310833333334" PointY="7.2146614583333388" />
+          <ConnectorPoint PointX="4.7916671666666675" PointY="7.2146614583333379" />
+          <ConnectorPoint PointX="4.9583338333333336" PointY="7.2146614583333388" />
+          <ConnectorPoint PointX="5.0104194166666671" PointY="7.2146614583333379" />
+          <ConnectorPoint PointX="5.1770860833333332" PointY="7.2146614583333388" />
+          <ConnectorPoint PointX="6" PointY="7.2146614583333388" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Procesta.serverSideService.Class.Propertyes" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Procesta.serverSideService.Class.Propertyes" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Userinformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NationalID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserImage" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Userinformation" nillable="true" type="tns:Userinformation" />
+  <xs:complexType name="ArrayOfLoginHistory">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LoginHistory" nillable="true" type="tns:LoginHistory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLoginHistory" nillable="true" type="tns:ArrayOfLoginHistory" />
+  <xs:complexType name="LoginHistory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CounterNumber" nillable="true" type="xs:short" />
+      <xs:element minOccurs="0" name="EntryDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MinutesUse" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TeamName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LoginHistory" nillable="true" type="tns:LoginHistory" />
+  <xs:complexType name="ArrayOfUserRechareHistory">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserRechareHistory" nillable="true" type="tns:UserRechareHistory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserRechareHistory" nillable="true" type="tns:ArrayOfUserRechareHistory" />
+  <xs:complexType name="UserRechareHistory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="EmployID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EntryDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Munities" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserRechareHistory" nillable="true" type="tns:UserRechareHistory" />
+  <xs:complexType name="ArrayOfAllUserAndTeam">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AllUserAndTeam" nillable="true" type="tns:AllUserAndTeam" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAllUserAndTeam" nillable="true" type="tns:ArrayOfAllUserAndTeam" />
+  <xs:complexType name="AllUserAndTeam">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddOrDelete" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AllUserAndTeam" nillable="true" type="tns:AllUserAndTeam" />
+  <xs:complexType name="TeamInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EntryDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TeamAdmin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TeamD" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TeamImage" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="TotalMember" type="xs:short" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TeamInfo" nillable="true" type="tns:TeamInfo" />
+  <xs:complexType name="counterSetting">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="seconds" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="counterSetting" nillable="true" type="tns:counterSetting" />
+</xs:schema>

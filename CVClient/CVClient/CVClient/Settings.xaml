@@ -1,0 +1,359 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:telerikControls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:Procesta_CustomControl="clr-namespace:Procesta.CustomControl;assembly=CustomControl" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Procesta_CvServer="clr-namespace:Procesta.CvServer" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:CvValueConverter="clr-namespace:Procesta.CVClient.Class.ValueConverter" xmlns:CvValidator="clr-namespace:Procesta.CVClient.Class.ValidationRuls" xmlns:Procesta_CVClient_Class_CvCPropertes="clr-namespace:Procesta.CVClient.Class.CvCPropertes" xmlns:Procesta_CvServer_UserControls="clr-namespace:Procesta.CvServer.UserControls"
+	x:Class="Procesta.CVClient.Settings"
+	x:Name="Window"
+	Title="Settings"
+	mc:Ignorable="d"
+	Width="640" Height="519">
+	<Window.Resources>
+		<Procesta_CVClient_Class_CvCPropertes:MiraculasProperty x:Key="MiraculasPropertyDataSource" d:IsDataSource="True"/>
+		<CvValueConverter:ValuePacker x:Key="ValuePaker"/>
+		<CvValueConverter:RadioToString x:Key="RadioToString"/>
+		<System:DateTime x:Key="DateTimeDataSource" d:IsDataSource="True"/>
+		<CvValueConverter:PasswordsToStrength x:Key="PasswordsToStrength"/>
+		<CvValueConverter:PasswordsTolengthcs x:Key="passwordToLengthcs"/>
+		<CvValueConverter:StrengthToBrush x:Key="StrengthToBrush"/>
+		<CvValueConverter:ObjectToBool x:Key="ObjectToBool"/>
+	</Window.Resources>
+
+	<Window.Background>
+		<RadialGradientBrush GradientOrigin="-0.01,1.01" RadiusY="0.52">
+		<GradientStop Color="#FF62BAFB"/>
+		<GradientStop Color="#FF0070DA" Offset="0.479"/> 
+		<GradientStop Color="#FF00499F" Offset="1"/>
+	</RadialGradientBrush>
+	</Window.Background>
+
+	<Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource DateTimeDataSource}}">
+		<ItemsControl HorizontalAlignment="Left" Width="100" d:IsLocked="True">
+			<ItemsControl.ItemsPanel>
+        		<ItemsPanelTemplate>
+        			<VirtualizingStackPanel Orientation="Vertical"/> 			
+        		</ItemsPanelTemplate>    		
+        	</ItemsControl.ItemsPanel>
+		<Procesta_CvServer_UserControls:MenuButton ButtonImage="Images/ChangePassword.png" ScreenTip="Change Password" SupperTip="Chamge Your Password" Height="66" VerticalAlignment="Top" d:LayoutOverrides="Width" Command="{Binding MenuBarCommand, ElementName=Window, Mode=OneWay}" CommandParameter="ChangePassword" Foreground="#FFE2E2E2"/>
+		<Procesta_CvServer_UserControls:MenuButton ButtonImage="Images/EditCustomer.png" HorizontalAlignment="Left" ScreenTip="Profile Information" SupperTip="Update Your Profile Information" Height="65" VerticalAlignment="Top" Width="100" Margin="0"  Command="{Binding MenuBarCommand, ElementName=Window, Mode=OneWay}" CommandParameter="ProfileEdit" Foreground="#FFE2E2E2"/>
+		<Procesta_CvServer_UserControls:MenuButton ButtonImage="Images/RechargeHistory.png" ScreenTip="View Rechage History" SupperTip="Customer Rechage History" HorizontalAlignment="Left" Height="66" VerticalAlignment="Top" Width="100" BorderThickness="0,5,0,0" Margin="0,5,0,0" Command="{Binding MenuBarCommand, ElementName=Window, Mode=OneWay}" CommandParameter="RechargeHistory" Foreground="#FFE2E2E2"/>
+		<Procesta_CvServer_UserControls:MenuButton ButtonImage="Images/UserLoginHistory.png" ScreenTip="View Login History" SupperTip="Customer Login History" HorizontalAlignment="Right" Height="64" VerticalAlignment="Top" Width="100" BorderThickness="0" Margin="0,5,0,0" Command="{Binding MenuBarCommand, ElementName=Window, Mode=OneWay}" CommandParameter="UserLoginHistory" Foreground="#FFE2E2E2"/>
+		<Procesta_CvServer_UserControls:MenuButton ButtonImage="Images/AddTeam.png" ScreenTip="New Team" SupperTip="Create A New Team Account" HorizontalAlignment="Left" Height="60" VerticalAlignment="Bottom" Width="100" BorderThickness="0" Margin="0,5,0,0" Command="{Binding MenuBarCommand, ElementName=Window, Mode=OneWay}" CommandParameter="AddTeam" Foreground="#FFE2E2E2"/>
+		<Procesta_CvServer_UserControls:MenuButton ButtonImage="Images/EditTeam.png" ScreenTip="Edit Team" SupperTip="Edit a Team Information" HorizontalAlignment="Left" Height="68" VerticalAlignment="Bottom" Width="100" BorderThickness="0" Margin="0,5,0,0" Command="{Binding MenuBarCommand, ElementName=Window, Mode=OneWay}" CommandParameter="EditTeam" Foreground="#FFE2E2E2"/>
+		<Procesta_CvServer_UserControls:MenuButton ButtonImage="Images/TeamLoginHistory.png" ScreenTip="View Rechage History" SupperTip="Team Rechage History" HorizontalAlignment="Right" Height="65" VerticalAlignment="Bottom" Width="100" BorderThickness="0,5,0,0" Margin="0,5,0,0" Command="{Binding MenuBarCommand, ElementName=Window, Mode=OneWay}" CommandParameter="TeamRechargeHistory" Foreground="#FFE2E2E2"/>
+		</ItemsControl>
+		<Grid x:Name="PanelCustInfoEdit" Margin="171.381,74.673,93.724,116.144" HorizontalAlignment="Center" VerticalAlignment="Center" Height="304.935" Width="362.837" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.554*"/>
+				<ColumnDefinition Width="0.446*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="0.27*"/>
+				<RowDefinition Height="0.076*"/>
+				<RowDefinition Height="0.085*"/>
+				<RowDefinition Height="0.081*"/>
+				<RowDefinition Height="0.088*"/>
+				<RowDefinition Height="0.084*"/>
+				<RowDefinition Height="0.176*"/>
+				<RowDefinition Height="0.14*"/>
+			</Grid.RowDefinitions>
+			<Border BorderThickness="3" Margin="1.109,8,0,0" d:LayoutOverrides="GridBox" HorizontalAlignment="Left" Width="83.065">
+				<Border.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFE4E4E4" Offset="0"/>
+						<GradientStop Color="#FFDEDEDE" Offset="1"/>
+						<GradientStop Color="#FF7C7A7A" Offset="0.51"/>
+					</LinearGradientBrush>
+				</Border.BorderBrush>
+				<Image x:Name="ProfileImageBox" Margin="-1" Source="{Binding UserImage}"/>
+			</Border>
+			<dxe:TextEdit x:Name="ProfileTextBoxName" Margin="0.631,2.205,1,0.947" Grid.Row="1" TabIndex="0" MaxLength="19" Grid.Column="1" Text="{Binding Name, Mode=TwoWay}"/>
+			<dxe:TextEdit x:Name="ProfileTextBoxPhone" Margin="0.631,1.13,1,2.021" Grid.Row="2" TabIndex="1" MaxLength="19" Grid.Column="1" Text="{Binding Phone, Mode=TwoWay}"/>
+			<dxe:TextEdit x:Name="ProfileTextBoxEmail" Margin="0.631,0.87,1,0.913" Grid.Row="3" TabIndex="2" Grid.Column="1" Text="{Binding Email, Mode=TwoWay}"/>
+			<dxe:TextEdit x:Name="ProfileTextBoxNationalID" Margin="0.631,2.65,1,1.531" Grid.Row="4" TabIndex="3" MaxLength="29" Grid.Column="1" Text="{Binding NationalID, Mode=TwoWay}"/>
+			<dxe:TextEdit x:Name="ProfileTextboxAddress" Margin="0.631,0,1,1.415" Grid.Row="6" TabIndex="4" MaxLength="99" Grid.Column="1" Text="{Binding Address, Mode=TwoWay}"/>
+			<Label Content="Name :" Margin="0,0.154,0,0" Target="{Binding ElementName=ProfileTextBoxName, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Right" Foreground="WhiteSmoke"/>
+			<Label Content="Date :" Margin="0,0.468,0,0.343" Grid.Row="5" Target="{Binding ElementName=ProfileTextBlockDate, Mode=OneWay}" d:LayoutOverrides="VerticalMargin" HorizontalAlignment="Right" Foreground="WhiteSmoke"/>
+			<Label Content="Phone :" Margin="0,0.154,-0.04,0" Grid.Row="2" Target="{Binding ElementName=ProfileTextBoxPhone, Mode=OneWay}" HorizontalAlignment="Right" Foreground="WhiteSmoke"/>
+			<Label Content="E-Mail :" Margin="0,-0.253,0,-0.964" Grid.Row="3" Target="{Binding ElementName=ProfileTextBoxEmail, Mode=OneWay}" HorizontalAlignment="Right" Foreground="WhiteSmoke"/>
+			<Label Content="National ID :" HorizontalAlignment="Right" Margin="111.228,0.042,0,1.141" Grid.Row="4" Foreground="WhiteSmoke"/>
+			<TextBlock x:Name="ProfileTextBlockDate" Margin="4.073,2.468,1,0.343" TextWrapping="WrapWithOverflow" Grid.Row="5" Grid.Column="1" Text="{Binding Date, StringFormat=\{0:d\}}" Foreground="#FFE0E0E0"/>
+			<Label Content="Address :" Margin="0,-0.344,0,0" Grid.Row="6" Target="{Binding ElementName=ProfileTextBlockDate, Mode=OneWay}" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="WhiteSmoke"/>
+			<Button x:Name="profileUpdate" Content="Update" Grid.Column="1" Margin="34.078,6,39.747,8" Grid.Row="7" Command="{Binding ProfileUpdateCommand, ElementName=Window, Mode=OneWay}" CommandParameter="{Binding DataContext, ElementName=PanelCustInfoEdit}"/>
+			<Button x:Name="profileImageBrowse" Content="..." Height="20.296" Margin="88.174,0,88.838,0" VerticalAlignment="Bottom" Command="{Binding ProfileImageBrowseCommand, ElementName=Window, Mode=OneWay}" CommandParameter="{Binding DataContext, ElementName=PanelCustInfoEdit}"/>
+		</Grid>
+		<Grid x:Name="PanelLoginHistory" Margin="124.598,51.319,8,55.193" Visibility="Hidden">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.314*"/>
+				<ColumnDefinition Width="0.299*"/>
+				<ColumnDefinition Width="0.186*"/>
+				<ColumnDefinition Width="0.201*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="0.23*"/>
+				<RowDefinition Height="0.77*"/>
+			</Grid.RowDefinitions>
+			<telerik:RadDatePicker x:Name="logHisDateOne" Margin="8,0,0,40.953" SelectedValue="{Binding Today, Mode=OneWay}" TextAlignment="Center" Width="124" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsEnabled="{Binding IsChecked, ElementName=logHisRaioByDate}"/>
+			<RadioButton x:Name="logHisRaioByDate" Content="By Date" Margin="8,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="#FFDADADA"  IsChecked="{Binding Option, ConverterParameter=ByDate, Converter={StaticResource RadioToString}, ElementName=Window}"/>
+			<Procesta_CvServer:ButtonWithImages x:Name="logHisButtonSearch" HorizontalAlignment="Left" Margin="1.812,0,0,-0.089" VerticalAlignment="Bottom" ButtonImages="Images/Search.png" FontSize="13.333" FontFamily="Segoe UI" Content="Search" Grid.Column="2" Height="26.089" d:LayoutOverrides="VerticalAlignment" />
+            <telerik:RadBusyIndicator x:Name="LogHisBusyInd" Margin="0,8,8,8" Width="{Binding Width, ElementName=logHisGridView}" Grid.Row="1" Grid.ColumnSpan="4" Height="{Binding Height, ElementName=logHisGridView}" telerik:StyleManager.Theme="Metro" FontSize="21.333" IsBusy="{Binding IsBusy, ElementName=Window}">
+			<telerik:RadGridView x:Name="logHisGridView" IsReadOnly="True" ShowGroupPanel="False" Grid.Row="2" Grid.ColumnSpan="4" AutoGenerateColumns="False" FontSize="16" >
+            	<telerik:RadGridView.Columns>
+            		<telerik:GridViewDataColumn Header="Date" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataFormatString="{}{0:d}" DataMemberBinding="{Binding EntryDate}"/>
+            		<telerik:GridViewDataColumn Header="Uses" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding MinutesUse}"/>
+            		<telerik:GridViewDataColumn Header="Counter No" TextAlignment="Center" Width="110" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding CounterNumber}"/>
+            		<telerik:GridViewDataColumn Header="Team Name" TextAlignment="Center" Width="110" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding TeamName}"/>
+				</telerik:RadGridView.Columns>         
+			</telerik:RadGridView>
+			</telerik:RadBusyIndicator> 
+            <RadioButton x:Name="logHisRaioByTwoDate" Content="Between Two Date" VerticalAlignment="Top" Foreground="#FFDADADA" Grid.Column="1" IsChecked="{Binding Option, ConverterParameter=BetweenTwoDate, Converter={StaticResource RadioToString}, ElementName=Window}" HorizontalAlignment="Left"/>
+            <telerik:RadDatePicker x:Name="logHisDateTwo" Margin="0,0,0,44.171" SelectedValue="{Binding Today, Mode=OneWay}" TextAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=logHisRaioByTwoDate}" Width="125" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+            <RadioButton x:Name="logHisRaioByAll" Content="All" Margin="1.812,0,0,0" Grid.Column="2" HorizontalAlignment="Left" Foreground="#FFDADADA" VerticalAlignment="Top" IsChecked="{Binding Option, ConverterParameter=All, Converter={StaticResource RadioToString}, ElementName=Window}"/>
+            <telerik:RadDatePicker x:Name="logHisDateThree" Margin="0,0,0,17.16" SelectedValue="{Binding Today, Mode=OneWay}" TextAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=logHisRaioByTwoDate}" Width="125" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" d:LayoutOverrides="VerticalAlignment"/>
+            <telerik:RadButton x:Name="loginHistorySearch" Content="Search" Grid.Column="2" Margin="1.812,0,15.694,17.158" VerticalAlignment="Bottom" IsDefault="True" Command="{Binding LoginHistorySearchCommand, ElementName=Window, Mode=OneWay}">
+            	<telerik:RadButton.CommandParameter>
+            		<MultiBinding Converter="{StaticResource ValuePaker}">
+    					<Binding ElementName="logHisDateOne" Path="SelectedDate"/>
+						<Binding ElementName="logHisDateTwo" Path="SelectedDate"/>
+						<Binding ElementName="logHisDateThree" Path="SelectedDate"/>
+					</MultiBinding>			        	
+				</telerik:RadButton.CommandParameter>         
+			</telerik:RadButton>
+        </Grid>
+		<Grid x:Name="panelRechHis" Margin="104,25.179,8,45.333" HorizontalAlignment="Center" VerticalAlignment="Center" Height="412.848" d:IsHidden="True" Visibility="Hidden" d:IsLocked="True">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="0.23*"/>
+				<RowDefinition Height="0.77*"/>
+			</Grid.RowDefinitions>
+			<telerik:RadDatePicker x:Name="RechHisDateOne" Margin="8,0,0,50.112" SelectedValue="{Binding Today, Mode=OneWay}" TextAlignment="Center" Width="124" HorizontalAlignment="Left" VerticalAlignment="Bottom" d:LayoutOverrides="HorizontalAlignment" FontSize="13.333" IsEnabled="{Binding IsChecked, ElementName=RechHisRadioByDate}"/>
+			<RadioButton x:Name="RechHisRadioByDate" Content="By Date" Margin="8,0,0,0" Foreground="#FFE7E7E7" HorizontalAlignment="Left" Height="16.297" VerticalAlignment="Top" IsChecked="{Binding Option, ConverterParameter=ByDate, Converter={StaticResource RadioToString}, ElementName=Window}"/>
+			<Procesta_CvServer:ButtonWithImages x:Name="RechHisButtonSearch" HorizontalAlignment="Right" Margin="0,0,180.465,-0.089" VerticalAlignment="Bottom" ButtonImages="Images/Search.png" FontSize="13.333" FontFamily="Segoe UI" Content="Search" Height="26.089" d:LayoutOverrides="VerticalAlignment"/>
+			<telerik:RadBusyIndicator x:Name="RechHisBustInd" telerik:StyleManager.Theme="Metro" Margin="8,8,8,0" Grid.Row="1" IsBusy="{Binding IsBusy, ElementName=Window}">
+			<telerik:RadGridView HorizontalAlignment="Left" x:Name="RechHisGridView" VerticalAlignment="Top" IsReadOnly="True" ShowGroupPanel="False" Grid.Row="2" Grid.ColumnSpan="4" Height="300" AutoGenerateColumns="False" Margin="8,8,0,0" Width="471.667" FontSize="14.667">
+				<telerik:RadGridView.Columns>
+					<telerik:GridViewDataColumn Header="Date" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataFormatString="{}{0:d}" DataMemberBinding="{Binding EntryDate}"/>
+					<telerik:GridViewDataColumn Header="Employ" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding EmployID}"/>
+					<telerik:GridViewDataColumn Header="Munities" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding Munities}"/>
+					<telerik:GridViewDataColumn Header="Amount" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding Amount}"/>
+				</telerik:RadGridView.Columns>         
+			</telerik:RadGridView>
+			</telerik:RadBusyIndicator>
+			<RadioButton x:Name="RechHisRadioTwoDate" Content="Between Two Date" Margin="165.535,0,231.798,0" VerticalAlignment="Top" Foreground="#FFE4E4E4" d:LayoutOverrides="Width" IsChecked="{Binding Option, ConverterParameter=BetweenTwoDate, Converter={StaticResource RadioToString}, ElementName=Window}"/>
+			<telerik:RadDatePicker x:Name="RechHisDateTwo" Margin="165.535,0,0,50.449" SelectedValue="{Binding Today, Mode=OneWay}" TextAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=RechHisRadioTwoDate}" Width="125" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="13.333"/>
+			<RadioButton x:Name="RechHisRadioByAll" Content="All" Margin="0,0.337,168.944,0" Foreground="#FFE2E2E2" VerticalAlignment="Top" HorizontalAlignment="Right" IsChecked="{Binding Option, ConverterParameter=All, Converter={StaticResource RadioToString}, ElementName=Window}"/>
+			<telerik:RadDatePicker x:Name="RechHisDateThree" Margin="165.535,0,0,24.448" SelectedValue="{Binding Today, Mode=OneWay}" TextAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=RechHisRadioTwoDate}" Width="125" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="13.333"/>
+			<telerik:RadButton Content="Search" HorizontalAlignment="Right" Margin="0,28.298,121.541,38.817" Width="76.956" FontSize="13.333" IsDefault="True" Command="{Binding UserRechHisCommnad, ElementName=Window, Mode=OneWay}">
+				<telerik:RadButton.CommandParameter>
+            		<MultiBinding Converter="{StaticResource ValuePaker}">
+    					<Binding ElementName="logHisDateOne" Path="SelectedDate"/>
+						<Binding ElementName="logHisDateTwo" Path="SelectedDate"/>
+						<Binding ElementName="logHisDateThree" Path="SelectedDate"/>
+					</MultiBinding>			        	
+				</telerik:RadButton.CommandParameter>         
+			</telerik:RadButton>
+		</Grid>
+		<!--Panel New Team-->
+		<Grid x:Name="PanelNewTeam" Margin="184.41,74.673,49.619,47.816" HorizontalAlignment="Center" VerticalAlignment="Center" Height="367.592" Width="400.724" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<dxe:TextEdit x:Name="newTeamName" Margin="186.879,58.835,46.845,0" VerticalAlignment="Top" NullText="Enter A Team Name" d:LayoutOverrides="VerticalAlignment" FontSize="13.333">
+				<dxe:TextEdit.Text>
+					<Binding Path="TeamD" Mode="TwoWay" ValidatesOnDataErrors="True" UpdateSourceTrigger="Default">
+						<Binding.ValidationRules>
+							<CvValidator:TeamNameValidator/>
+						</Binding.ValidationRules>
+					</Binding>
+				</dxe:TextEdit.Text>
+			</dxe:TextEdit>
+			<Image x:Name="newTeamImageAvail" Margin="0,101.957,3.007,0" HorizontalAlignment="Right" Width="20" Height="20" VerticalAlignment="Top"/>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="Name :" Margin="138.127,60.405,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Foreground="#FFEFEFEF" FontSize="14.667"/>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Text="Member List :" Margin="223.49,93.766,0,0" Foreground="#FFEFEFEF" FontSize="14.667" VerticalAlignment="Top"/>
+			<Border BorderThickness="2" Margin="13,8,0,0" HorizontalAlignment="Left" Height="78.115" VerticalAlignment="Top" Width="80.073" RenderTransformOrigin="0.5,0.5">
+				<Border.BorderBrush>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFDADADA" Offset="0"/>
+						<GradientStop Color="#FFC4C4C4" Offset="1"/>
+						<GradientStop Color="#FF5D5D5D" Offset="0.502"/>
+					</LinearGradientBrush>
+				</Border.BorderBrush>
+				<Image x:Name="newTeamImage" Margin="-1" Source="{Binding TeamImage}"/>
+			</Border>
+			<telerik:RadButton x:Name="teamImagebrowse" Content="...." Margin="96.073,58.835,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="31.903" FontSize="16" Command="{Binding TeamImageBrowseCommand, ElementName=Window, Mode=OneWay}" CommandParameter="{Binding DataContext, ElementName=PanelNewTeam}"/>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left"  Text="User List :" Margin="13.328,96.059,0,0" Foreground="#FFEFEFEF" FontSize="14.667" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top"/>
+			<telerik:RadButton x:Name="teamUpdate" Content="Update" Margin="162.69,0,155.911,5.533" VerticalAlignment="Bottom" FontSize="14.667" Command="{Binding TeamUpdateCommand, ElementName=Window, Mode=OneWay}">
+				<telerik:RadButton.CommandParameter>
+            		<MultiBinding Converter="{StaticResource ValuePaker}">
+    					<Binding ElementName="PanelNewTeam" Path="DataContext"/>
+						<Binding ElementName="teamMemberList" Path="ItemsSource"/>
+					</MultiBinding>			        	
+				</telerik:RadButton.CommandParameter>         
+				<telerik:RadButton.Style>
+					<Style>
+		        		<Style.Triggers>
+		        			<DataTrigger Binding="{Binding (Validation.HasError), ElementName=newTeamName}"  Value="True"> 
+		        				<Setter  Property="UIElement.IsEnabled" Value="False" /> 
+		        			</DataTrigger>
+						</Style.Triggers>
+        		</Style>	
+				</telerik:RadButton.Style>
+			</telerik:RadButton>
+			<ListBox x:Name="teamUserList" HorizontalAlignment="Left" Margin="13,119.566,0,35.04" Width="160.309">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<DockPanel Height="40" Margin="0,0,0,5" LastChildFill="True">
+							<telerik:RadButton DockPanel.Dock="Left" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Margin="5,5,5,0" Command="{Binding DataContext.TeamMemberAddCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding}">
+									<Image Source="Images/Add.png" Height="20" Width="30"/>
+							</telerik:RadButton>
+							<TextBlock DockPanel.Dock="Left" Height="19" TextWrapping="Wrap" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14.667"/> 
+						</DockPanel>
+				  	</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+			<ListBox x:Name="teamMemberList" Margin="0,117.273,8.494,37.333" HorizontalAlignment="Right" Width="168.74" IsSynchronizedWithCurrentItem="True">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<DockPanel Height="40" Margin="0,0,0,5" LastChildFill="True">
+							<telerik:RadButton DockPanel.Dock="Left" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Margin="5,5,5,0" Command="{Binding DataContext.TeamMemberRemoveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding}">
+									<Image Source="Images/remove.png" Height="20" Width="30"/>
+							</telerik:RadButton>
+							<TextBlock DockPanel.Dock="Left" Height="19" TextWrapping="Wrap" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14.667"/> 
+						</DockPanel>
+				  	</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</Grid>
+		<!--Panel Edit Team-->
+		<Grid x:Name="PanelEditTeam" Margin="149.598,34.857,44.243,43.275" HorizontalAlignment="Center" VerticalAlignment="Center" Height="380.028" Width="417.492" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<telerik:RadComboBox x:Name="editTeamComboBoxTeamName" Margin="104.877,10.591,189.282,0" IsEditable="True" telerik:TextSearch.TextPath="Name" DisplayMemberPath="Name" VerticalAlignment="Top" Command="{Binding GetTeamInfoCommand, ElementName=Window, Mode=OneWay}" CommandParameter="{Binding Text, ElementName=editTeamComboBoxTeamName}"/>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="Team Name :" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" Margin="22,12.589,0,0" Foreground="#FFE9E9E9" FontSize="13.333"/>
+			<telerik:RadBusyIndicator x:Name="TeamEditBusy" telerik:StyleManager.Theme="Metro" Margin="8,36.591,8,0" IsBusy="{Binding IsBusy, ElementName=Window}" d:LayoutOverrides="GridBox">
+			<Grid Margin="19,8,26.929,8">
+				<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="User list :" Margin="0,82.115,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" Foreground="#FFE9E9E9" FontSize="13.333"/>
+				<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="Member List :" Margin="211.49,79.489,0,0" VerticalAlignment="Top" Foreground="#FFE9E9E9" FontSize="13.333"/>
+				<ListBox x:Name="teamEditUserList" HorizontalAlignment="Left" Margin="1,102.075,0,44.415" Width="160.309">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<DockPanel Height="40" Margin="0,0,0,5" LastChildFill="True">
+								<telerik:RadButton DockPanel.Dock="Left" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Margin="5,5,5,0" Command="{Binding DataContext.TeamEditAddCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding}">
+									<Image Source="Images/Add.png" Height="20" Width="30"/>
+								</telerik:RadButton>
+								<TextBlock DockPanel.Dock="Left" Height="19" TextWrapping="Wrap" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14.667"/> 
+							</DockPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+				<ListBox x:Name="teamEditMemberList" Margin="0,102.075,0,44.415" HorizontalAlignment="Right" Width="156.74">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<DockPanel Height="40" Margin="0,0,0,5" LastChildFill="True">
+								<telerik:RadButton DockPanel.Dock="Left" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Margin="5,5,5,0" Command="{Binding DataContext.TeamEditRemoveCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding}">
+									<Image Source="Images/remove.png" Height="20" Width="30"/>
+								</telerik:RadButton>
+								<TextBlock DockPanel.Dock="Left" Height="19" TextWrapping="Wrap" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14.667"/> 
+							</DockPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+				<telerik:RadButton x:Name="teamEditUpdate" Content="Update" Margin="146.755,0,135.018,7.681" VerticalAlignment="Bottom" FontSize="13.333" Command="{Binding TeamEditUpdateCommand, ElementName=Window, Mode=OneWay}">
+					<telerik:RadButton.CommandParameter>
+            		<MultiBinding Converter="{StaticResource ValuePaker}">
+    					<Binding ElementName="editTeamComboBoxTeamName" Path="Text"/>
+						<Binding ElementName="teamEditMemberList" Path="ItemsSource"/>
+					</MultiBinding>			        	
+				</telerik:RadButton.CommandParameter>         
+				</telerik:RadButton>
+				<Border x:Name="editTeamImageBorder" BorderThickness="2" HorizontalAlignment="Left" Height="78.115" VerticalAlignment="Top" Width="80.073" RenderTransformOrigin="0.5,0.5">
+					<Border.BorderBrush>
+						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+							<GradientStop Color="#FFDADADA" Offset="0"/>
+							<GradientStop Color="#FFC4C4C4" Offset="1"/>
+							<GradientStop Color="#FF5D5D5D" Offset="0.502"/>
+						</LinearGradientBrush>
+					</Border.BorderBrush>
+					<Image x:Name="editTeamImage" Margin="-1" Source="{Binding TeamImage}"/>
+				</Border>
+				<telerik:RadButton x:Name="editTeamBrowse" Content="..." Height="23" Margin="85.877,55.115,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="23" Command="{Binding TeamEditImageBrowseCommand, ElementName=Window, Mode=OneWay}" CommandParameter="{Binding DataContext, ElementName=editTeamImageBorder}"/>
+			</Grid>
+			</telerik:RadBusyIndicator>
+		</Grid>
+		<!--Panel Change Password-->
+		<Grid x:Name="settingPanelChangePassword" Margin="179.033,191.794,102.955,158.232" d:LayoutOverrides="Width, Height" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<dxe:PasswordBoxEdit x:Name="settingChangeOldPassword" Margin="128.152,0,78.348,0" VerticalAlignment="Top" MaxLength="19" NullText="Old Password" TabIndex="0"/>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="Old Password :" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" Margin="37.322,1.583,0,0" FontSize="13.333" Foreground="#FFEFEFEF"/>
+			<telerik:RadProgressBar x:Name="settingChangeProgress" Margin="128.152,60.021,78.348,0" Height="6.331" VerticalAlignment="Top" Maximum="3">
+				<telerik:RadProgressBar.Foreground>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF5973FF" Offset="1"/>
+						<GradientStop Color="#FF5973FF" Offset="0"/>
+						<GradientStop Color="#FF94A9E7" Offset="0.43"/>
+						<GradientStop Color="#FF8EAEFF" Offset="0.43"/>
+					</LinearGradientBrush>
+				</telerik:RadProgressBar.Foreground>
+				<telerik:RadProgressBar.Value>
+					<MultiBinding Converter="{StaticResource passwordToLengthcs}">
+						<Binding ElementName="settingChangeNewPassword" Path="Password" />
+						<Binding ElementName="settingChnageConPassword" Path="Password" />
+					</MultiBinding>
+				</telerik:RadProgressBar.Value>
+			</telerik:RadProgressBar>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="New Password :" Margin="31.872,32.176,0,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment" FontSize="13.333" Foreground="#FFEFEFEF"/>
+			<TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Margin="8.639,73.016,0,0" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" FontSize="13.333" Foreground="#FFEFEFEF" Text="Re-Enter password :"/>
+			<Grid Margin="128.152,30.593,78.348,8">
+				<Grid.IsEnabled>
+					<MultiBinding Converter="{StaticResource ObjectToBool}">
+						<Binding ElementName="settingChangeOldPassword" Path="Password" />
+						<Binding ElementName="Window" Path="UserInfo.Password" />
+					</MultiBinding>
+				</Grid.IsEnabled>
+				<dxe:PasswordBoxEdit x:Name="settingChnageConPassword" Margin="0,41.973,0,28.408" MaxLength="19" NullText="Confirm Password" TabIndex="2" d:LayoutOverrides="Height"/>
+				<dxe:PasswordBoxEdit x:Name="settingChangeNewPassword" VerticalAlignment="Top" MaxLength="19" NullText="New Password" TabIndex="1"/>
+				<telerik:RadButton x:Name="passwordChangeUpdate" Content="Update" Margin="20.554,0,0,0.674" VerticalAlignment="Bottom" FontSize="13.333" HorizontalAlignment="Left" Width="94.29" Command="{Binding ChangePasswordCommand, ElementName=Window, Mode=OneWay}" CommandParameter="{Binding Password, ElementName=settingChnageConPassword}">
+					<telerik:RadButton.IsEnabled>
+						<MultiBinding Converter="{StaticResource ObjectToBool}">
+							<Binding ElementName="settingChangeNewPassword" Path="Password" />
+							<Binding ElementName="settingChnageConPassword" Path="Password" />
+						</MultiBinding>
+					</telerik:RadButton.IsEnabled>
+				</telerik:RadButton>
+			</Grid>
+			<TextBlock x:Name="settingChangeTextStangth" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="267.663,50.02,0,0" VerticalAlignment="Top" FontSize="10.667" Foreground="{Binding Text, Converter={StaticResource StrengthToBrush}, ElementName=settingChangeTextStangth}" Text="{Binding Value, Converter={StaticResource PasswordsToStrength}, ElementName=settingChangeProgress}" Width="74.348"/>
+		</Grid>
+		<Grid x:Name="PanelTeamRechHis" Margin="124.598,51.319,8,55.193" HorizontalAlignment="Center" VerticalAlignment="Center" Height="366.637" Width="473.202" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.487*"/>
+				<ColumnDefinition Width="0.312*"/>
+				<ColumnDefinition Width="0.201*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="0.23*"/>
+				<RowDefinition Height="0.77*"/>
+			</Grid.RowDefinitions>
+			<telerik:RadDatePicker x:Name="TeamRechDateOne" Margin="98.449,0,0,40.953" SelectedValue="{Binding Today, Mode=OneWay}" TextAlignment="Center" Width="124" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsEnabled="{Binding IsChecked, ElementName=TeamRechHisRaioByDate}"/>
+			<RadioButton x:Name="TeamRechHisRaioByDate" Content="By Date" Margin="98.449,0,67.829,0" VerticalAlignment="Top" Foreground="#FFDADADA"  IsChecked="{Binding Option, ConverterParameter=ByDate, Converter={StaticResource RadioToString}, ElementName=Window}" FontSize="13.333"/>
+			<Procesta_CvServer:ButtonWithImages x:Name="logHisButtonSearch1" HorizontalAlignment="Left" Margin="61.584,0,0,-0.089" VerticalAlignment="Bottom" ButtonImages="Images/Search.png" FontSize="13.333" FontFamily="Segoe UI" Content="Search" Height="26.089" d:LayoutOverrides="VerticalAlignment" Grid.Column="1" />
+			<telerik:RadBusyIndicator x:Name="TeamRechHisBusyInd" Margin="0,7.997,8,8" Width="{Binding Width, ElementName=logHisGridView}" Grid.Row="1" Grid.ColumnSpan="3" Height="{Binding Height, ElementName=logHisGridView}" telerik:StyleManager.Theme="Metro" FontSize="21.333" IsBusy="{Binding IsBusy, ElementName=Window}">
+				<telerik:RadGridView x:Name="TeamRechHisGridView" IsReadOnly="True" ShowGroupPanel="False" Grid.Row="2" Grid.ColumnSpan="4" AutoGenerateColumns="False" FontSize="16" >
+					<telerik:RadGridView.Columns>
+						<telerik:GridViewDataColumn Header="Date" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataFormatString="{}{0:d}" DataMemberBinding="{Binding EntryDate}"/>
+						<telerik:GridViewDataColumn Header="Employee" TextAlignment="Center" Width="100" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding EmployID}"/>
+						<telerik:GridViewDataColumn Header="Munites" TextAlignment="Center" Width="110" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding Munities}"/>
+						<telerik:GridViewDataColumn Header="Bill" TextAlignment="Center" Width="110" HeaderTextAlignment="Center" TextTrimming="WordEllipsis" DataMemberBinding="{Binding Amount}"/>
+					</telerik:RadGridView.Columns>         
+				</telerik:RadGridView>
+			</telerik:RadBusyIndicator> 
+			<RadioButton x:Name="TeamRechRaioByTwoDate" Content="Between Two Date" VerticalAlignment="Top" Foreground="#FFDADADA" IsChecked="{Binding Option, ConverterParameter=BetweenTwoDate, Converter={StaticResource RadioToString}, ElementName=Window}" HorizontalAlignment="Left" Margin="10.283,0.663,0,0" Grid.Column="1" FontSize="13.333"/>
+			<telerik:RadDatePicker x:Name="TeamRechDateTwo" Margin="10.283,0,0,40.008" SelectedValue="{Binding Today, Mode=OneWay}" TextAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=TeamRechRaioByTwoDate}" Width="125" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="1"/>
+			<RadioButton x:Name="TeamRechRaioByAll" Content="All" Margin="8,0,0,0" Grid.Column="2" HorizontalAlignment="Left" Foreground="#FFDADADA" VerticalAlignment="Top" IsChecked="{Binding Option, ConverterParameter=All, Converter={StaticResource RadioToString}, ElementName=Window}" FontSize="13.333"/>
+			<telerik:RadDatePicker x:Name="TeamRechDateThree" Margin="10.283,0,0,12.997" SelectedValue="{Binding Today, Mode=OneWay}" TextAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=TeamRechRaioByTwoDate}" Width="125" HorizontalAlignment="Left" VerticalAlignment="Bottom" d:LayoutOverrides="VerticalAlignment" Grid.Column="1"/>
+			<telerik:RadButton x:Name="TeamRechHistorySearch" Content="Search" Grid.Column="2" Margin="8,0,16.604,17.158" VerticalAlignment="Bottom" IsDefault="True" Command="{Binding TeamRechHisCommnad, ElementName=Window, Mode=OneWay}">
+				<telerik:RadButton.CommandParameter>
+					<MultiBinding Converter="{StaticResource ValuePaker}">
+						<Binding ElementName="TeamRechDateOne" Path="SelectedDate"/>
+						<Binding ElementName="TeamRechDateTwo" Path="SelectedDate"/>
+						<Binding ElementName="TeamRechDateThree" Path="SelectedDate"/>
+						<Binding ElementName="TeamRechHisTeamName" Path="Text"/>
+					</MultiBinding>			        	
+				</telerik:RadButton.CommandParameter>         
+			</telerik:RadButton>
+			<TextBlock Margin="0,37.655,0,27.164" TextWrapping="Wrap" Text="Team` s: " FontSize="14.667" HorizontalAlignment="Left" Foreground="#FFEDEDED" d:LayoutOverrides="Height"/>
+			<telerik:RadComboBox x:Name="TeamRechHisTeamName" Margin="31.286,0,55.163,0" VerticalAlignment="Bottom" FontSize="16" Height="27.164" DisplayMemberPath="Name" SelectedIndex="0"/>
+		</Grid>
+	</Grid>
+</Window>
